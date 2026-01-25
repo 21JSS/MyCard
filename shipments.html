@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipments - MyCard Panel versión Beta 1.0</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="shipments.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <span class="logo-text">MyCard</span>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="shipments.html" class="nav-item active">
+                    <i class="fas fa-box"></i>
+                    <span>Shipments</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-code"></i>
+                    <span>Developer</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 class="page-title">MyCard Panel versión Beta 1.0</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">0</span>
+                    </button>
+                    <div class="user-profile">
+                        <i class="fas fa-user-circle"></i>
+                        <span>CredVale</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="section-header">
+                <h2 class="section-title">Shipments</h2>
+            </div>
+
+            <!-- Tracking Card -->
+            <div class="tracking-card">
+                <div class="tracking-header">
+                    <div class="tracking-icon">
+                        <i class="fas fa-search-location"></i>
+                    </div>
+                    <div class="tracking-info">
+                        <h2>Seguimiento de Envío de Tarjeta</h2>
+                        <p>Ingresa tu número de guía para verificar el estado de tu envío.</p>
+                    </div>
+                </div>
+
+                <div class="tracking-form">
+                    <div class="form-group">
+                        <label for="trackingNumber">Número de Guía:</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="trackingNumber" class="form-input"
+                                placeholder="22 dígitos Estafeta, 10 dígitos DHL, 12 dígitos" maxlength="22">
+                            <button class="btn btn-primary" id="searchBtn">
+                                <i class="fas fa-search"></i>
+                                Buscar
+                            </button>
+                        </div>
+                        <small class="form-hint">Formatos aceptados: Estafeta (22 dígitos), DHL (10 dígitos), Otros (12
+                            dígitos)</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section (Initially Hidden) -->
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <!-- Shipment Details Card -->
+                <div class="card shipment-details">
+                    <div class="card-header">
+                        <div>
+                            <h2>Detalles del Envío</h2>
+                            <p class="tracking-number-display">Guía: <span id="displayTrackingNumber"></span></p>
+                        </div>
+                        <div class="status-badge" id="statusBadge">
+                            <i class="fas fa-circle"></i>
+                            <span>En Tránsito</span>
+                        </div>
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <div class="detail-icon blue">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                            <div class="detail-info">
+                                <div class="detail-label">Paquetería</div>
+                                <div class="detail-value" id="carrier">Estafeta</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-item">
+                            <div class="detail-icon green">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="detail-info">
+                                <div class="detail-label">Fecha Estimada de Entrega</div>
+                                <div class="detail-value" id="estimatedDate">25 Enero 2026</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-item">
+                            <div class="detail-icon orange">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="detail-info">
+                                <div class="detail-label">Última Ubicación</div>
+                                <div class="detail-value" id="lastLocation">Centro de Distribución CDMX</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-item">
+                            <div class="detail-icon purple">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="detail-info">
+                                <div class="detail-label">Última Actualización</div>
+                                <div class="detail-value" id="lastUpdate">Hoy, 10:30 AM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Card -->
+                <div class="card timeline-card">
+                    <div class="card-header">
+                        <h2>Historial de Seguimiento</h2>
+                    </div>
+
+                    <div class="timeline" id="timeline">
+                        <div class="timeline-item active">
+                            <div class="timeline-marker">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-time">Hoy, 10:30 AM</div>
+                                <div class="timeline-title">En tránsito a destino</div>
+                                <div class="timeline-location">Centro de Distribución CDMX</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item completed">
+                            <div class="timeline-marker">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-time">23 Ene, 3:45 PM</div>
+                                <div class="timeline-title">Paquete en centro de distribución</div>
+                                <div class="timeline-location">Hub Querétaro</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item completed">
+                            <div class="timeline-marker">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-time">22 Ene, 8:20 AM</div>
+                                <div class="timeline-title">Paquete recolectado</div>
+                                <div class="timeline-location">Oficina MyCard - Monterrey</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item completed">
+                            <div class="timeline-marker">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-time">21 Ene, 2:00 PM</div>
+                                <div class="timeline-title">Orden creada</div>
+                                <div class="timeline-location">Sistema MyCard</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Info Card -->
+                <div class="card info-card">
+                    <div class="card-header">
+                        <h2>Información Adicional</h2>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-item">
+                            <i class="fas fa-box"></i>
+                            <div>
+                                <strong>Tipo de Paquete:</strong>
+                                <span>Tarjeta de Crédito</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-weight"></i>
+                            <div>
+                                <strong>Peso:</strong>
+                                <span>0.05 kg</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <strong>Seguro:</strong>
+                                <span>Incluido</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-file-signature"></i>
+                            <div>
+                                <strong>Firma Requerida:</strong>
+                                <span>Sí</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State (Initially Visible) -->
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Busca tu envío</h3>
+                <p>Ingresa un número de guía para comenzar el seguimiento</p>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>© 2025 MyCard S.A. de C.V. Todos los derechos reservados.</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="shipments.js"></script>
+</body>
+
+</html>

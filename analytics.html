@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - MyCard Panel versión Beta 1.0</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="analytics.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <span class="logo-text">MyCard</span>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="shipments.html" class="nav-item">
+                    <i class="fas fa-box"></i>
+                    <span>Shipments</span>
+                </a>
+                <a href="analytics.html" class="nav-item active">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="developer.html" class="nav-item">
+                    <i class="fas fa-code"></i>
+                    <span>Developer</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 class="page-title">MyCard Panel versión Beta 1.0</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">0</span>
+                    </button>
+                    <div class="user-profile">
+                        <i class="fas fa-user-circle"></i>
+                        <span>CredVale</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="section-header">
+                <h2 class="section-title">Analytics</h2>
+            </div>
+
+            <!-- Métricas Trimestrales -->
+            <div class="metrics-header">
+                <h3>Métricas Trimestrales</h3>
+                <div class="quarter-selector">
+                    <span>Seleccionar Trimestre:</span>
+                    <select id="quarterSelect" class="quarter-dropdown">
+                        <option value="Q2-2025">Q2 - 2025</option>
+                        <option value="Q1-2025">Q1 - 2025</option>
+                        <option value="Q4-2024">Q4 - 2024</option>
+                        <option value="Q3-2024">Q3 - 2024</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <!-- Tasa de Éxito QTD -->
+                <div class="metric-card green">
+                    <div class="metric-header">
+                        <span class="metric-label">Tasa de Éxito QTD</span>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="metric-value" id="successRate">0%</div>
+                    <div class="metric-detail">Entregados: <span id="deliveredCount">0</span></div>
+                </div>
+
+                <!-- Tasa de Retorno QTD -->
+                <div class="metric-card red">
+                    <div class="metric-header">
+                        <span class="metric-label">Tasa de Retorno QTD</span>
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <div class="metric-value" id="returnRate">0%</div>
+                    <div class="metric-detail">Retornos: <span id="returnCount">0</span></div>
+                </div>
+
+                <!-- Excepciones QTD -->
+                <div class="metric-card orange">
+                    <div class="metric-header">
+                        <span class="metric-label">Excepciones QTD</span>
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="metric-value" id="exceptionCount">0</div>
+                    <div class="metric-detail">Del total: <span id="exceptionPercent">0%</span></div>
+                </div>
+
+                <!-- Volumen Total QTD -->
+                <div class="metric-card blue">
+                    <div class="metric-header">
+                        <span class="metric-label">Volumen Total QTD</span>
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <div class="metric-value" id="totalVolume">0</div>
+                    <div class="metric-detail">Envíos registrados</div>
+                </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="charts-grid">
+                <!-- Tendencia Mensual -->
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h2>Tendencia Mensual: OTD vs. Retornos</h2>
+                        <p class="chart-subtitle">Rendimiento OTD y Retorno Rate (Filtrado por trimestre)</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                    <div class="chart-legend-custom">
+                        <div class="legend-item">
+                            <span class="legend-color green"></span>
+                            <span>OTD % (Éxito)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color red"></span>
+                            <span>Retorno % (Problema)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rendimiento por Paquetería -->
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h2>Rendimiento por Paquetería</h2>
+                        <p class="chart-subtitle">Comparativa de Tasa de Éxito y Retorno (Filtrado por trimestre)</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="carrierChart"></canvas>
+                    </div>
+                    <div class="chart-legend-custom">
+                        <div class="legend-item">
+                            <span class="legend-color green"></span>
+                            <span>Tasa de Éxito (%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color red"></span>
+                            <span>Tasa de Retorno (%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reportes Personalizados -->
+            <div class="card reports-card">
+                <div class="card-header">
+                    <h2>Reportes Personalizados</h2>
+                </div>
+                <p class="reports-description">
+                    Utiliza estos parámetros para generar un reporte detallado de envíos en un rango de fechas
+                    específico.
+                </p>
+                <div class="reports-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startDate">Fecha Inicio</label>
+                            <input type="date" id="startDate" class="date-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">Fecha Fin</label>
+                            <input type="date" id="endDate" class="date-input">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success" id="generateReport">
+                                <i class="fas fa-file-pdf"></i>
+                                Generar Reporte PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>© 2025 MyCard S.A. de C.V. Todos los derechos reservados.</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="analytics.js"></script>
+</body>
+
+</html>
