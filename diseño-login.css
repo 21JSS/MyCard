@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap");
 
 /* Reseteo básico de márgenes */
 * {
@@ -17,7 +16,6 @@ body {
     background: url('https://images.pexels.com/photos/29703226/pexels-photo-29703226.png') no-repeat center center fixed;
     background-size: cover;
     font-family: "Roboto", sans-serif;
-    font-family: "Orbitron", sans-serif;
 }
 
 /* Panel de fondo traslúcido (el marco grande) */
@@ -76,7 +74,7 @@ body {
 
 /*  tamaño y brillo */
 /* Ajustes del logo: tamaño y brillo */
-.logo-img { width: 50px; }
+.brand-img { width: 50px; }
 
 /* Formulario tarjeta" */
 /* Formulario estilo "tarjeta" */
@@ -112,7 +110,6 @@ body {
     outline: none;
     color: rgb(0, 0, 0);
     font-family: "Roboto", sans-serif;
-    font-family: "Orbitron", sans-serif;
     padding: 10px;
     letter-spacing: 2px;
     font-size: 0.8rem;
@@ -147,7 +144,6 @@ body {
     border: none;
     padding: 8px 20px;
     font-family: "Roboto", sans-serif;
-    font-family: "Orbitron", sans-serif;
     font-weight: bold;
     font-size: 0.7rem;
     cursor: pointer;
