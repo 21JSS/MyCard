@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso al Sistema de Rastreo</title> 
+    <!-- Enlace a la hoja de estilos personalizada -->
+    <link rel="stylesheet" href="diseño-login.css">
+</head>
+<body>
+    <div class="glass-bg">
+        
+        <!-- Encabezado superior: Icono y Título -->
+        <div class="login-header">
+            <img src="img/usuario.png" alt="Usuario Icon" class="user-icon-top">
+            <h2>INICIAR SESIÓN</h2>
+            <p class="header-subtitle">Ingresa tus credenciales para acceder al sistema de rastreo.</p>
+        </div>
+
+        <!-- Contenedor de la tarjeta con efecto 3D (Tilt) -->
+        <!-- Ajustar atributos data-tilt para modificar el comportamiento -->
+        <div class="card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.5">
+            <div class="card-content">
+                
+                <!-- Sección del encabezado: Logo y Texto -->
+                <div class="header-row">
+                    <div class="brand">
+                        <!-- Reemplazar src con la URL de tu logo -->
+                        <img src="img/mastercard.png"      class="logo-img">
+                        <span>MyCard</span>
+                    </div>
+                    <div class="top-label">ACCESS SYSTEM</div>
+                </div>
+
+                <!-- Formulario de Login -->
+                <form class="login-form">
+                    <div class="input-row">
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png" class="input-icon">
+                        <label>USUARIO</label>
+                        <input type="text" placeholder="REQUERIDO" required>
+                    </div>
+                    <div class="input-row">
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/lock--v1.png" class="input-icon">
+                        <label>CONTRASEÑA</label>
+                        <input type="password" placeholder="••••••••" required id="password-input">
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/visible--v1.png" class="password-toggle" id="toggle-password">
+                    </div>
+                    <div class="button-row">
+                        <!-- Botón de autorización -->
+                        <button type="submit" class="btn-access">ACCEDER</button>
+                        <!-- Enlace para registrarse -->
+                    </div>
+                </form>
+
+                <!-- Pie de tarjeta: Chip y Datos simulados -->
+                <div class="footer-row">
+                    <div class="chip-container">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFzeQ0hz39haiHkhSOKnHJCG3v6AynORgBKrj0Zf2FTYMvjAsDAxzqIFZ8DYXbyq_-u_kuZcgg5nRpXxVGp18K15NiCGvVwTv-8QUGdZwJS3sSlhRpqEpZ3RHP7vQCIoKYnd6UFEAzxrhFPR5byjFFR6ld7gWvNCD7g5LF3Y6uhJvgY1_hw8qBCqO6/s1600/chip.png" class="chip-img">
+                    </div>
+                    <div class="card-info">
+                        <!-- Nombre del usuario (Dinámico) -->
+                        <span class="card-holder">Fabrica MyCard</span>
+                        <!-- Fecha de expiración -->
+                        <span class="card-date">09/26- 11/30</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Librería para el efecto de inclinación (Tilt) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+
+    <!-- Script para mostrar/ocultar contraseña -->
+    <script>
+        const togglePassword = document.querySelector('#toggle-password');
+        const password = document.querySelector('#password-input');
+
+        togglePassword.addEventListener('click', function () {
+            // Alternar el tipo de input entre password y text
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // Alternar el icono (ojo abierto / ojo tachado)
+            this.src = type === 'password' ? 'https://img.icons8.com/ios-glyphs/30/000000/visible--v1.png' : 'https://img.icons8.com/ios-glyphs/30/000000/invisible--v1.png';
+        });
+    </script>
+</body>
+</html>

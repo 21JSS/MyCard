@@ -1,0 +1,195 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://images.pexels.com/photos/29703226/pexels-photo-29703226.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: "Roboto", sans-serif;
+}
+
+/* Panel de fondo traslúcido (el marco grande) */
+.glass-bg {
+    /* Dimensiones del contenedor de vidrio */
+    width: 90%;
+    max-width: 800px;
+    height: 600px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+}
+
+/* La tarjeta técnica flotante */
+.card {
+    position: relative;
+    /* Dimensiones de la tarjeta de login (la pequeña) */
+    width: 500px;
+    height: 320px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    color: rgb(0, 0, 0);
+    padding: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Fila superior */
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/*  tamaño y brillo */
+.logo-img { width: 50px; }
+
+/* Formulario tarjeta" */
+.login-form {
+    margin: 20px 0;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    /* Líneas debajo de los imputs */
+    border-bottom: 1px solid rgba(112, 105, 105, 0.425);
+}
+
+.input-icon {
+    width: 16px;
+    margin-right: 10px;
+    opacity: 0.8;
+}
+
+.input-row label {
+    font-size: 0.6rem;
+    width: 100px;
+    color: rgba(0, 0, 0, 0.826);
+}
+
+.input-row input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: rgb(0, 0, 0);
+    font-family: "Roboto", sans-serif;
+    padding: 10px;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+}
+
+/* Icono de ver contraseña (ojito) */
+.password-toggle {
+    width: 20px;
+    cursor: pointer;
+    opacity: 0.6;
+    margin-left: 5px;
+}
+
+/* Botón y links */
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.btn-access {
+    /* Estilo base del botón */
+    background: white;
+    color: black;
+    border: none;
+    padding: 8px 20px;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 0.7rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.btn-access:hover {
+    /* Efecto  brillo al pasar el mouse */
+    background: #00d4ff;
+    box-shadow: 0 0 15px #00d4ff;
+}
+
+.signup-link {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 0.6rem;
+    opacity: 0.7;
+}
+
+/* Parte inferior */
+.footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+/* Tamaño e imagen del chip */
+.chip-img { width: 50px; opacity: 0.8; }
+
+.card-info {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+}
+
+.card-date { opacity: 0.5; font-size: 0.6rem; }
+
+/* Estilos para el encabezado superior (Icono y Texto) */
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+    letter-spacing: 3px;
+}
+
+.user-icon-top {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+/* Subtítulo del encabezado */
+.header-subtitle {
+    font-size: 0.8rem;
+    margin-top: 10px;
+    opacity: 0.9;
+    letter-spacing: 1px;
+}
