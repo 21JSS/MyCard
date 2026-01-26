@@ -445,12 +445,15 @@ body {
 
 /* Iconos internos para inputs de Usuario y Contraseña */
 #username, #password {
-    padding-left: 42px; /* Espacio para que el texto no pise el icono */
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+    padding-left: 32px; /* Espacio para que el texto no pise el icono */
     background-repeat: no-repeat;
     background-position: 12px center;
     background-size: 18px;
     text-align: center;
-    padding-right: 42px;
+    padding-right: 22px;
 }
 
 #username {
@@ -1076,7 +1079,8 @@ input:checked+.slider:before {
     position: absolute;
     clip-path: url(#menu);
     background-color: #8a8ae1;
-    transition: transform 0.7s;
+    transition: transform 0.7s, background-color 0.7s;
+    filter: saturate(1.5); /* Hace el color un poco más intenso */
 }
 
 .svg-container {

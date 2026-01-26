@@ -34,6 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const menuRect = menu.getBoundingClientRect();
         const left = Math.floor(offsetActiveItem.left - menuRect.left - (menuBorder.offsetWidth - offsetActiveItem.width) / 2) + "px";
         menuBorder.style.transform = `translate3d(${left}, 0 , 0)`;
+        // Cambiar el color del borde al color del ítem activo
+        menuBorder.style.backgroundColor = element.style.getPropertyValue('--bgColorItem');
     }
 
     // Inicializar posición de la curva
