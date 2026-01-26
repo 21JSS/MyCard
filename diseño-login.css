@@ -83,7 +83,7 @@ body {
     align-items: center;
     margin-bottom: 15px;
     /* Líneas debajo de los imputs */
-    border-bottom: 1px solid rgba(28, 26, 26, 0.425);
+    border-bottom: 1px solid rgba(112, 105, 105, 0.425);
 }
 
 .input-icon {
@@ -141,7 +141,7 @@ body {
 }
 
 .btn-access:hover {
-    /* Efecto brillo al pasar el mouse */
+    /* Efecto  brillo al pasar el mouse */
     background: #00d4ff;
     box-shadow: 0 0 15px #00d4ff;
 }
@@ -182,7 +182,7 @@ body {
 }
 
 .user-icon-top {
-    width: 60px;
+    width: 100px;
     margin-bottom: 10px;
 }
 
