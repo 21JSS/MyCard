@@ -438,12 +438,19 @@ body {
     display: none !important;
 }
 
+/* Centrar etiquetas en la sección de perfil */
+#perfil .form-group label {
+    text-align: center;
+}
+
 /* Iconos internos para inputs de Usuario y Contraseña */
 #username, #password {
     padding-left: 42px; /* Espacio para que el texto no pise el icono */
     background-repeat: no-repeat;
     background-position: 12px center;
     background-size: 18px;
+    text-align: center;
+    padding-right: 42px;
 }
 
 #username {
@@ -1015,7 +1022,7 @@ input:checked+.slider:before {
     position: relative;
     align-items: center;
     justify-content: center;
-    background-color: #1d1d27; /* Fondo oscuro para que resalten los iconos */
+    background-color: #1d1d27;
     border-radius: 16px;
 }
 
@@ -1054,10 +1061,10 @@ input:checked+.slider:before {
 }
 
 .icon {
-    width: 2.4em;
-    height: 2.4em;
-    stroke: white;
-    fill: white;
+    font-size: 1.4em;
+    color: white;
+    font-size: 1.4em;
+    color: white;
     transition: 0.3s;
 }
 
