@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer - MyCard Panel versión Beta 1.0</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="developer.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <span class="logo-text">MyCard</span>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="shipments.html" class="nav-item">
+                    <i class="fas fa-box"></i>
+                    <span>Shipments</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="developer.html" class="nav-item active">
+                    <i class="fas fa-code"></i>
+                    <span>Developer</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 class="page-title">MyCard Panel versión Beta 1.0</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">0</span>
+                    </button>
+                    <div class="user-profile">
+                        <i class="fas fa-user-circle"></i>
+                        <span>CredVale</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="section-header">
+                <h2 class="section-title">Developer</h2>
+            </div>
+
+            <!-- Configuration Card -->
+            <div class="card config-card">
+                <div class="card-header">
+                    <h2>Configuración del Sistema</h2>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="perfil">
+                        <i class="fas fa-user"></i>
+                        Perfil
+                    </button>
+                    <button class="tab-btn" data-tab="alertas">
+                        <i class="fas fa-bell"></i>
+                        Alertas
+                    </button>
+                    <button class="tab-btn" data-tab="api">
+                        <i class="fas fa-key"></i>
+                        API / Token
+                    </button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Perfil Tab -->
+                    <div class="tab-panel active" id="perfil">
+                        <div class="panel-header">
+                            <h3>Información de Perfil</h3>
+                            <p>Estos son tus datos de acceso generales.</p>
+                        </div>
+
+                        <div class="form-section">
+                            <div class="form-group">
+                                <label for="username">Usuario</label>
+                                <input type="text" id="username" class="form-input" value="C6est" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="password" class="form-input" value="MySecurePassword123"
+                                        readonly>
+                                    <button class="toggle-password" id="togglePassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-outline" id="editProfile">
+                                    <i class="fas fa-edit"></i>
+                                    Editar Perfil
+                                </button>
+                                <button class="btn btn-primary" id="changePassword">
+                                    <i class="fas fa-lock"></i>
+                                    Cambiar Contraseña
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alertas Tab -->
+                    <div class="tab-panel" id="alertas">
+                        <div class="panel-header">
+                            <h3>Preferencias de Alertas</h3>
+                            <p>Configura cómo y cuándo deseas recibir notificaciones.</p>
+                        </div>
+
+                        <div class="preferences-section-main">
+                            <div class="preference-item">
+                                <div class="preference-info">
+                                    <h4>Notificación por retraso crítico</h4>
+                                    <p>Recibe alertas cuando un envío exceda el tiempo estimado de entrega</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="delayAlert" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="preference-item">
+                                <div class="preference-info">
+                                    <h4>Email de confirmación de entrega</h4>
+                                    <p>Envía un correo automático cuando el paquete sea entregado exitosamente</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="deliveryConfirmation">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn btn-primary" id="saveAlerts">
+                                <i class="fas fa-save"></i>
+                                Guardar Configuración
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- API / Token Tab -->
+                    <div class="tab-panel" id="api">
+                        <div class="panel-header">
+                            <h3>Token de Integración</h3>
+                            <p>Este token se usa para autenticar Webhooks y APIs.</p>
+                        </div>
+
+                        <div class="api-section">
+                            <!-- Warning Message (when no token exists) -->
+                            <div class="warning-message" id="noTokenWarning">
+                                <div class="warning-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <p>Aún no tienes un token generado para integraciones.</p>
+                            </div>
+
+                            <!-- Generate Token Button -->
+                            <div class="token-actions" id="tokenActions">
+                                <button class="btn btn-primary" id="generateToken">
+                                    <i class="fas fa-plus-circle"></i>
+                                    Generar Token
+                                </button>
+                            </div>
+
+                            <!-- Token Display (hidden initially) -->
+                            <div class="token-display" id="tokenDisplay" style="display: none;">
+                                <div class="token-card">
+                                    <div class="token-header">
+                                        <div class="token-info">
+                                            <h4>Token de Integración</h4>
+                                            <span class="token-status active">Activo</span>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline" id="regenerateToken">
+                                            <i class="fas fa-sync"></i>
+                                            Regenerar
+                                        </button>
+                                    </div>
+                                    <div class="token-value">
+                                        <code id="integrationToken">mc_int_tk_1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p</code>
+                                        <button class="copy-btn" data-copy="integrationToken">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <div class="token-meta">
+                                        <span><i class="fas fa-calendar"></i> Creado: <span
+                                                id="tokenCreatedDate">--</span></span>
+                                        <span><i class="fas fa-shield-alt"></i> Encriptación: SHA-256</span>
+                                    </div>
+                                </div>
+
+                                <div class="token-info-box">
+                                    <div class="info-icon">
+                                        <i class="fas fa-info-circle"></i>
+                                    </div>
+                                    <div class="info-content">
+                                        <h4>Importante</h4>
+                                        <p>Guarda este token en un lugar seguro. No podrás verlo nuevamente después de
+                                            cerrar esta página.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>© 2025 MyCard S.A. de C.V. Todos los derechos reservados.</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="developer.js"></script>
+</body>
+
+</html>

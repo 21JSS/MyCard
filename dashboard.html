@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCard Panel versión Beta 1.0</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <span class="logo-text">MyCard</span>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="shipments.html" class="nav-item">
+                    <i class="fas fa-box"></i>
+                    <span>Shipments</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="developer.html" class="nav-item">
+                    <i class="fas fa-code"></i>
+                    <span>Developer</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 class="page-title">MyCard Panel versión Beta 1.0</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">0</span>
+                    </button>
+                    <div class="user-profile">
+                        <i class="fas fa-user-circle"></i>
+                        <span>CredVale</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="section-header">
+                <h2 class="section-title">Dashboard</h2>
+            </div>
+
+            <!-- Plata Card Section -->
+            <div class="plata-card-section">
+                <div class="plata-card-container">
+                    <div class="plata-card">
+                        <img src="PLATA.png" alt="Tarjeta Plata" class="card-image">
+                    </div>
+                    <div class="card-info">
+                        <h3>Cliente Actual</h3>
+                        <p class="client-name">PLATA</p>
+                        <p class="card-type">Tarjeta Débito Mastercard</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Cards Grid -->
+            <div class="stats-cards-grid">
+                <!-- Total de Envíos -->
+                <div class="stat-card blue">
+                    <div class="stat-card-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Total de Envíos</div>
+                            <div class="stat-value">0</div>
+                            <div class="stat-meta">N/A</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Entregados -->
+                <div class="stat-card green">
+                    <div class="stat-card-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Entregados</div>
+                            <div class="stat-value">0</div>
+                            <div class="stat-meta">Tasa de Éxito (±4D): 0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- En Tránsito -->
+                <div class="stat-card cyan">
+                    <div class="stat-card-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">En Tránsito</div>
+                            <div class="stat-value">0</div>
+                            <div class="stat-meta">N/A</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Excepción -->
+                <div class="stat-card orange">
+                    <div class="stat-card-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Excepción</div>
+                            <div class="stat-value">0</div>
+                            <div class="stat-meta">Tasa de Excepción (±4D): 0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Retornos -->
+                <div class="stat-card red">
+                    <div class="stat-card-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Retornos</div>
+                            <div class="stat-value">0</div>
+                            <div class="stat-meta">Tasa de Retorno (±4D): 0%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Rendimiento de Entregas -->
+                <div class="card performance-card">
+                    <div class="card-header">
+                        <h2>Rendimiento de Entregas (A Tiempo vs. Fuera de Tiempo - Últimos 7 días)</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-color green"></span>
+                            <span class="legend-text">A Tiempo</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color red"></span>
+                            <span class="legend-text">Fuera de Tiempo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alertas Activas -->
+                <div class="card alerts-card">
+                    <div class="card-header">
+                        <h2>Alertas Activas</h2>
+                    </div>
+                    <div class="alerts-content">
+                        <div class="alert-section">
+                            <h3 class="alert-title">Análisis de Retornos/Excepciones</h3>
+                            <div class="alert-stats">
+                                <div class="alert-stat-item">
+                                    <span class="alert-label">Retorno (Última Semana):</span>
+                                    <span class="alert-value yellow">0%</span>
+                                </div>
+                                <div class="alert-stat-item">
+                                    <span class="alert-label">Retorno (Esta Semana):</span>
+                                    <span class="alert-value red">0%</span>
+                                </div>
+                                <div class="alert-stat-item">
+                                    <span class="alert-label">Predicción Próxima Semana:</span>
+                                    <span class="alert-value gray">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container small">
+                            <canvas id="alertsChart"></canvas>
+                        </div>
+                        <div class="chart-labels">
+                            <span>Retornos (Últ. Sem)</span>
+                            <span>Retornos (Esta Sem)</span>
+                            <span>Excepción (Esta Sem)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detalle de Envíos Table -->
+            <div class="card table-card">
+                <div class="card-header">
+                    <h2>Detalle de Envíos (Últimos 7 Días)</h2>
+                    <button class="btn btn-outline btn-sm">
+                        <i class="fas fa-download"></i>
+                        Exportar
+                    </button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th># Guía</th>
+                                <th>Paquetería</th>
+                                <th>Status</th>
+                                <th>Ref</th>
+                                <th>Fecha Estimada Entrega</th>
+                                <th>Últ. Act</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="empty-state">
+                                <td colspan="7">
+                                    <div class="empty-content">
+                                        <i class="fas fa-inbox"></i>
+                                        <p>No se encontraron envíos recientes en los últimos 7 días.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>© 2025 MyCard S.A. de C.V. Todos los derechos reservados.</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="dashboard.js"></script>
+</body>
+
+</html>
