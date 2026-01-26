@@ -364,6 +364,14 @@ window.addEventListener('load', () => {
       }
     });
   }, 100);
+
+  // Funcionalidad para el botón/tarjeta CrewdiVale (Redirección a Perfil)
+  const crewdiValeCard = document.querySelector('.plata-card');
+  if (crewdiValeCard) {
+      crewdiValeCard.addEventListener('click', () => {
+          window.location.href = 'perfil-usuario.html';
+      });
+  }
 });
 
 console.log('✅ Dashboard MyCard cargado correctamente');
