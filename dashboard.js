@@ -125,6 +125,19 @@ if (performanceCtx) {
   });
 }
 
+/* Animación de Header y Tarjeta al hacer Scroll */
+document.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const body = document.body;
+    
+    // Si bajamos más de 100px (ajusta este número según cuando quieras el efecto)
+    if (scrollY > 100) {
+        body.classList.add('is-scrolled');
+    } else {
+        body.classList.remove('is-scrolled');
+    }
+});
+
 // Gráfico de Alertas (Retornos y Excepciones)
 const alertsCtx = document.getElementById('alertsChart');
 if (alertsCtx) {
