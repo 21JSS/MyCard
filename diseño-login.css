@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap");
 
+/* Reseteo básico de márgenes */
 * {
     margin: 0;
     padding: 0;
@@ -11,9 +13,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* IMAGEN DE FONDO: Cambia la URL aquí para poner tu propio fondo */
     background: url('https://images.pexels.com/photos/29703226/pexels-photo-29703226.png') no-repeat center center fixed;
     background-size: cover;
     font-family: "Roboto", sans-serif;
+    font-family: "Orbitron", sans-serif;
 }
 
 /* Panel de fondo traslúcido (el marco grande) */
@@ -71,9 +75,11 @@ body {
 }
 
 /*  tamaño y brillo */
+/* Ajustes del logo: tamaño y brillo */
 .logo-img { width: 50px; }
 
 /* Formulario tarjeta" */
+/* Formulario estilo "tarjeta" */
 .login-form {
     margin: 20px 0;
 }
@@ -84,6 +90,7 @@ body {
     margin-bottom: 15px;
     /* Líneas debajo de los imputs */
     border-bottom: 1px solid rgba(112, 105, 105, 0.425);
+    border-bottom: 1px solid rgba(28, 26, 26, 0.425);
 }
 
 .input-icon {
@@ -105,9 +112,16 @@ body {
     outline: none;
     color: rgb(0, 0, 0);
     font-family: "Roboto", sans-serif;
+    font-family: "Orbitron", sans-serif;
     padding: 10px;
     letter-spacing: 2px;
     font-size: 0.8rem;
+}
+
+/* Ajuste para que los puntos de la contraseña se vean más grandes y separados */
+.input-row input[type="password"] {
+    font-size: 1.2rem;
+    letter-spacing: 5px;
 }
 
 /* Icono de ver contraseña (ojito) */
@@ -133,6 +147,7 @@ body {
     border: none;
     padding: 8px 20px;
     font-family: "Roboto", sans-serif;
+    font-family: "Orbitron", sans-serif;
     font-weight: bold;
     font-size: 0.7rem;
     cursor: pointer;
@@ -142,6 +157,7 @@ body {
 
 .btn-access:hover {
     /* Efecto  brillo al pasar el mouse */
+    /* Efecto HOVER: Cambia este color (#00d4ff) para modificar el brillo al pasar el mouse */
     background: #00d4ff;
     box-shadow: 0 0 15px #00d4ff;
 }
@@ -182,7 +198,7 @@ body {
 }
 
 .user-icon-top {
-    width: 100px;
+    width: 80px;
     margin-bottom: 10px;
 }
 
