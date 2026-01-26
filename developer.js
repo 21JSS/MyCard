@@ -121,22 +121,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showNotification(message, type = 'info') {
         const notification = document.createElement('div');
-        const colors = { success: '#10b981', error: '#ef4444', info: '#6366f1' };
         const iconClass = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle' };
 
+        notification.className = `notification-toast ${type}`;
         notification.innerHTML = `<i class="fas ${iconClass[type]}"></i> <span>${message}</span>`;
-        notification.style.cssText = `
-            position: fixed; top: 24px; right: 24px; background: ${colors[type]};
-            color: white; padding: 16px 24px; border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: flex;
-            align-items: center; gap: 12px; font-weight: 600; z-index: 2000;
-            animation: slideIn 0.3s ease-out;
-        `;
 
         document.body.appendChild(notification);
         setTimeout(() => {
-            notification.style.animation = 'slideOut 0.3s ease-out';
-            setTimeout(() => notification.remove(), 300);
+            notification.classList.add('closing');
+            notification.addEventListener('animationend', () => notification.remove());
         }, 3000);
     }
 });   

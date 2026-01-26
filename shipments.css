@@ -217,6 +217,30 @@ body {
     background: white;
     border: 1px solid var(--border-color);
     position: relative;
+    transition: all 0.2s ease;
+    color: var(--text-secondary);
+    font-size: 20px;
+}
+
+.btn-icon:hover {
+    background-color: var(--bg-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    color: var(--text-primary);
+}
+
+.btn-icon:hover i {
+    animation: bellRing 0.9s infinite ease-in-out;
+    transform-origin: 50% 0%;
+}
+
+@keyframes bellRing {
+    0%, 100% { transform: rotate(0); }
+    15% { transform: rotate(10deg); }
+    30% { transform: rotate(-10deg); }
+    45% { transform: rotate(5deg); }
+    60% { transform: rotate(-5deg); }
+    75% { transform: rotate(2deg); }
 }
 
 .badge {
