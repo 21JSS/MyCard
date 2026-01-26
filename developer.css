@@ -169,6 +169,7 @@ body {
 /* Section Header */
 .section-header {
     margin-bottom: 32px;
+    text-align: center;
 }
 
 .section-title {
@@ -267,15 +268,17 @@ body {
     background: var(--bg-secondary);
     border-radius: var(--radius-lg);
     padding: 32px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-lg);
     border: 1px solid var(--border-color);
-    margin-bottom: 24px;
+    margin: 0 auto 24px auto;
+    max-width: 850px;
 }
 
 .card-header {
     margin-bottom: 24px;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--border-color);
+    text-align: center;
 }
 
 .card-header h2 {
@@ -287,21 +290,22 @@ body {
 /* Tabs */
 .tabs {
     display: flex;
-    gap: 8px;
-    margin-bottom: 32px;
+    gap: 2px;
+    margin-bottom: 16px;
     border-bottom: 2px solid var(--border-color);
+    justify-content: center;
 }
 
 .tab-btn {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
+    gap: 4px;
+    padding: 2px 6px;
     background: none;
     border: none;
-    border-bottom: 3px solid transparent;
+    border-bottom: 2px solid transparent;
     color: var(--text-secondary);
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -319,7 +323,7 @@ body {
 }
 
 .tab-btn i {
-    font-size: 16px;
+    font-size: 12px;
 }
 
 /* Tab Content */
@@ -338,6 +342,7 @@ body {
 
 .panel-header {
     margin-bottom: 32px;
+    text-align: center;
 }
 
 .panel-header h3 {
@@ -355,6 +360,7 @@ body {
 /* Form Section */
 .form-section {
     max-width: 600px;
+    margin: 0 auto;
 }
 
 .form-group {
@@ -397,7 +403,8 @@ body {
     position: relative;
 }
 
-.toggle-password {
+.toggle-password { 
+    display: none !important;
     position: absolute;
     right: 12px;
     top: 50%;
@@ -418,6 +425,33 @@ body {
     display: flex;
     gap: 12px;
     margin-top: 32px;
+    justify-content: center;
+}
+
+#editProfile,
+#changePassword {
+    display: none !important;
+}
+
+/* Ocultar contenedor de botones en el perfil para quitar espacio vacío */
+#perfil .form-actions {
+    display: none !important;
+}
+
+/* Iconos internos para inputs de Usuario y Contraseña */
+#username, #password {
+    padding-left: 42px; /* Espacio para que el texto no pise el icono */
+    background-repeat: no-repeat;
+    background-position: 12px center;
+    background-size: 18px;
+}
+
+#username {
+    background-image: url('https://img.icons8.com/ios-glyphs/30/64748b/user--v1.png');
+}
+
+#password {
+    background-image: url('https://img.icons8.com/ios-glyphs/30/64748b/lock--v1.png');
 }
 
 /* Alerts Section */
@@ -849,6 +883,7 @@ input:checked+.slider:before {
 /* Token Actions */
 .token-actions {
     margin-bottom: 32px;
+    text-align: center;
 }
 
 /* Token Display */
@@ -962,4 +997,83 @@ input:checked+.slider:before {
     font-size: 14px;
     color: var(--text-secondary);
     margin: 0;
+}
+/* --- Integración de Menú Animado --- */
+.menu-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    position: relative;
+    padding-top: 10px;
+}
+
+.menu {
+    display: flex;
+    width: 32em;
+    font-size: 14px;
+    padding: 0 2.5em;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background-color: #1d1d27; /* Fondo oscuro para que resalten los iconos */
+    border-radius: 16px;
+}
+
+.menu__item {
+    all: unset;
+    flex-grow: 1;
+    z-index: 100;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8em 0 1.2em;
+    transition: transform 0.7s;
+}
+
+.menu__item::before {
+    content: "";
+    z-index: -1;
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    position: absolute;
+    transform: scale(0);
+    transition: background-color 0.7s, transform 0.7s;
+}
+
+.menu__item.active {
+    transform: translate3d(0, -.8em, 0);
+}
+
+.menu__item.active::before {
+    transform: scale(1);
+    background-color: var(--bgColorItem);
+}
+
+.icon {
+    width: 2.4em;
+    height: 2.4em;
+    stroke: white;
+    fill: white;
+    transition: 0.3s;
+}
+
+.menu__border {
+    left: 0;
+    bottom: 99%;
+    width: 10.9em;
+    height: 2.4em;
+    position: absolute;
+    clip-path: url(#menu);
+    background-color: #8a8ae1;
+    transition: transform 0.7s;
+}
+
+.svg-container {
+    width: 0;
+    height: 0;
+    position: absolute;
 }
