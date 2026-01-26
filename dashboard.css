@@ -261,13 +261,17 @@ body {
 }
 
 .stat-card:hover {
-   transform: translateY(-4px);
+   transform: translateY(-7px);
    /* Shadow por defecto suave si no tiene color específico */
    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 }
 
 .stat-card.blue {
    border-left-color: #3b82f6;
+   padding: 40px;
+   margin-bottom: 23px;
+   margin-right: 25%;
+   margin-left: 24%;
 }
 
 .stat-card.blue:hover {
@@ -315,7 +319,8 @@ body {
 .stat-icon {
    width: 56px;
    height: 56px;
-   border-radius: 12px;
+   padding: 40px;
+   border-radius: 42px;
    display: flex;
    align-items: center;
    justify-content: center;
@@ -350,6 +355,7 @@ body {
 
 .stat-info {
    flex: 1;
+   padding-left: 15px;
 }
 
 .stat-label {
@@ -903,4 +909,44 @@ body {
 .card-image:focus-visible {
    outline: none !important;
    border: none !important;
+}
+
+/* Dashboard Split Layout */
+.dashboard-layout-split {
+   display: flex;
+   gap: 32px;
+   align-items: flex-start;
+   margin-bottom: 40px;
+   margin-top: 24px;
+}
+
+.plata-card-section {
+   flex: 0 0 auto;
+   margin-bottom: 0 !important;
+   margin-top: 0 !important;
+}
+
+.stats-cards-grid {
+   flex: 1;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 16px;
+   margin-bottom: 0 !important;
+}
+
+/* Tarjeta Total de Envíos ocupa todo el ancho */
+.stats-cards-grid .stat-card:first-child {
+   grid-column: 1 / -1;
+}
+
+/* Ajustar responsive */
+@media (max-width: 1200px) {
+   .dashboard-layout-split {
+      flex-direction: column;
+   }
+
+   .plata-card-section {
+      align-self: center;
+      margin-bottom: 32px !important;
+   }
 }
