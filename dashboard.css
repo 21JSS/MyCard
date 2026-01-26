@@ -11,6 +11,7 @@
    --primary-light: #818cf8;
    --success-color: #10b981;
    --danger-color: #ef4444;
+   --danger-minus-color: #FF403D;
    --warning-color: #f59e0b;
    --info-color: #06b6d4;
    --bg-primary: #f8f9fb;
@@ -195,7 +196,9 @@ body {
 
 .btn:hover {
    transform: translateY(-1px);
-   box-shadow: var(--shadow-md);
+   box-shadow: var(--danger-minus-color);
+   background: linear-gradient(135deg, var(--danger-color), var(--danger-minus-color));
+   color: white;
 }
 
 .btn-outline {
@@ -205,7 +208,7 @@ body {
 }
 
 .btn-outline:hover {
-   border-color: var(--text-secondary);
+   border-color: var(--danger-color);
 }
 
 .btn-icon {
@@ -258,28 +261,53 @@ body {
 }
 
 .stat-card:hover {
-   transform: translateY(-4px);
-   box-shadow: var(--shadow-lg);
+   transform: translateY(-7px);
+   /* Shadow por defecto suave si no tiene color específico */
+   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 }
 
 .stat-card.blue {
    border-left-color: #3b82f6;
+   padding: 40px;
+   margin-bottom: 23px;
+   margin-right: 25%;
+   margin-left: 24%;
+}
+
+.stat-card.blue:hover {
+   box-shadow: 0 10px 25px -2px rgba(59, 130, 246, 0.6), 0 8px 10px -6px rgba(59, 130, 246, 0.4) !important;
 }
 
 .stat-card.green {
    border-left-color: #10b981;
 }
 
+.stat-card.green:hover {
+   box-shadow: 0 10px 25px -2px rgba(16, 185, 129, 0.6), 0 8px 10px -6px rgba(16, 185, 129, 0.4) !important;
+}
+
 .stat-card.cyan {
    border-left-color: #06b6d4;
+}
+
+.stat-card.cyan:hover {
+   box-shadow: 0 10px 25px -2px rgba(6, 182, 212, 0.6), 0 8px 10px -6px rgba(6, 182, 212, 0.4) !important;
 }
 
 .stat-card.orange {
    border-left-color: #f59e0b;
 }
 
+.stat-card.orange:hover {
+   box-shadow: 0 10px 25px -2px rgba(245, 158, 11, 0.6), 0 8px 10px -6px rgba(245, 158, 11, 0.4) !important;
+}
+
 .stat-card.red {
    border-left-color: #ef4444;
+}
+
+.stat-card.red:hover {
+   box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.6), 0 8px 10px -6px rgba(239, 68, 68, 0.4) !important;
 }
 
 .stat-card-header {
@@ -291,7 +319,8 @@ body {
 .stat-icon {
    width: 56px;
    height: 56px;
-   border-radius: 12px;
+   padding: 40px;
+   border-radius: 42px;
    display: flex;
    align-items: center;
    justify-content: center;
@@ -326,6 +355,7 @@ body {
 
 .stat-info {
    flex: 1;
+   padding-left: 15px;
 }
 
 .stat-label {
@@ -879,4 +909,44 @@ body {
 .card-image:focus-visible {
    outline: none !important;
    border: none !important;
+}
+
+/* Dashboard Split Layout */
+.dashboard-layout-split {
+   display: flex;
+   gap: 32px;
+   align-items: flex-start;
+   margin-bottom: 40px;
+   margin-top: 24px;
+}
+
+.plata-card-section {
+   flex: 0 0 auto;
+   margin-bottom: 0 !important;
+   margin-top: 0 !important;
+}
+
+.stats-cards-grid {
+   flex: 1;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 16px;
+   margin-bottom: 0 !important;
+}
+
+/* Tarjeta Total de Envíos ocupa todo el ancho */
+.stats-cards-grid .stat-card:first-child {
+   grid-column: 1 / -1;
+}
+
+/* Ajustar responsive */
+@media (max-width: 1200px) {
+   .dashboard-layout-split {
+      flex-direction: column;
+   }
+
+   .plata-card-section {
+      align-self: center;
+      margin-bottom: 32px !important;
+   }
 }
