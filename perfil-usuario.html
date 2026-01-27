@@ -4,33 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario - MyCard</title>
-    <!-- Reutilizamos los estilos existentes para mantener el diseño -->
+    
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="developer.css">
+    <link rel="stylesheet" href="perfil-usuario.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 <body>
     <div class="app-container">
-        <!-- Sidebar (Mismo menú que en las otras páginas) -->
         <aside class="sidebar">
             <div class="logo">
                 <div class="logo-icon">
-                    <i class="fas fa-cube"></i>
+                    <i class="fas fa-credit-card"></i>
                 </div>
                 <span class="logo-text">MyCard</span>
             </div>
             <nav class="nav-menu">
                 <a href="dashboard.html" class="nav-item">
-                    <i class="fas fa-home"></i>
+                    <i class="fas fa-th-large"></i>
                     <span>Dashboard</span>
                 </a>
                 <a href="shipments.html" class="nav-item">
                     <i class="fas fa-box"></i>
-                    <span>Envíos</span>
+                    <span>Shipments</span>
                 </a>
                 <a href="analytics.html" class="nav-item">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>Analíticas</span>
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
                 </a>
                 <a href="developer.html" class="nav-item">
                     <i class="fas fa-code"></i>
@@ -43,47 +45,104 @@
         <main class="main-content">
             <header class="top-header">
                 <div class="header-left">
-                    <h1 class="page-title">Perfil de Usuario</h1>
+                    <h1 class="page-title">MyCard Panel versión Beta 1.0</h1>
                 </div>
                 <div class="header-right">
+                    <button class="button">
+                        <svg viewBox="0 0 448 512" class="bell"><path d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"></path></svg>
+                        <span class="badge">0</span>
+                    </button>
                     <div class="user-profile">
-                        <span>Fabrica MyCard</span>
                         <i class="fas fa-user-circle"></i>
+                        <span>CrediVale</span>
                     </div>
                 </div>
             </header>
 
             <div class="section-header">
-                <h2 class="section-title">Información de Cuenta</h2>
+                <h2 class="section-title">Perfil de Usuario</h2>
             </div>
 
             <!-- Tarjeta de Perfil -->
-            <div class="card" style="max-width: 800px; margin: 0 auto;">
-                <div class="form-section">
-                    <div class="form-group">
-                        <label>Nombre de la Organización</label>
-                        <input type="text" class="form-input" value="Fabrica MyCard" readonly>
+            <div class="card profile-card">
+                <!-- Banner Superior -->
+                <div class="profile-banner"></div>
+                
+                <div class="profile-content">
+                    <!-- Info de Cabecera con Avatar -->
+                    <div class="profile-header-info">
+                        <div class="profile-avatar">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+                        <h2 class="profile-name">CrediVale</h2>
+                        <span class="profile-role">Estos son tus datos de acceso. Mantén tu contraseña segura.</span>
                     </div>
-                    <div class="form-group">
-                        <label>ID de Usuario</label>
-                        <input type="text" class="form-input" value="USR-2024-MYC-8821" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label>Correo Electrónico</label>
-                        <input type="email" class="form-input" value="admin@mycard.com" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label>Tipo de Plan</label>
-                        <input type="text" class="form-input" value="Enterprise - CrewdiVale" readonly style="color: var(--primary-color); font-weight: bold;">
-                    </div>
-                    
-                    <div class="form-actions">
-                        <button class="btn btn-primary">Guardar Cambios</button>
-                        <button class="btn btn-outline">Cerrar Sesión</button>
+
+                    <!-- Formulario en Grid -->
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Usuario</label>
+                            <div class="input-wrapper-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" class="form-input" value="Ctest" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Tipo de Usuario</label>
+                            <div class="input-wrapper-icon">
+                                <i class="fas fa-id-badge"></i>
+                                <input type="text" class="form-input input-highlight" value="ClienteDev" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Correo Electrónico</label>
+                            <div class="input-wrapper-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" class="form-input" value="CrediVale@mycard.com" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cliente</label>
+                            <div class="input-wrapper-icon">
+                                <i class="fas fa-building"></i>
+                                <input type="text" class="form-input" value="CrediVale" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <div class="input-wrapper-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" placeholder="••••••••" required id="password-input" class="form-input" value="demo123" readonly>
+                                <i class="fas fa-eye password-toggle-icon" id="togglePassword"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="form-action">
+                        <button class="Btn" onclick="window.location.href='login.html'">
+                        <div class="sign"><svg viewBox="0 0 512 512">
+                        <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+                        <div class="text">Cerrar Sesión</div>
+                        </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password-input');
+
+        togglePassword.addEventListener('click', function (e) {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
 </body>
 </html>

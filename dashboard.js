@@ -372,6 +372,14 @@ window.addEventListener('load', () => {
           window.location.href = 'perfil-usuario.html';
       });
   }
+
+  // Funcionalidad para el botón de perfil (CredVale)
+  const userProfileBtn = document.querySelector('.user-profile');
+  if (userProfileBtn) {
+      userProfileBtn.addEventListener('click', () => {
+          window.location.href = 'perfil-usuario.html';
+      });
+  }
 });
 
 // Funcionalidad para redirigir al hacer click en la tarjeta azul de Total de Envíos
