@@ -129,9 +129,9 @@ body {
    max-width: calc(100vw - 260px);
 }
 
-/* Top Header */
 .top-header {
    display: flex;
+   border-radius: 12px;
    position: sticky;
    top: 0;
    backdrop-filter: blur(12px);
@@ -139,13 +139,10 @@ body {
    z-index: 1000;
    justify-content: space-between;
    background: rgba(255, 255, 255, 0.82);
-   /* Corregido coma faltante */
    align-items: center;
-   margin-bottom: 24px;
    padding: 16px 32px;
-   /* Ajustado padding */
    border-bottom: 1px solid transparent;
-   /* Preparado para transición */
+   background: rgba(255, 255, 255, 0.95);
 }
 
 .header-left {
@@ -178,14 +175,6 @@ body.is-scrolled .header-mini-card {
    transform: translateY(0) scale(1);
 }
 
-body.is-scrolled .top-header {
-   padding-top: 10px;
-   padding-bottom: 10px;
-   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-   background: rgba(255, 255, 255, 0.95);
-   /* Más opaco al bajar */
-}
 
 .plata-card {
    transition: all 0.5s ease;
@@ -306,16 +295,10 @@ body.is-scrolled .plata-card {
 }
 
 .bell path {
-<<<<<<< HEAD
-   fill: white;
-   fill: var(--text-secondary);
+   fill: var(--text-primary);
    transition: fill 0.2s ease;
-=======
-  fill: white;
-  fill: var(--text-secondary);
-  transition: fill 0.2s ease; 
->>>>>>> 774ca497b3fc106eb355f291bb7d198642aad279
 }
+
 
 .button:hover {
    background-color: rgb(56, 56, 56);

@@ -143,6 +143,21 @@ body {
     font-weight: 600;
     color: var(--primary-color);
 }
+.top-header {
+   display: flex;
+   border-radius: 12px;
+   position: sticky;
+   top: 0;
+   backdrop-filter: blur(12px);
+   transition: all 0.3s ease;
+   z-index: 1000;
+   justify-content: space-between;
+   background: rgba(255, 255, 255, 0.82);
+   align-items: center;
+   padding: 16px 32px;
+   border-bottom: 1px solid transparent;
+   background: rgba(255, 255, 255, 0.95);
+    }
 
 .header-right {
     display: flex;
@@ -213,31 +228,44 @@ body {
     background: #059669;
 }
 
-.btn-icon {
+.button {
     width: 40px;
     height: 40px;
-    padding: 0;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
-    border: 1px solid var(--border-color);
-    position: relative;
+    background-color: white;
+    border-radius: var(--radius-md);
+    cursor: pointer;
     transition: all 0.2s ease;
-    color: var(--text-secondary);
-    font-size: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
 }
 
-.btn-icon:hover {
+.bell {
+    width: 20px;
+    transform-origin: 50% 0%;
+    display: block;
+}
+
+.bell path {
+   fill: var(--text-primary);
+    transition: fill 0.2s ease;
+}
+
+.button:hover {
     background-color: var(--bg-primary);
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
-    color: var(--text-primary);
 }
 
-.btn-icon:hover i {
+.button:hover .bell {
     animation: bellRing 0.9s infinite ease-in-out;
-    transform-origin: 50% 0%;
+}
+
+.button:hover .bell path {
+    fill: var(--text-primary);
 }
 
 @keyframes bellRing {
