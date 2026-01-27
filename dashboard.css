@@ -221,11 +221,17 @@ body.is-scrolled .plata-card {
    font-size: 18px;
    font-weight: 500;
    color: var(--text-primary);
+   cursor: pointer;
+   transition: background-color 0.2s ease;
 }
 
 .user-profile i {
    font-size: 24px;
    color: var(--primary-color);
+}
+
+.user-profile:hover {
+   background-color: var(--border-color);
 }
 
 /* Section Header */
@@ -303,7 +309,7 @@ body.is-scrolled .plata-card {
 .bell path {
   fill: white;
   fill: var(--text-secondary);
-  transition: fill 0.2s ease;
+  transition: fill 0.2s ease; 
 }
 
 .button:hover {
