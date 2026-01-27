@@ -391,6 +391,17 @@ window.addEventListener('load', () => {
   }
 });
 
+// Funcionalidad para redirigir al hacer click en la tarjeta azul de Total de Envíos
+document.addEventListener('DOMContentLoaded', () => {
+    const totalEnviosCard = document.querySelector('.stat-card.blue');
+    if (totalEnviosCard) {
+        totalEnviosCard.style.cursor = 'pointer';
+        totalEnviosCard.addEventListener('click', () => {
+            window.location.href = 'envios-status.html';
+        });
+    }
+});
+
 console.log('✅ Dashboard MyCard cargado correctamente');
 console.log('📊 Gráficos inicializados con datos de ejemplo');
 console.log('🎨 Animaciones activadas');
