@@ -17,6 +17,34 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="shipments.css">
+
+    <!-- Prevent sidebar flash - apply collapsed state before render -->
+    <script>
+        if (localStorage.getItem('sidebarCollapsed') === 'true') {
+            document.documentElement.classList.add('sidebar-collapsed-init');
+        }
+    </script>
+    <style>
+        .sidebar-collapsed-init .sidebar {
+            width: 80px;
+            padding: 24px 8px;
+        }
+
+        .sidebar-collapsed-init .logo-text,
+        .sidebar-collapsed-init .nav-item span {
+            display: none;
+        }
+
+        .sidebar-collapsed-init .logo,
+        .sidebar-collapsed-init .nav-item {
+            justify-content: center;
+        }
+
+        .sidebar-collapsed-init .main-content {
+            margin-left: 80px;
+            max-width: calc(100vw - 80px);
+        }
+    </style>
 </head>
 
 <body>
@@ -268,6 +296,7 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="menu.js"></script>
     <script src="shipments.js"></script>
 </body>
 
