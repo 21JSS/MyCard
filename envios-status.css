@@ -121,6 +121,42 @@ body {
     text-align: center;
 }
 
+/* Botón de Regresar */
+.return {
+    margin-bottom: 27px;
+    padding-top: 23px;
+}
+
+.returnbutton {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 25px;
+    background: var(--mycard-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.returnbutton:hover {
+    background: linear-gradient(var(--mycard-color), var(--primary-light));
+    color: white;
+    transform: translateX(-7px);
+    box-shadow: var(--shadow-md);
+}
+
+.returnbutton::before {
+    content: '\f060';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 14px;
+}
+
 /* Main Content */
 .main-content {
     flex: 1;
@@ -135,17 +171,23 @@ body {
 /* Top Header */
 .top-header {
     display: flex;
+    border-radius: 12px;
     position: sticky;
     top: 0;
     backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.95);
-    z-index: 50;
+    transition: all 0.3s ease;
+    z-index: 1000;
     justify-content: space-between;
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.95);
     align-items: center;
-    margin-bottom: 24px;
     padding: 16px 32px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid transparent;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 .page-title {
@@ -183,6 +225,30 @@ body {
 
 user.profile:hover {
     background-color: var(--border-color);
+}
+
+/* Mini Tarjeta en Header */
+.header-mini-card {
+    width: 60px;
+    height: 38px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+}
+
+.header-mini-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+body.is-scrolled .header-mini-card {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
 /* Section Header */
@@ -507,28 +573,14 @@ user.profile:hover {
     font-weight: 600;
 }
 
-/* Carrier Badge */
-.carrier-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.carrier-badge.estafeta {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
-}
-
-.carrier-badge.dhl {
-    background: rgba(245, 158, 11, 0.1);
-    color: #f59e0b;
-}
-
-.carrier-badge.fedex {
-    background: rgba(99, 102, 241, 0.1);
-    color: #6366f1;
+/* Carrier Logo */
+.carrier-logo {
+    height: 65px;
+    width: auto;
+    max-width: 80px;
+    object-fit: contain;
+    display: block;
+    margin: 3 auto;
 }
 
 /* Status Badge */

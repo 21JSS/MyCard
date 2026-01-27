@@ -52,3 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('✅ Envíos Status cargado correctamente');
 });
+
+// Detectar scroll para mostrar mini tarjeta en header
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        document.body.classList.add('is-scrolled');
+    } else {
+        document.body.classList.remove('is-scrolled');
+    }
+});
