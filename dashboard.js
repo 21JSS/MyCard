@@ -373,11 +373,20 @@ window.addEventListener('load', () => {
       });
   }
 
-  // Funcionalidad para el botón de perfil (CredVale)
+  // Funcionalidad Dropdown Perfil
   const userProfileBtn = document.querySelector('.user-profile');
-  if (userProfileBtn) {
-      userProfileBtn.addEventListener('click', () => {
-          window.location.href = 'perfil-usuario.html';
+  const profileDropdown = document.querySelector('.profile-dropdown');
+
+  if (userProfileBtn && profileDropdown) {
+      userProfileBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          profileDropdown.classList.toggle('show');
+      });
+
+      document.addEventListener('click', (e) => {
+          if (!profileDropdown.contains(e.target) && !userProfileBtn.contains(e.target)) {
+              profileDropdown.classList.remove('show');
+          }
       });
   }
 });

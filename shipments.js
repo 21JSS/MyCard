@@ -1,11 +1,3 @@
-// Elementos del DOM
-const trackingInput = document.getElementById('trackingNumber');
-const searchBtn = document.getElementById('searchBtn');
-const resultsSection = document.getElementById('resultsSection');
-const emptyState = document.getElementById('emptyState');
-const displayTrackingNumber = document.getElementById('displayTrackingNumber');
-const statusBadge = document.getElementById('statusBadge');
-
 // Datos de ejemplo de envíos
 const shipmentsData = {
   '1234567890123456789012': {
@@ -112,221 +104,186 @@ const shipmentsData = {
   }
 };
 
-// Event Listeners
-searchBtn.addEventListener('click', handleSearch);
-trackingInput.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    handleSearch();
-  }
-});
+// Inicialización segura
+document.addEventListener('DOMContentLoaded', () => {
+  // Elementos del DOM
+  const trackingInput = document.getElementById('trackingNumber');
+  const searchBtn = document.getElementById('searchBtn');
+  const resultsSection = document.getElementById('resultsSection');
+  const emptyState = document.getElementById('emptyState');
+  const displayTrackingNumber = document.getElementById('displayTrackingNumber');
+  const statusBadge = document.getElementById('statusBadge');
 
-// Formatear input mientras se escribe
-trackingInput.addEventListener('input', (e) => {
-  // Solo permitir números
-  e.target.value = e.target.value.replace(/[^0-9]/g, '');
-});
-
-// Función principal de búsqueda
-function handleSearch() {
-  const trackingNumber = trackingInput.value.trim();
+  // Event Listeners (Solo si existen los elementos)
+  if (searchBtn) searchBtn.addEventListener('click', handleSearch);
   
-  // Validar que no esté vacío
-  if (!trackingNumber) {
-    showError('Por favor ingresa un número de guía');
-    return;
-  }
-  
-  // Validar longitud
-  if (trackingNumber.length < 10) {
-    showError('El número de guía debe tener al menos 10 dígitos');
-    return;
-  }
-  
-  // Buscar el envío
-  const shipment = shipmentsData[trackingNumber];
-  
-  if (shipment) {
-    displayShipmentInfo(trackingNumber, shipment);
-  } else {
-    showNotFound();
-  }
-}
-
-// Mostrar información del envío
-function displayShipmentInfo(trackingNumber, shipment) {
-  // Ocultar empty state
-  emptyState.style.display = 'none';
-  
-  // Mostrar sección de resultados
-  resultsSection.style.display = 'block';
-  
-  // Actualizar número de guía
-  displayTrackingNumber.textContent = trackingNumber;
-  
-  // Actualizar status badge
-  statusBadge.className = `status-badge ${shipment.status}`;
-  statusBadge.innerHTML = `
-    <i class="fas fa-circle"></i>
-    <span>${shipment.statusText}</span>
-  `;
-  
-  // Actualizar detalles
-  document.getElementById('carrier').textContent = shipment.carrier;
-  document.getElementById('estimatedDate').textContent = shipment.estimatedDate;
-  document.getElementById('lastLocation').textContent = shipment.lastLocation;
-  document.getElementById('lastUpdate').textContent = shipment.lastUpdate;
-  
-  // Actualizar timeline
-  updateTimeline(shipment.timeline);
-  
-  // Scroll suave a los resultados
-  setTimeout(() => {
-    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 100);
-  
-  console.log('✅ Envío encontrado:', trackingNumber);
-}
-
-// Actualizar timeline
-function updateTimeline(timelineData) {
-  const timeline = document.getElementById('timeline');
-  timeline.innerHTML = '';
-  
-  timelineData.forEach(item => {
-    const timelineItem = document.createElement('div');
-    timelineItem.className = `timeline-item ${item.status}`;
+  if (trackingInput) {
+    trackingInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleSearch();
+    });
     
-    timelineItem.innerHTML = `
-      <div class="timeline-marker">
-        <i class="fas fa-check"></i>
-      </div>
-      <div class="timeline-content">
-        <div class="timeline-time">${item.time}</div>
-        <div class="timeline-title">${item.title}</div>
-        <div class="timeline-location">${item.location}</div>
+    trackingInput.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    });
+    
+    // Auto-focus
+    trackingInput.focus();
+  }
+
+  // --- Funciones ---
+  function handleSearch() {
+    if (!trackingInput) return;
+    const trackingNumber = trackingInput.value.trim();
+    
+    if (!trackingNumber) {
+      showError('Por favor ingresa un número de guía');
+      return;
+    }
+    
+    if (trackingNumber.length < 10) {
+      showError('El número de guía debe tener al menos 10 dígitos');
+      return;
+    }
+    
+    const shipment = shipmentsData[trackingNumber];
+    
+    if (shipment) {
+      displayShipmentInfo(trackingNumber, shipment);
+    } else {
+      showNotFound();
+    }
+  }
+
+  function displayShipmentInfo(trackingNumber, shipment) {
+    if (emptyState) emptyState.style.display = 'none';
+    if (resultsSection) resultsSection.style.display = 'block';
+    if (displayTrackingNumber) displayTrackingNumber.textContent = trackingNumber;
+    
+    if (statusBadge) {
+      statusBadge.className = `status-badge ${shipment.status}`;
+      statusBadge.innerHTML = `<i class="fas fa-circle"></i><span>${shipment.statusText}</span>`;
+    }
+    
+    const setContent = (id, text) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    };
+
+    setContent('carrier', shipment.carrier);
+    setContent('estimatedDate', shipment.estimatedDate);
+    setContent('lastLocation', shipment.lastLocation);
+    setContent('lastUpdate', shipment.lastUpdate);
+    
+    updateTimeline(shipment.timeline);
+    
+    setTimeout(() => {
+      if (resultsSection) resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+    
+    console.log('✅ Envío encontrado:', trackingNumber);
+  }
+
+  function updateTimeline(timelineData) {
+    const timeline = document.getElementById('timeline');
+    if (!timeline) return;
+    
+    timeline.innerHTML = '';
+    
+    timelineData.forEach(item => {
+      const timelineItem = document.createElement('div');
+      timelineItem.className = `timeline-item ${item.status}`;
+      
+      timelineItem.innerHTML = `
+        <div class="timeline-marker">
+          <i class="fas fa-check"></i>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-time">${item.time}</div>
+          <div class="timeline-title">${item.title}</div>
+          <div class="timeline-location">${item.location}</div>
+        </div>
+      `;
+      
+      timeline.appendChild(timelineItem);
+    });
+  }
+
+  function showError(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification error';
+    notification.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>${message}</span>`;
+    
+    notification.style.cssText = `
+      position: fixed; top: 24px; right: 24px; background: #ef4444; color: white;
+      padding: 16px 24px; border-radius: 12px; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+      display: flex; align-items: center; gap: 12px; font-weight: 600; z-index: 1000;
+      animation: slideIn 0.3s ease-out;
+    `;
+    
+    document.body.appendChild(notification);
+    setTimeout(() => {
+      notification.style.animation = 'slideOut 0.3s ease-out';
+      setTimeout(() => notification.remove(), 300);
+    }, 3000);
+    
+    addNotificationStyles();
+  }
+
+  function showNotFound() {
+    const notification = document.createElement('div');
+    notification.className = 'notification warning';
+    notification.innerHTML = `
+      <i class="fas fa-search"></i>
+      <div>
+        <strong>Envío no encontrado</strong>
+        <p style="margin: 4px 0 0 0; font-size: 13px; opacity: 0.9;">
+          Verifica el número de guía e intenta nuevamente.
+        </p>
       </div>
     `;
     
-    timeline.appendChild(timelineItem);
-  });
-}
-
-// Mostrar error
-function showError(message) {
-  // Crear notificación de error
-  const notification = document.createElement('div');
-  notification.className = 'notification error';
-  notification.innerHTML = `
-    <i class="fas fa-exclamation-circle"></i>
-    <span>${message}</span>
-  `;
-  
-  // Agregar estilos inline
-  notification.style.cssText = `
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    background: #ef4444;
-    color: white;
-    padding: 16px 24px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 600;
-    z-index: 1000;
-    animation: slideIn 0.3s ease-out;
-  `;
-  
-  document.body.appendChild(notification);
-  
-  // Remover después de 3 segundos
-  setTimeout(() => {
-    notification.style.animation = 'slideOut 0.3s ease-out';
-    setTimeout(() => notification.remove(), 300);
-  }, 3000);
-  
-  // Agregar animaciones si no existen
-  if (!document.getElementById('notification-styles')) {
-    const style = document.createElement('style');
-    style.id = 'notification-styles';
-    style.textContent = `
-      @keyframes slideIn {
-        from {
-          transform: translateX(400px);
-          opacity: 0;
-        }
-        to {
-          transform: translateX(0);
-          opacity: 1;
-        }
-      }
-      @keyframes slideOut {
-        from {
-          transform: translateX(0);
-          opacity: 1;
-        }
-        to {
-          transform: translateX(400px);
-          opacity: 0;
-        }
-      }
+    notification.style.cssText = `
+      position: fixed; top: 24px; right: 24px; background: #f59e0b; color: white;
+      padding: 16px 24px; border-radius: 12px; box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+      display: flex; align-items: flex-start; gap: 12px; font-weight: 500; z-index: 1000;
+      animation: slideIn 0.3s ease-out; max-width: 400px;
     `;
-    document.head.appendChild(style);
+    
+    document.body.appendChild(notification);
+    setTimeout(() => {
+      notification.style.animation = 'slideOut 0.3s ease-out';
+      setTimeout(() => notification.remove(), 300);
+    }, 5000);
   }
-}
 
-// Mostrar no encontrado
-function showNotFound() {
-  // Crear notificación de no encontrado
-  const notification = document.createElement('div');
-  notification.className = 'notification warning';
-  notification.innerHTML = `
-    <i class="fas fa-search"></i>
-    <div>
-      <strong>Envío no encontrado</strong>
-      <p style="margin: 4px 0 0 0; font-size: 13px; opacity: 0.9;">
-        Verifica el número de guía e intenta nuevamente. 
-        <br>Números de ejemplo: 1234567890123456789012, 9876543210, 123456789012
-      </p>
-    </div>
-  `;
-  
-  notification.style.cssText = `
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    background: #f59e0b;
-    color: white;
-    padding: 16px 24px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-weight: 500;
-    z-index: 1000;
-    animation: slideIn 0.3s ease-out;
-    max-width: 400px;
-  `;
-  
-  document.body.appendChild(notification);
-  
-  setTimeout(() => {
-    notification.style.animation = 'slideOut 0.3s ease-out';
-    setTimeout(() => notification.remove(), 300);
-  }, 5000);
-}
+  function addNotificationStyles() {
+    if (!document.getElementById('notification-styles')) {
+      const style = document.createElement('style');
+      style.id = 'notification-styles';
+      style.textContent = `
+        @keyframes slideIn { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(400px); opacity: 0; } }
+      `;
+      document.head.appendChild(style);
+    }
+  }
 
-// Animación de entrada para elementos
-window.addEventListener('load', () => {
   console.log('✅ Página de Shipments cargada');
-  console.log('📦 Números de guía de ejemplo disponibles:');
-  console.log('   - 1234567890123456789012 (Estafeta - En Tránsito)');
-  console.log('   - 9876543210 (DHL - Entregado)');
-  console.log('   - 123456789012 (FedEx - Pendiente)');
-});
 
-// Auto-focus en el input al cargar
-trackingInput.focus();
+  // Funcionalidad Dropdown Perfil
+  const userProfileBtn = document.querySelector('.user-profile');
+  const profileDropdown = document.querySelector('.profile-dropdown');
+
+  if (userProfileBtn && profileDropdown) {
+      userProfileBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          profileDropdown.classList.toggle('show');
+      });
+
+      document.addEventListener('click', (e) => {
+          if (!profileDropdown.contains(e.target) && !userProfileBtn.contains(e.target)) {
+              profileDropdown.classList.remove('show');
+          }
+      });
+  }
+});

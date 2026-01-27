@@ -223,6 +223,66 @@ body.is-scrolled .plata-card {
    background-color: var(--border-color);
 }
 
+/* Estilos del Dropdown de Perfil */
+.user-profile-container {
+   position: relative;
+}
+
+.user-profile {
+   cursor: pointer;
+   user-select: none;
+}
+
+.profile-dropdown {
+   position: absolute;
+   top: 120%;
+   right: 0;
+   width: 200px;
+   background: white;
+   border: 1px solid var(--border-color);
+   border-radius: var(--radius-md);
+   box-shadow: var(--shadow-lg);
+   display: none;
+   flex-direction: column;
+   z-index: 1000;
+   overflow: hidden;
+   animation: fadeIn 0.2s ease-out;
+}
+
+.profile-dropdown.show {
+   display: flex;
+}
+
+.dropdown-item {
+   padding: 12px 16px;
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   color: var(--text-primary);
+   text-decoration: none;
+   font-size: 14px;
+   transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+   background: var(--bg-primary);
+}
+
+.dropdown-item i {
+   width: 20px;
+   text-align: center;
+   color: var(--text-secondary);
+}
+
+.dropdown-item.logout {
+   color: var(--danger-color);
+   border-top: 1px solid var(--border-color);
+}
+
+.dropdown-item.logout i {
+   color: var(--danger-color);
+}
+
 /* Section Header */
 .section-header {
    margin-bottom: 24px;

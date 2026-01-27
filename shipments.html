@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shipments - MyCard Panel versión Beta 1.0</title>
+    <title>Shipments </title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +17,15 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="shipments.css">
+    <style>
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+        .input-wrapper .form-input {
+            flex: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -64,9 +73,22 @@
                         </path></svg>
                         <span class="badge">0</span>
                     </button>
-                    <div class="user-profile" onclick="window.location.href='perfil-usuario.html'">
-                        <i class="fas fa-user-circle"></i>
-                        <span>CredVale</span>
+                    <div class="user-profile-container">
+                        <div class="user-profile">
+                            <i class="fas fa-user-circle"></i>
+                            <span>CrediVale</span>
+                            <i class="fas fa-chevron-down" style="margin-left: 8px; font-size: 12px;"></i>
+                        </div>
+                        <div class="profile-dropdown">
+                            <a href="perfil-usuario.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                Ver Perfil
+                            </a>
+                            <a href="login.html" class="dropdown-item logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Cerrar Sesión
+                            </a>
+                        </div>
                     </div>
                 </div>
             </header>
