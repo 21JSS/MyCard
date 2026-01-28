@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         exportBtn.addEventListener('click', () => {
             console.log('Exportando a Excel...');
             alert('Funcionalidad de exportación en desarrollo');
-            // Aquí implementarías la lógica de exportación
+            // Aqui se va a ver si se quiere la lógica de exportación
         });
     }
 
