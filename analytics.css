@@ -817,3 +817,251 @@ body {
     margin-left: 80px;
     width: calc(100vw - 80px);
 }
+
+/* Additional Metric Card Colors */
+.metric-card.cyan {
+    border-left-color: #06b6d4;
+}
+
+.metric-card.cyan .metric-header i {
+    color: #06b6d4;
+}
+
+.metric-card.purple {
+    border-left-color: #8b5cf6;
+}
+
+.metric-card.purple .metric-header i {
+    color: #8b5cf6;
+}
+
+.metric-card.teal {
+    border-left-color: #14b8a6;
+}
+
+.metric-card.teal .metric-header i {
+    color: #14b8a6;
+}
+
+.metric-card.yellow {
+    border-left-color: #eab308;
+}
+
+.metric-card.yellow .metric-header i {
+    color: #eab308;
+}
+
+/* Filters Section */
+.filters-section {
+    margin-bottom: 24px;
+}
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.filter-select {
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    font-size: 14px;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Ranking Table */
+.ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ranking-table thead {
+    background: var(--bg-primary);
+}
+
+.ranking-table th {
+    text-align: left;
+    padding: 14px 16px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.ranking-table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.ranking-table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.ranking-table tbody tr:hover {
+    background: var(--bg-primary);
+}
+
+.rank-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.rank-badge.gold {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #8b6914;
+}
+
+.rank-badge.silver {
+    background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+    color: #5a5a5a;
+}
+
+.rank-badge.bronze {
+    background: linear-gradient(135deg, #cd7f32, #e6a85c);
+    color: #5c3d1f;
+}
+
+.carrier-logo-small {
+    height: 24px;
+    width: auto;
+    max-width: 60px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.success-text {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+.warning-text {
+    color: var(--warning-color);
+    font-weight: 600;
+}
+
+.low-text {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+.medium-text {
+    color: var(--warning-color);
+    font-weight: 600;
+}
+
+.rating {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Chart Container Adjustments */
+.chart-container {
+    position: relative;
+    height: 300px;
+    padding: 20px 0;
+}
+
+.chart-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* Carrier Logo Medium Size */
+.carrier-logo-medium {
+    height: 40px;
+    width: auto;
+    max-width: 100px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Rank Number (for positions 4+) */
+.rank-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Additional Text Colors */
+.danger-text {
+    color: var(--danger-color);
+    font-weight: 600;
+}
+
+.high-text {
+    color: var(--danger-color);
+    font-weight: 600;
+}
+
+/* Center align logo column */
+.ranking-table td:nth-child(2) {
+    text-align: center;
+}
+
