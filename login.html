@@ -44,23 +44,17 @@
                 </div>
 
                 <!-- Formulario de Login -->
-                <form class="login-form">
+                <form class="login-form" id="login-form" onsubmit="event.preventDefault(); window.location.href='dashboard.html'">
                     <div class="input-row">
                         <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png" class="input-icon">
-                        <label>Usuario :</label>
+                        <label>Username :</label>
                         <input type="text" placeholder="REQUERIDO" required>
                     </div>
                     <div class="input-row">
                         <img src="https://img.icons8.com/ios-glyphs/30/000000/lock--v1.png" class="input-icon">
-                        <label>Contraseña :</label>
+                        <label>Password:</label>
                         <input type="password" placeholder="••••••••" required id="password-input">
                         <img src="https://img.icons8.com/ios-glyphs/30/000000/visible--v1.png" class="password-toggle" id="toggle-password">
-                    </div>
-                    <div class="button-row">
-                        <!-- Botón de autorización -->
-                         <a href="dashboard.html">
-                         <button class="button2">Acceder</button>
-                        </a>
                     </div>
                 </form>
 
@@ -69,10 +63,8 @@
                     <div class="chip-container">
                         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFzeQ0hz39haiHkhSOKnHJCG3v6AynORgBKrj0Zf2FTYMvjAsDAxzqIFZ8DYXbyq_-u_kuZcgg5nRpXxVGp18K15NiCGvVwTv-8QUGdZwJS3sSlhRpqEpZ3RHP7vQCIoKYnd6UFEAzxrhFPR5byjFFR6ld7gWvNCD7g5LF3Y6uhJvgY1_hw8qBCqO6/s1600/chip.png" class="chip-img">
                     </div>
-                    <div class="card-info">
-                                                <!-- Fecha de expiración -->
-                        <span class="card-date">09/26- 11/30</span>
-                    </div>
+                    <!-- Botón de autorización movido al pie -->
+                    <button class="button2" type="submit" form="login-form">Acceder</button>
                 </div>
             </div>
         </div>
