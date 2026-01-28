@@ -57,12 +57,12 @@
                     <span>Dashboard</span>
                 </a>
                 <a href="shipments.html" class="nav-item active">
-                    <i class="fas fa-box"></i>
-                    <span>Shipments</span>
+                    <i class="fas fa-credit-card"></i>
+                    <span>Mis Tarjetas</span>
                 </a>
                 <a href="analytics.html" class="nav-item">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Analytics</span>
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reportes</span>
                 </a>
                 <a href="developer.html" class="nav-item">
                     <i class="fas fa-code"></i>
@@ -267,6 +267,14 @@
     <!-- JavaScript -->
     <script src="menu.js"></script>
     <script src="shipments.js"></script>
+    <script>
+        // Redirección rápida para demo de tracking
+        document.getElementById('searchBtn').addEventListener('click', () => {
+            const trackingNum = document.getElementById('trackingNumber').value;
+            // Redirigir si hay texto o simplemente para la demo
+            window.location.href = 'tracking.html';
+        });
+    </script>
 </body>
 
 </html>

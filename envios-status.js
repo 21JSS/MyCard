@@ -46,18 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const guideNumber = row.querySelector('.guide-number').textContent;
             console.log('Ver detalles de guía:', guideNumber);
             // Aquí podrías redirigir a shipments.html con el número de guía
-            // window.location.href = `shipments.html?guide=${guideNumber}`;
+            window.location.href = 'tracking.html';
         });
     });
 
     console.log('✅ Envíos Status cargado correctamente');
-});
-
-// Detectar scroll para mostrar mini tarjeta en header
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        document.body.classList.add('is-scrolled');
-    } else {
-        document.body.classList.remove('is-scrolled');
-    }
 });

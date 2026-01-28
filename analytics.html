@@ -20,6 +20,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="analytics.css">
+    <link rel="stylesheet" href="analytics-geo.css">
 
     <!-- Prevent sidebar flash - apply collapsed state before render -->
     <script>
@@ -67,12 +68,12 @@
                     <span>Dashboard</span>
                 </a>
                 <a href="shipments.html" class="nav-item">
-                    <i class="fas fa-box"></i>
-                    <span>Shipments</span>
+                    <i class="fas fa-credit-card"></i>
+                    <span>Mis Tarjetas</span>
                 </a>
                 <a href="analytics.html" class="nav-item active">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Analytics</span>
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reportes</span>
                 </a>
                 <a href="developer.html" class="nav-item">
                     <i class="fas fa-code"></i>
@@ -114,7 +115,7 @@
             </header>
 
             <div class="section-header">
-                <h2 class="section-title">Analytics</h2>
+                <h2 class="section-title">Reportes de Mis Tarjetas</h2>
             </div>
 
             <!-- Métricas Trimestrales -->
@@ -173,6 +174,188 @@
                 </div>
             </div>
 
+            <!-- Additional KPIs Row -->
+            <div class="metrics-grid" style="margin-top: 24px;">
+                <!-- Tasa de Entrega a Tiempo -->
+                <div class="metric-card cyan">
+                    <div class="metric-header">
+                        <span class="metric-label">Entrega a Tiempo</span>
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="metric-value" id="ontimeRate">94.5%</div>
+                    <div class="metric-detail">De 402 tarjetas totales</div>
+                </div>
+
+                <!-- Tiempo Promedio de Entrega -->
+                <div class="metric-card purple">
+                    <div class="metric-header">
+                        <span class="metric-label">Tiempo Promedio</span>
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <div class="metric-value" id="avgDeliveryTime">2.8 días</div>
+                    <div class="metric-detail">Tiempo de llegada</div>
+                </div>
+
+                <!-- Costo Promedio por Envío -->
+                <div class="metric-card teal">
+                    <div class="metric-header">
+                        <span class="metric-label">Costo Promedio</span>
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="metric-value" id="avgCost">$145.00</div>
+                    <div class="metric-detail">Por tarjeta</div>
+                </div>
+
+                <!-- Satisfacción del Cliente -->
+                <div class="metric-card yellow">
+                    <div class="metric-header">
+                        <span class="metric-label">Satisfacción</span>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="metric-value" id="satisfaction">4.7/5</div>
+                    <div class="metric-detail">Calificación promedio</div>
+                </div>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="card filters-section" style="margin-top: 32px;">
+                <div class="card-header">
+                    <h2>Filtros de Análisis</h2>
+                </div>
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label for="dateRange">Rango de Fechas:</label>
+                        <select id="dateRange" class="filter-select">
+                            <option value="7">Últimos 7 días</option>
+                            <option value="30" selected>Últimos 30 días</option>
+                            <option value="90">Últimos 90 días</option>
+                            <option value="custom">Personalizado</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="carrierFilter">Paquetería:</label>
+                        <select id="carrierFilter" class="filter-select">
+                            <option value="all" selected>Todas</option>
+                            <option value="estafeta">Estafeta</option>
+                            <option value="dhl">DHL</option>
+                            <option value="fedex">FedEx</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="statusFilter">Estado:</label>
+                        <select id="statusFilter" class="filter-select">
+                            <option value="all" selected>Todos</option>
+                            <option value="delivered">Entregados</option>
+                            <option value="in-transit">En Tránsito</option>
+                            <option value="exception">Excepción</option>
+                            <option value="returned">Retornados</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <button class="btn btn-primary" id="applyFilters">
+                            <i class="fas fa-filter"></i>
+                            Aplicar Filtros
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="charts-grid" style="margin-top: 32px;">
+                <!-- Envíos por Tiempo -->
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h2>Tendencia de Mis Tarjetas</h2>
+                        <p class="chart-subtitle">Volumen de tarjetas en el tiempo</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="shipmentsTimelineChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Distribución por Status -->
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h2>Estado de Mis Tarjetas</h2>
+                        <p class="chart-subtitle">Porcentaje de tarjetas por estado</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="statusDistributionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carrier Ranking Table -->
+            <div class="card" style="margin-top: 32px;">
+                <div class="card-header">
+                    <h2>Ranking de Paqueterías</h2>
+                    <p class="chart-subtitle">Comparativa de rendimiento</p>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table ranking-table">
+                        <thead>
+                            <tr>
+                                <th>Posición</th>
+                                <th>Paquetería</th>
+                                <th>Total Envíos</th>
+                                <th>Entrega a Tiempo</th>
+                                <th>Tiempo Promedio</th>
+                                <th>Tasa Excepción</th>
+                                <th>Calificación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="rank-1">
+                                <td><span class="rank-badge gold">🥇 1</span></td>
+                                <td><img src="dhl.png" alt="DHL" class="carrier-logo-medium" title="DHL"></td>
+                                <td>156</td>
+                                <td><span class="success-text">96.2%</span></td>
+                                <td>2.3 días</td>
+                                <td><span class="low-text">1.9%</span></td>
+                                <td><span class="rating">⭐ 4.8</span></td>
+                            </tr>
+                            <tr class="rank-2">
+                                <td><span class="rank-badge silver">🥈 2</span></td>
+                                <td><img src="fedex.png" alt="FedEx" class="carrier-logo-medium" title="FedEx"></td>
+                                <td>134</td>
+                                <td><span class="success-text">94.8%</span></td>
+                                <td>2.6 días</td>
+                                <td><span class="low-text">2.2%</span></td>
+                                <td><span class="rating">⭐ 4.7</span></td>
+                            </tr>
+                            <tr class="rank-3">
+                                <td><span class="rank-badge bronze">🥉 3</span></td>
+                                <td><img src="Logo-Estafeta.svg" alt="Estafeta" class="carrier-logo-medium" title="Estafeta"></td>
+                                <td>112</td>
+                                <td><span class="warning-text">92.0%</span></td>
+                                <td>3.4 días</td>
+                                <td><span class="medium-text">3.6%</span></td>
+                                <td><span class="rating">⭐ 4.5</span></td>
+                            </tr>
+                            <tr class="rank-4">
+                                <td><span class="rank-number">4</span></td>
+                                <td><img src="ups-icon.svg" alt="UPS" class="carrier-logo-medium" title="UPS"></td>
+                                <td>98</td>
+                                <td><span class="warning-text">90.8%</span></td>
+                                <td>3.1 días</td>
+                                <td><span class="medium-text">4.1%</span></td>
+                                <td><span class="rating">⭐ 4.3</span></td>
+                            </tr>
+                            <tr class="rank-5">
+                                <td><span class="rank-number">5</span></td>
+                                <td><img src="logo-redpack.png" alt="Redpack" class="carrier-logo-medium" title="Redpack"></td>
+                                <td>82</td>
+                                <td><span class="danger-text">88.4%</span></td>
+                                <td>3.8 días</td>
+                                <td><span class="high-text">5.5%</span></td>
+                                <td><span class="rating">⭐ 4.1</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
             <!-- Charts Grid -->
             <div class="charts-grid">
                 <!-- Tendencia Mensual -->
@@ -214,6 +397,57 @@
                             <span class="legend-color red"></span>
                             <span>Tasa de Retorno (%)</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Análisis Geográfico (Nuevo) -->
+            <div class="section-header" style="margin-top: 48px; margin-bottom: 10px;">
+                <h2 class="section-title">Análisis Geográfico</h2>
+            </div>
+            <p class="section-subtitle">Distribución de envíos y rendimiento por zona logística</p>
+
+            <div class="geo-dashboard-grid">
+                <!-- Mapa de Calor -->
+                <div class="card geo-card">
+                    <div class="card-header">
+                        <h2>Mapa de Calor (Heatmap)</h2>
+                        <p class="chart-subtitle">Concentración de envíos por zona</p>
+                    </div>
+                    <div class="map-wrapper">
+                        <div class="map-background">
+                            <canvas id="geoHeatmapChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="geo-insight">
+                        <i class="fas fa-lightbulb"></i>
+                        <p><strong>Insight:</strong> El 65% de los envíos se concentran en el <span>Centro y Bajío</span>, lo que sugiere una oportunidad para consolidar rutas terrestres en estas zonas.</p>
+                    </div>
+                </div>
+
+                <!-- Tabla de Rendimiento Regional -->
+                <div class="card region-card">
+                    <div class="card-header">
+                        <h2>Rendimiento por Región</h2>
+                        <p class="chart-subtitle">Comparativa vs. Promedio Nacional</p>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table region-table">
+                            <thead>
+                                <tr>
+                                    <th>Región</th>
+                                    <th>Tiempo Prom.</th>
+                                    <th>Diferencia</th>
+                                </tr>
+                            </thead>
+                            <tbody id="regionTableBody">
+                                <!-- JS Populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="geo-insight warning" style="margin-top: 24px;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p><strong>Atención:</strong> Los envíos a la <span>Zona Norte</span> tardan <strong>2 días más</strong> que al Centro. Se recomienda ajustar la promesa de entrega en el checkout para esta región.</p>
                     </div>
                 </div>
             </div>
