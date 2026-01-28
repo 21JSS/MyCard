@@ -360,9 +360,16 @@ function updateDashboardData(data) {
 }
 
 // Animar valores de estadísticas al cargar la página
+// Animar valores de estadísticas al cargar la página
 window.addEventListener("load", () => {
-  // Primero actualizar con datos de ejemplo
-  const datosEjemplo = {
+  // Lógica Multi-Usuario
+  const currentUser = localStorage.getItem("currentUser") || "plata";
+  const cardImage = document.querySelector(".card-image");
+  const miniCardImage = document.querySelector(".header-mini-card img");
+  const clientName = document.querySelector(".client-name");
+
+  // Datos por defecto (PLATA)
+  let dashboardData = {
     totalEnvios: 42,
     entregados: 34,
     enTransito: 6,
@@ -370,14 +377,72 @@ window.addEventListener("load", () => {
     retornos: 1,
   };
 
-  // Actualizar las tarjetas con los datos
-  updateDashboardData(datosEjemplo);
+  if (currentUser === "broxel") {
+    console.log("🔹 Perfil activo: BROXEL");
+    // Cambiar Branding
+    if (cardImage) {
+      cardImage.src = "broxel.png";
+      cardImage.alt = "Tarjeta Broxel";
+      // Clase específica para imágenes full-bleed (como Broxel)
+      cardImage.classList.add("is-full-card");
+      cardImage.classList.remove("is-mockup-card");
+    }
+
+    // Cambiar Mini Tarjeta Header
+    if (miniCardImage) {
+      miniCardImage.src = "broxel.png";
+      miniCardImage.alt = "Mini Tarjeta Broxel";
+    }
+
+    if (clientName) clientName.textContent = "BROXEL";
+
+    // Cambiar tipo de tarjeta
+    const cardType = document.querySelector(".card-type");
+    if (cardType) cardType.textContent = "Tarjeta Débito VISA";
+
+    // Datos Específicos para Broxel (Más volumen, métricas distintas)
+    dashboardData = {
+      totalEnvios: 1250,
+      entregados: 980,
+      enTransito: 210,
+      excepcion: 45,
+      retornos: 15,
+    };
+  } else {
+    console.log("🔸 Perfil activo: PLATA");
+    // Asegurar que vuelve a Plata si es el default
+    if (cardImage) {
+      cardImage.src = "PLATA.png";
+      cardImage.alt = "Tarjeta Plata";
+      // Clase específica para imágenes tipo mockup (como Plata)
+      cardImage.classList.add("is-mockup-card");
+      cardImage.classList.remove("is-full-card");
+    }
+
+    // Restaurar Mini Tarjeta Header
+    if (miniCardImage) {
+      miniCardImage.src = "PLATA.png";
+      miniCardImage.alt = "Mini Tarjeta Plata";
+    }
+
+    if (clientName) clientName.textContent = "PLATA";
+
+    // Restaurar tipo de tarjeta
+    const cardType = document.querySelector(".card-type");
+    if (cardType) cardType.textContent = "Tarjeta Débito Mastercard";
+  }
+
+  // Actualizar las tarjetas con los datos seleccionados
+  updateDashboardData(dashboardData);
 
   // Luego animar los valores
   setTimeout(() => {
     const statValues = document.querySelectorAll(".stat-value");
     statValues.forEach((element, index) => {
-      const currentValue = parseInt(element.textContent) || 0;
+      // Limpiar comas si existen numeros grandes
+      let cleanValue = element.textContent.replace(/,/g, "");
+      const currentValue = parseInt(cleanValue) || 0;
+
       if (currentValue > 0) {
         element.textContent = "0";
         setTimeout(() => {
