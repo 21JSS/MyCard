@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         });
     }
 
-    if(filtrarCarrier) {
+    if(filterCarrier) {
         filterCarrier.addEventListener('change', (e) => {
             console.log('Filtrar por paqueteria:', e.target.value);
         });
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     const actionButtons = document.querySelectorAll('.btn-action');
     actionButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const row = e.target.closets('tr');
+            const row = e.target.closest('tr');
             const guideNumber = row.querySelector('.guide-number').textContent;
             console.log('Ver detalles de guia: ', guideNumber);
         });

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estatus En Tránsito - MyCard Panel</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="En-transito-status.css?v=6">
+
+    <!-- Prevent sidebar flash -->
+    <script>
+        if (localStorage.getItem('sidebarCollapsed') === 'true') {
+            document.documentElement.classList.add('sidebar-collapsed-init');
+        }
+    </script>
+    <style>
+        .sidebar-collapsed-init .sidebar { width: 80px; padding: 24px 8px; }
+        .sidebar-collapsed-init .logo-text, .sidebar-collapsed-init .nav-item span { display: none; }
+        .sidebar-collapsed-init .logo, .sidebar-collapsed-init .nav-item { justify-content: center; }
+        .sidebar-collapsed-init .main-content { margin-left: 80px; max-width: calc(100vw - 80px); }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <span class="logo-text">MyCard</span>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="shipments.html" class="nav-item">
+                    <i class="fas fa-box"></i>
+                    <span>Shipments</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="developer.html" class="nav-item">
+                    <i class="fas fa-code"></i>
+                    <span>Developer</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 class="page-title">MyCard Panel versión Beta 1.0</h1>
+                    <div class="header-mini-card">
+                        <img src="PLATA.png" alt="Mini Tarjeta">
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <button class="button">
+                        <svg viewBox="0 0 448 512" class="bell">
+                            <path d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"></path>
+                        </svg>
+                        <span class="badge">2</span>
+                    </button>
+                    <div class="user-profile">
+                        <i class="fas fa-user-circle"></i>
+                        <span>CrediVale</span>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="return">
+                <button class="returnbutton" onclick="window.location.href='dashboard.html'">Regresar</button>
+            </div>
+
+            <div class="section-header">
+                <h2 class="section-title">Estatus En Tránsito</h2>
+                <p class="section-subtitle">Monitoreo activo - Total: 43 envíos</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-card">
+                <div class="filter-group">
+                    <label for="filterStatus">Filtrar por estatus:</label>
+                    <select id="filterStatus" class="filter-select">
+                        <option value="in-transit" selected>En Tránsito</option>
+                        <option value="all">Todos</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filterCarrier">Paquetería:</label>
+                    <select id="filterCarrier" class="filter-select">
+                        <option value="all">Todas</option>
+                        <option value="estafeta">Estafeta</option>
+                        <option value="dhl">DHL</option>
+                        <option value="fedex">FedEx</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <input type="text" id="searchGuide" class="filter-input" placeholder="Buscar por # de guía...">
+                </div>
+
+                <button class="btn-excel" id="exportBtn">
+                    <i class="fas fa-download"></i>
+                    Exportar Excel
+                </button>
+            </div>
+
+            <!-- Table Card -->
+            <div class="card table-card">
+                <div class="card-header">
+                    <h2>Listado de Envíos en Tránsito</h2>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th># Guía</th>
+                                <th>Paquetería</th>
+                                <th>Status</th>
+                                <th>Fecha Estimada Entrega</th>
+                                <th>Ult. Act</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="shipmentsTable">
+                            <!-- Fila 1 -->
+                            <tr>
+                                <td><span class="guide-number">1234567890</span></td>
+                                <td><img src="dhl.png" alt="DHL" class="carrier-logo"></td>
+                                <td><span class="status-badge in-transit">En Tránsito</span></td>
+                                <td>26 Ene 2026</td>
+                                <td>Hoy, 08:15 AM</td>
+                                <td>
+                                    <button class="btn-action" title="Ver detalles">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <!-- Fila 2 -->
+                            <tr>
+                                <td><span class="guide-number">7777888899990000</span></td>
+                                <td><img src="Logo-Estafeta.svg" alt="Estafeta" class="carrier-logo"></td>
+                                <td><span class="status-badge in-transit">En Tránsito</span></td>
+                                <td>27 Ene 2026</td>
+                                <td>Hoy, 06:00 AM</td>
+                                <td>
+                                    <button class="btn-action" title="Ver detalles">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                    <span class="pagination-info">Página 1 de 5</span>
+                    <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <p>© 2025 MyCard S.A. de C.V. Todos los derechos reservados.</p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="menu.js"></script>
+    <script src="En-transito-status.js"></script>
+</body>
+</html>

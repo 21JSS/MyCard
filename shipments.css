@@ -265,27 +265,38 @@ body {
 
 /* Buttons */
 .btn {
-    display: inline-flex;
+    display: flex;
+    height: 2.4em;
+    width: 7.2em;
     align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
+    justify-content: center;
     border-radius: var(--radius-md);
-    font-size: 14px;
-    font-weight: 600;
+    transition: all 0.2s linear;
     border: none;
+    padding: 25px;
     cursor: pointer;
     transition: all 0.2s ease;
-    white-space: nowrap;
+    background: linear-gradient(180deg, var(--mycard-color), var(--primary-dark));
 }
 
 .btn:hover {
     transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 9px 9px 33px var(--mycard-color), -9px -9px 33px var(--primary-light);
+
+}
+
+.fa-search {
+    padding: 8px;
 }
 
 .btn-primary {
     background: var(--primary-color);
     color: white;
+    margin-right: 5px;
+    margin-left: 5px;
+    border: var(--shadow-md) color(1 0 0 0);
+    font-size: 20px;
+    transition: all 0.4s ease-in;
 }
 
 .btn-primary:hover {
