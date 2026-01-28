@@ -44,11 +44,11 @@
                 </div>
 
                 <!-- Formulario de Login -->
-                <form class="login-form" id="login-form" onsubmit="event.preventDefault(); window.location.href='dashboard.html'">
+                <form class="login-form" id="login-form">
                     <div class="input-row">
                         <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png" class="input-icon">
                         <label>Username :</label>
-                        <input type="text" placeholder="REQUERIDO" required>
+                        <input type="text" placeholder="REQUERIDO" required id="username-input">
                     </div>
                     <div class="input-row">
                         <img src="https://img.icons8.com/ios-glyphs/30/000000/lock--v1.png" class="input-icon">
@@ -56,6 +56,7 @@
                         <input type="password" placeholder="••••••••" required id="password-input">
                         <img src="https://img.icons8.com/ios-glyphs/30/000000/visible--v1.png" class="password-toggle" id="toggle-password">
                     </div>
+                    <div id="login-error" style="color: red; font-size: 12px; margin-top: 10px; text-align: center; display: none;">Credenciales incorrectas</div>
                 </form>
 
                 <!-- Pie de tarjeta: Chip y Datos simulados -->
@@ -73,10 +74,14 @@
     <!-- Librería para el efecto de inclinación (Tilt) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
-    <!-- Script para mostrar/ocultar contraseña -->
+    <!-- Script para mostrar/ocultar contraseña y Auth Logic -->
     <script>
         const togglePassword = document.querySelector('#toggle-password');
         const password = document.querySelector('#password-input');
+        const loginForm = document.getElementById('login-form');
+        const usernameInput = document.getElementById('username-input');
+        const passwordInput = document.getElementById('password-input');
+        const errorMsg = document.getElementById('login-error');
 
         togglePassword.addEventListener('click', function () {
             // Alternar el tipo de input entre password y text
@@ -85,6 +90,44 @@
             // Alternar el icono (ojo abierto / ojo tachado)
             this.src = type === 'password' ? 'https://img.icons8.com/ios-glyphs/30/000000/visible--v1.png' : 'https://img.icons8.com/ios-glyphs/30/000000/invisible--v1.png';
         });
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const user = usernameInput.value.trim();
+            const pass = passwordInput.value.trim();
+            
+            if (user === 'admin_plata' && pass === 'plata123') {
+                localStorage.setItem('currentUser', 'plata');
+                window.location.href = 'dashboard.html';
+            } else if (user === 'admin_broxel' && pass === 'broxel123') {
+                localStorage.setItem('currentUser', 'broxel');
+                window.location.href = 'dashboard.html';
+            } else {
+                // Fallback para pruebas rápidas si no coinciden
+                // Si el usuario pone cualquier otra cosa, por seguridad mejor mostrar error, 
+                // pero si quieres mantener el comportamiento anterior de entrar directo:
+                // localStorage.setItem('currentUser', 'plata'); // Default
+                // window.location.href = 'dashboard.html';
+                
+                // Mejor mostramos error para que prueben los usuarios reales
+                errorMsg.style.display = 'block';
+                
+                // Shake effect visual
+                const card = document.querySelector('.card');
+                card.style.animation = 'shake 0.5s';
+                setTimeout(() => card.style.animation = '', 500);
+            }
+        });
     </script>
+    <style>
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
 </body>
 </html>
