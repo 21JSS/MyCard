@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const guideNumber = row.querySelector('.guide-number').textContent;
             console.log('Ver detalles de guía:', guideNumber);
             // Aquí podrías redirigir a shipments.html con el número de guía
-            window.location.href = 'tracking.html';
+            window.location.href = `tracking.html?guide=${guideNumber}`;
         });
     });
 

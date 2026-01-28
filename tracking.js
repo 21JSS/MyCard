@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- 0. Obtener Número de Guía de la URL ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const guideNumber = urlParams.get('guide') || 'MX-882910'; // Valor por defecto si no hay param
+    
+    const trackingDisplay = document.getElementById('trackingNumberDisplay');
+    if (trackingDisplay) {
+        trackingDisplay.textContent = guideNumber;
+    }
+
     // Coordenadas iniciales (Simulación: CDMX)
     const startCoords = [19.4326, -99.1332]; // Zócalo
     const endCoords = [19.4150, -99.1700];   // Condesa aprox
@@ -66,6 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Elementos del Stepper (Barra de Progreso)
     const progressLine = document.querySelector('.progress-line-fill');
     const stepItems = document.querySelectorAll('.step-item');
+    
+    // Elementos de Detalles del Envío
+    const lastUpdateDisplay = document.getElementById('lastUpdateDisplay');
+    const lastLocationDisplay = document.getElementById('lastLocationDisplay');
 
     // Función de Animación
     function animateTruck() {
@@ -97,6 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
             now.setMinutes(now.getMinutes() + timeMin);
             etaTimeEl.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             etaCountdownEl.textContent = `Llega en ${timeMin} minutos`;
+
+            // Actualizar detalles dinámicos
+            if (lastUpdateDisplay) {
+                lastUpdateDisplay.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+            if (lastLocationDisplay) {
+                lastLocationDisplay.textContent = `En ruta (${distKm} km restantes)`;
+            }
 
             // --- Sincronizar Barra de Progreso ---
             // Mapeamos el progreso del camión (0.0 a 1.0) al ancho visual de la barra (65% a 100%)
