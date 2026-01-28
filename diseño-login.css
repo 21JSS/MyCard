@@ -35,14 +35,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Fondo corporativo financiero/tecnológico */
-    background: radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.15), transparent 40%),
-                linear-gradient(135deg, #0f172a 0%, #1e293b 100%),
-                url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
-    background-blend-mode: overlay;
-    background-size: cover;
-    background-position: center;
+    background:var(--mycard-color);
+    overflow: hidden;
     font-family: "IBM Plex Sans", sans-serif;
+    position: relative;
 }
 
 /* Panel de fondo traslúcido (el marco grande) */
@@ -51,11 +47,9 @@ body {
     /* Dimensiones del contenedor de vidrio */
     width: 90%;
     max-width: 800px;
-    height: 600px;
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    height: auto;
+    padding: 50px;
+    background: transparent;
     border-radius: 30px;
     display: flex;
     justify-content: center;
@@ -63,33 +57,7 @@ body {
     flex-direction: column;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     overflow: hidden;
-}
-
-/* Detalles de sistema (texto decorativo en las esquinas estilo terminal) */
-.glass-bg::before {
-    content: "● SECURE CONNECTION: ENCRYPTED \A ● MYCARD FINANCIAL SERVICES \A ● PCI-DSS COMPLIANT";
-    white-space: pre-wrap;
-    position: absolute;
-    top: 25px;
-    left: 30px;
-    font-family: "Courier New", monospace;
-    font-size: 0.6rem;
-    color: rgba(99, 102, 241, 0.7);
-    line-height: 1.8;
-    pointer-events: none;
-    letter-spacing: 1px;
-}
-
-/* Indicador de rastreo en la parte inferior */
-.glass-bg::after {
-    content: "GATEWAY ID: MC-2026-SECURE";
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
-    font-family: "Courier New", monospace;
-    font-size: 0.6rem;
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: 2px;
+    z-index: 10;
 }
 
 /* La tarjeta técnica flotante */
@@ -99,7 +67,8 @@ body {
     width: 500px;
     height: 320px;
     /* Gradiente estilo tarjeta Premium/Platinum */
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0.02));
+    background: rgb(0, 0, 0);
+    border: 2px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255, 255, 255, 0.3);
     border-left: 1px solid rgba(255, 255, 255, 0.2);
@@ -108,7 +77,7 @@ body {
     border-radius: 15px;
     color: white;
     padding: 25px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.953), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
     overflow: hidden;
 }
 
@@ -136,6 +105,15 @@ body {
 
 .brand-img { width: 50px; }
 
+.brand span {
+    margin-inline-start: 4.0em;
+    font-size: 1.5rem;
+    font-family: "IBM Plex Sans", sans-serif;
+    align-self: center;
+    letter-spacing: 12px; 
+    
+}
+
 /* Formulario tarjeta" */
 /* Formulario estilo "tarjeta" */
 .login-form {
@@ -158,16 +136,17 @@ body {
 .input-icon {
     width: 16px;
     margin-right: 10px;
-    filter: invert(1); 
+    filter: invert(1); /* Iconos blancos */
     opacity: 0.9;
 }
 
 .input-row label {
-    font-size: 0.6rem;
+    font-size: 14px;
     width: 100px;
     color: rgba(255, 255, 255, 0.8);
     font-weight: bold;
     letter-spacing: 1px;
+    
 }
 
 .input-row input {
@@ -180,7 +159,208 @@ body {
     padding: 10px;
     letter-spacing: 2px;
     font-size: 0.8rem;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.81);
+}
+
+/* Ajuste para que los puntos de la contraseña se vean más grandes y separados */
+.input-row input[type="password"] {
+    font-size: 1.2rem;
+    letter-spacing: 5px;
+}
+
+/* Icono de ver contraseña (ojito) */
+.password-toggle {
+    width: 20px;
+    cursor: pointer;
+    opacity: 0.8;
+    margin-left: 5px;
+    filter: invert(1);
+}
+
+/* Botón y links */
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* From Uiverse.io by shah1345 */ 
+.button2 {
+  display: inline-block;
+  transition: all 0.2s ease-in;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  color: #090909;
+  padding: 0.7em 1.7em;
+  cursor: pointer;
+  font-size: 10px;
+  border-radius: 0.5em;
+  background: #e8e8e8;
+  border: 1px solid #e8e8e8;
+:root {
+   --primary-color: #6366f1;
+   --mycard-color: #0d6efd;
+   --primary-dark: #4f46e5;
+   --primary-light: #818cf8;
+   --success-color: #10b981;
+   --danger-color: #ef4444;
+   --danger-minus-color: #FF403D;
+   --warning-color: #f59e0b;
+   --info-color: #06b6d4;
+   --bg-primary: #f8f9fb;
+   --bg-secondary: #ffffff;
+   --text-primary: #1e293b;
+   --text-secondary: #64748b;
+   --text-tertiary: #94a3b8;
+   --border-color: #e2e8f0;
+   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+   --radius-sm: 8px;
+   --radius-md: 12px;
+   --radius-lg: 16px;
+   --radius-xl: 20px;
+}
+/* Reseteo básico de márgenes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+ height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:var(--mycard-color);
+    overflow: hidden;
+    font-family: "IBM Plex Sans", sans-serif;
+    position: relative;
+}
+
+/* Panel de fondo traslúcido (el marco grande) */
+.glass-bg {
+    position: relative;
+    /* Dimensiones del contenedor de vidrio */
+    width: 90%;
+    max-width: 800px;
+    height: auto;
+    padding: 20px;
+    background: transparent;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    z-index: 10;
+}
+
+/* La tarjeta técnica flotante */
+.card {
+    position: relative;
+    /* Dimensiones de la tarjeta de login (la pequeña) */
+    width: 500px;
+    height: 320px;
+    /* Gradiente estilo tarjeta Premium/Platinum */
+    background: rgb(0, 0, 0);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    color: white;
+    padding: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.953), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+.card-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Fila superior */
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.brand-img { width: 50px; }
+
+.brand span {
+    margin-inline-start: 4.0em;
+    font-size: 1.5rem;
+    font-family: "IBM Plex Sans", sans-serif;
+    align-self: center;
+    letter-spacing: 12px; 
+    
+}
+
+/* Formulario tarjeta" */
+/* Formulario estilo "tarjeta" */
+.login-form {
+    margin: 20px 0;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    /* Líneas debajo de los imputs */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    transition: border-color 0.3s ease;
+}
+
+.input-row:focus-within {
+    border-bottom: 1px solid var(--primary-light);
+}
+
+.input-icon {
+    width: 16px;
+    margin-right: 10px;
+    filter: invert(1); /* Iconos blancos */
+    opacity: 0.9;
+}
+
+.input-row label {
+    font-size: 14px;
+    width: 100px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+    letter-spacing: 1px;
+    
+}
+
+.input-row input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: "IBM Plex Sans", sans-serif;
+    padding: 10px;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.81);
 }
 
 /* Ajuste para que los puntos de la contraseña se vean más grandes y separados */
@@ -279,8 +459,316 @@ body {
 
 /* Subtítulo del encabezado */
 .header-subtitle {
-    font-size: 0.8rem;
+    font-size: 13px;
     margin-top: 10px;
     opacity: 0.9;
     letter-spacing: 1px;
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+/* Fondo animado de ondas */
+.circle{
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  animation: ripple 15s infinite;
+  box-shadow: 0px 0px 1px 0px #508fb9;
+  z-index: 1;
+}
+
+.small{
+  width: 200px;
+  height: 200px;
+  left: -100px;
+  bottom: -100px;
+}
+
+.medium{
+  width: 400px;
+  height: 400px;
+  left: -200px;
+  bottom: -200px;
+}
+
+.large{
+  width: 600px;
+  height: 600px;
+  left: -300px;
+  bottom: -300px;
+}
+
+.xlarge{
+  width: 800px;
+  height: 800px;
+  left: -400px;
+  bottom: -400px;
+}
+
+.xxlarge{
+  width: 1000px;
+  height: 1000px;
+  left: -500px;
+  bottom: -500px;
+}
+
+/* Ondas esquina superior derecha */
+.small-tr{
+  width: 200px;
+  height: 200px;
+  right: -100px;
+  top: -100px;
+}
+
+.medium-tr{
+  width: 400px;
+  height: 400px;
+  right: -200px;
+  top: -200px;
+}
+
+.large-tr{
+  width: 600px;
+  height: 600px;
+  right: -300px;
+  top: -300px;
+}
+
+.xlarge-tr{
+  width: 800px;
+  height: 800px;
+  right: -400px;
+  top: -400px;
+}
+
+.xxlarge-tr{
+  width: 1000px;
+  height: 1000px;
+  right: -500px;
+  top: -500px;
+}
+
+.shade1{ opacity: 0.2; }
+.shade2{ opacity: 0.5; }
+.shade3{ opacity: 0.7; }
+.shade4{ opacity: 0.8; }
+.shade5{ opacity: 0.9; }
+
+@keyframes ripple{
+  0%{
+    transform: scale(0.8);
+  }
+  
+  50%{
+    transform: scale(1.2);
+  }
+  
+  100%{
+    transform: scale(0.8);
+  }
+}}
+
+
+
+.button2:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scaleY(1) scaleX(1.25);
+  top: 100%;
+  width: 140%;
+  height: 180%;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  display: block;
+  transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+  z-index: -1;
+}
+
+.button2:after {
+  content: "";
+  position: absolute;
+  left: 55%;
+  transform: translateX(-50%) scaleY(1) scaleX(1.45);
+  top: 180%;
+  width: 160%;
+  height: 190%;
+  background-color: #0d24d3;
+  border-radius: 50%;
+  display: block;
+  transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+  z-index: -1;
+}
+
+.button2:hover {
+  color: #ffffff;
+  border: 1px solid #1c43c1;
+}
+
+.button2:hover:before {
+  top: -35%;
+  background-color: #2942e7;
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.button2:hover:after {
+  top: -45%;
+  background-color:my;
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.signup-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.6rem;
+    opacity: 0.7;
+}
+
+/* Parte inferior */
+.footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+/* Tamaño e imagen del chip */
+.chip-img { 
+    width: 50px; 
+    opacity: 0.9; 
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.card-info {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.card-date { opacity: 0.7; font-size: 0.6rem; }
+
+/* Estilos para el encabezado superior (Icono y Texto) */
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.user-icon-top {
+    width: 80px;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+/* Subtítulo del encabezado */
+.header-subtitle {
+    font-size: 13px;
+    margin-top: 10px;
+    opacity: 0.9;
+    letter-spacing: 1px;
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+/* Fondo animado de ondas */
+.circle{
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  animation: ripple 15s infinite;
+  box-shadow: 0px 0px 1px 0px #508fb9;
+  z-index: 1;
+}
+
+.small{
+  width: 200px;
+  height: 200px;
+  left: -100px;
+  bottom: -100px;
+}
+
+.medium{
+  width: 400px;
+  height: 400px;
+  left: -200px;
+  bottom: -200px;
+}
+
+.large{
+  width: 600px;
+  height: 600px;
+  left: -300px;
+  bottom: -300px;
+}
+
+.xlarge{
+  width: 800px;
+  height: 800px;
+  left: -400px;
+  bottom: -400px;
+}
+
+.xxlarge{
+  width: 1000px;
+  height: 1000px;
+  left: -500px;
+  bottom: -500px;
+}
+
+/* Ondas esquina superior derecha */
+.small-tr{
+  width: 200px;
+  height: 200px;
+  right: -100px;
+  top: -100px;
+}
+
+.medium-tr{
+  width: 400px;
+  height: 400px;
+  right: -200px;
+  top: -200px;
+}
+
+.large-tr{
+  width: 600px;
+  height: 600px;
+  right: -300px;
+  top: -300px;
+}
+
+.xlarge-tr{
+  width: 800px;
+  height: 800px;
+  right: -400px;
+  top: -400px;
+}
+
+.xxlarge-tr{
+  width: 1000px;
+  height: 1000px;
+  right: -500px;
+  top: -500px;
+}
+
+.shade1{ opacity: 0.2; }
+.shade2{ opacity: 0.5; }
+.shade3{ opacity: 0.7; }
+.shade4{ opacity: 0.8; }
+.shade5{ opacity: 0.9; }
+
+@keyframes ripple{
+  0%{
+    transform: scale(0.8);
+  }
+  
+  50%{
+    transform: scale(1.2);
+  }
+  
+  100%{
+    transform: scale(0.8);
+  }
 }
