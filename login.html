@@ -26,7 +26,7 @@
         
         <!-- Encabezado superior: Icono y Título -->
         <div class="login-header">
-            <img src="img/usuario.png" alt="Usuario" class="user-icon-top">
+            <img src="img/usuario.png" alt="Usuario" class="user-icon-top" width="80" height="80">
             <h2>INICIAR SESIÓN</h2>
             <p class="header-subtitle">Ingresa tus credenciales para acceder al sistema de rastreo.</p>
             
@@ -38,7 +38,7 @@
                 <!-- Sección del encabezado: Logo y Texto -->
                 <div class="header-row">
                     <div class="brand">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrsDN4CdYzmxGhcrZzhpNFYdGfFesb0M5nCSXPGYDGt3cLH3hMlRFPQVevdyTLNyglGqII6XySeAm8X1RwPyabrpnGBAmNxYX27rFbUVMPsfGZEQ4jYqY0c-64_wsm8Jh9pKJhRBTbYQDdfMfRQyD8Piqky_W2JHEPGxCRXcYcCE6YrBECAKJehJ0_/s1600/logo.png" class="brand-img">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrsDN4CdYzmxGhcrZzhpNFYdGfFesb0M5nCSXPGYDGt3cLH3hMlRFPQVevdyTLNyglGqII6XySeAm8X1RwPyabrpnGBAmNxYX27rFbUVMPsfGZEQ4jYqY0c-64_wsm8Jh9pKJhRBTbYQDdfMfRQyD8Piqky_W2JHEPGxCRXcYcCE6YrBECAKJehJ0_/s1600/logo.png" class="brand-img" width="50" height="50">
                         <span>MyCard</span>
                     </div>
                 </div>
@@ -46,23 +46,23 @@
                 <!-- Formulario de Login -->
                 <form class="login-form" id="login-form">
                     <div class="input-row">
-                        <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png" class="input-icon">
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png" class="input-icon" width="16" height="16">
                         <label>Username :</label>
                         <input type="text" placeholder="REQUERIDO" required id="username-input">
                     </div>
                     <div class="input-row">
-                        <img src="https://img.icons8.com/ios-glyphs/30/000000/lock--v1.png" class="input-icon">
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/lock--v1.png" class="input-icon" width="16" height="16">
                         <label>Password:</label>
                         <input type="password" placeholder="••••••••" required id="password-input">
-                        <img src="https://img.icons8.com/ios-glyphs/30/000000/visible--v1.png" class="password-toggle" id="toggle-password">
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/visible--v1.png" class="password-toggle" id="toggle-password" width="20" height="20">
                     </div>
-                    <div id="login-error" style="color: red; font-size: 12px; margin-top: 10px; text-align: center; display: none;">Credenciales incorrectas</div>
+                    <div id="login-error" class="login-error">Credenciales incorrectas</div>
                 </form>
 
-                <!-- Pie de tarjeta: Chip y Datos simulados -->
+                <!-- Pie de tarjeta: Chip  -->
                 <div class="footer-row">
                     <div class="chip-container">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFzeQ0hz39haiHkhSOKnHJCG3v6AynORgBKrj0Zf2FTYMvjAsDAxzqIFZ8DYXbyq_-u_kuZcgg5nRpXxVGp18K15NiCGvVwTv-8QUGdZwJS3sSlhRpqEpZ3RHP7vQCIoKYnd6UFEAzxrhFPR5byjFFR6ld7gWvNCD7g5LF3Y6uhJvgY1_hw8qBCqO6/s1600/chip.png" class="chip-img">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFzeQ0hz39haiHkhSOKnHJCG3v6AynORgBKrj0Zf2FTYMvjAsDAxzqIFZ8DYXbyq_-u_kuZcgg5nRpXxVGp18K15NiCGvVwTv-8QUGdZwJS3sSlhRpqEpZ3RHP7vQCIoKYnd6UFEAzxrhFPR5byjFFR6ld7gWvNCD7g5LF3Y6uhJvgY1_hw8qBCqO6/s1600/chip.png" class="chip-img" width="50" height="40">
                     </div>
                     <!-- Botón de autorización movido al pie -->
                     <button class="button2" type="submit" form="login-form">Acceder</button>
@@ -120,14 +120,5 @@
             }
         });
     </script>
-    <style>
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            50% { transform: translateX(10px); }
-            75% { transform: translateX(-10px); }
-            100% { transform: translateX(0); }
-        }
-    </style>
 </body>
 </html>
