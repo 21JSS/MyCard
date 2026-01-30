@@ -20,6 +20,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="analytics.css">
+    <link rel="stylesheet" href="analytics-geo.css">
 
     <!-- Prevent sidebar flash - apply collapsed state before render -->
     <script>
@@ -396,6 +397,57 @@
                             <span class="legend-color red"></span>
                             <span>Tasa de Retorno (%)</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Análisis Geográfico (Nuevo) -->
+            <div class="section-header" style="margin-top: 48px; margin-bottom: 10px;">
+                <h2 class="section-title">Análisis Geográfico</h2>
+            </div>
+            <p class="section-subtitle">Distribución de envíos y rendimiento por zona logística</p>
+
+            <div class="geo-dashboard-grid">
+                <!-- Mapa de Calor -->
+                <div class="card geo-card">
+                    <div class="card-header">
+                        <h2>Mapa de Calor (Heatmap)</h2>
+                        <p class="chart-subtitle">Concentración de envíos por zona</p>
+                    </div>
+                    <div class="map-wrapper">
+                        <div class="map-background">
+                            <canvas id="geoHeatmapChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="geo-insight">
+                        <i class="fas fa-lightbulb"></i>
+                        <p><strong>Insight:</strong> El 65% de los envíos se concentran en el <span>Centro y Bajío</span>, lo que sugiere una oportunidad para consolidar rutas terrestres en estas zonas.</p>
+                    </div>
+                </div>
+
+                <!-- Tabla de Rendimiento Regional -->
+                <div class="card region-card">
+                    <div class="card-header">
+                        <h2>Rendimiento por Región</h2>
+                        <p class="chart-subtitle">Comparativa vs. Promedio Nacional</p>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table region-table">
+                            <thead>
+                                <tr>
+                                    <th>Región</th>
+                                    <th>Tiempo Prom.</th>
+                                    <th>Diferencia</th>
+                                </tr>
+                            </thead>
+                            <tbody id="regionTableBody">
+                                <!-- JS Populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="geo-insight warning" style="margin-top: 24px;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p><strong>Atención:</strong> Los envíos a la <span>Zona Norte</span> tardan <strong>2 días más</strong> que al Centro. Se recomienda ajustar la promesa de entrega en el checkout para esta región.</p>
                     </div>
                 </div>
             </div>

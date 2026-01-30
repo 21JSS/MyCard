@@ -45,17 +45,15 @@
                         <input type="password" placeholder="••••••••" required id="password-input">
                         <i class="fas fa-eye password-toggle" id="toggle-password"></i>
                     </div>
-                    <div id="login-error" style="color: red; font-size: 12px; margin-top: 10px; text-align: center; display: none;">Credenciales incorrectas</div>
+                    <div id="login-error" class="login-error">Credenciales incorrectas</div>
                 </form>
 
-                <!-- Pie de tarjeta: Chip y Datos simulados -->
-                <div class="footer-row">
-                    <div class="chip-container">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFzeQ0hz39haiHkhSOKnHJCG3v6AynORgBKrj0Zf2FTYMvjAsDAxzqIFZ8DYXbyq_-u_kuZcgg5nRpXxVGp18K15NiCGvVwTv-8QUGdZwJS3sSlhRpqEpZ3RHP7vQCIoKYnd6UFEAzxrhFPR5byjFFR6ld7gWvNCD7g5LF3Y6uhJvgY1_hw8qBCqO6/s1600/chip.png" class="chip-img">
-                    </div>
-                    <!-- Botón de autorización movido al pie -->
-                    <button class="button2" type="submit" form="login-form">Acceder</button>
+                <!-- Pie de tarjeta: Chip y Botón -->
+                <div class="chip-container">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFzeQ0hz39haiHkhSOKnHJCG3v6AynORgBKrj0Zf2FTYMvjAsDAxzqIFZ8DYXbyq_-u_kuZcgg5nRpXxVGp18K15NiCGvVwTv-8QUGdZwJS3sSlhRpqEpZ3RHP7vQCIoKYnd6UFEAzxrhFPR5byjFFR6ld7gWvNCD7g5LF3Y6uhJvgY1_hw8qBCqO6/s1600/chip.png" class="chip-img">
                 </div>
+                <!-- Botón de autorización -->
+                <button class="button2" type="submit" form="login-form">Acceder</button>
             </div>
         </div>
 
@@ -110,14 +108,5 @@
             }
         });
     </script>
-    <style>
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            50% { transform: translateX(10px); }
-            75% { transform: translateX(-10px); }
-            100% { transform: translateX(0); }
-        }
-    </style>
 </body>
 </html>
