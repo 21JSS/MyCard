@@ -68,4 +68,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("✅ Menu.js cargado - Toggle disponible en el logo de MyCard");
   console.log(`📌 Estado del menú: ${isCollapsed ? "Colapsado" : "Expandido"}`);
+
+  // --- 2. EFECTO SCROLL HEADER (Global) ---
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+      document.body.classList.add("is-scrolled");
+    } else {
+      document.body.classList.remove("is-scrolled");
+    }
+  });
 });
