@@ -267,6 +267,14 @@
     <!-- JavaScript -->
     <script src="menu.js"></script>
     <script src="shipments.js"></script>
+    <script>
+        // Redirección rápida para demo de tracking
+        document.getElementById('searchBtn').addEventListener('click', () => {
+            const trackingNum = document.getElementById('trackingNumber').value;
+            // Redirigir si hay texto o simplemente para la demo
+            window.location.href = `tracking.html?guide=${trackingNum || 'MX-DEMO'}`;
+        });
+    </script>
 </body>
 
 </html>

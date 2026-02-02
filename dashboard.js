@@ -127,19 +127,6 @@ if (performanceCtx) {
   });
 }
 
-/* Animación de Header y Tarjeta al hacer Scroll */
-document.addEventListener("scroll", () => {
-  const scrollY = window.scrollY;
-  const body = document.body;
-
-  // Si bajamos más de 100px (ajusta este número según cuando quieras el efecto)
-  if (scrollY > 100) {
-    body.classList.add("is-scrolled");
-  } else {
-    body.classList.remove("is-scrolled");
-  }
-});
-
 // Gráfico de Alertas (Retornos y Excepciones)
 const alertsCtx = document.getElementById("alertsChart");
 if (alertsCtx) {
@@ -457,26 +444,6 @@ window.addEventListener("load", () => {
   if (crewdiValeCard) {
     crewdiValeCard.addEventListener("click", () => {
       window.location.href = "perfil-usuario.html";
-    });
-  }
-
-  // Funcionalidad Dropdown Perfil
-  const userProfileBtn = document.querySelector(".user-profile");
-  const profileDropdown = document.querySelector(".profile-dropdown");
-
-  if (userProfileBtn && profileDropdown) {
-    userProfileBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      profileDropdown.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      if (
-        !profileDropdown.contains(e.target) &&
-        !userProfileBtn.contains(e.target)
-      ) {
-        profileDropdown.classList.remove("show");
-      }
     });
   }
 });

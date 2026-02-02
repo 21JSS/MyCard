@@ -269,21 +269,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   console.log('✅ Página de Shipments cargada');
-
-  // Funcionalidad Dropdown Perfil
-  const userProfileBtn = document.querySelector('.user-profile');
-  const profileDropdown = document.querySelector('.profile-dropdown');
-
-  if (userProfileBtn && profileDropdown) {
-      userProfileBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          profileDropdown.classList.toggle('show');
-      });
-
-      document.addEventListener('click', (e) => {
-          if (!profileDropdown.contains(e.target) && !userProfileBtn.contains(e.target)) {
-              profileDropdown.classList.remove('show');
-          }
-      });
-  }
 });

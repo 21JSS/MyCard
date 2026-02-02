@@ -685,6 +685,7 @@ console.log("✅ Nuevas gráficas de Analytics cargadas");
 
 // ===== ANÁLISIS GEOGRÁFICO (SIMULACIÓN) =====
 
+<<<<<<< HEAD
 const geoCtx = document.getElementById("geoHeatmapChart");
 if (geoCtx) {
   // Simulación de coordenadas relativas en un mapa abstracto de México
@@ -796,12 +797,114 @@ if (regionTableBody) {
             <td>${region.time}</td>
             <td>
                 <span style="background: ${badgeBg}; color: ${region.status === "positive" ? "#10b981" : "#ef4444"}; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">
+=======
+const geoCtx = document.getElementById('geoHeatmapChart');
+if (geoCtx) {
+    // Simulación de coordenadas relativas en un mapa abstracto de México
+    // X: Longitud aprox, Y: Latitud aprox (invertida para canvas a veces, pero aquí normal)
+    const geoData = [
+        { x: 50, y: 45, r: 25, city: 'Centro (CDMX/EdoMex)', value: 850 }, // Centro - Gran volumen
+        { x: 45, y: 55, r: 15, city: 'Bajío (Guadalajara/León)', value: 420 }, // Bajío
+        { x: 48, y: 75, r: 12, city: 'Norte (Monterrey)', value: 310 }, // Monterrey
+        { x: 20, y: 85, r: 8, city: 'Noroeste (Tijuana)', value: 120 }, // Tijuana
+        { x: 85, y: 40, r: 8, city: 'Sureste (Cancún/Mérida)', value: 147 }, // Cancún
+        { x: 65, y: 30, r: 6, city: 'Sur (Oaxaca/Chiapas)', value: 80 } // Sur
+    ];
+
+    new Chart(geoCtx, {
+        type: 'bubble',
+        data: {
+            datasets: [{
+                label: 'Volumen de Envíos',
+                data: geoData,
+                backgroundColor: [
+                    'rgba(239, 68, 68, 0.6)',  // Rojo intenso (Centro)
+                    'rgba(245, 158, 11, 0.6)', // Naranja (Bajío)
+                    'rgba(245, 158, 11, 0.5)', // Naranja suave (Norte)
+                    'rgba(16, 185, 129, 0.5)', // Verde (Noroeste)
+                    'rgba(16, 185, 129, 0.5)', // Verde (Sureste)
+                    'rgba(59, 130, 246, 0.5)'  // Azul (Sur)
+                ],
+                borderColor: [
+                    'rgba(239, 68, 68, 1)',
+                    'rgba(245, 158, 11, 1)',
+                    'rgba(245, 158, 11, 1)',
+                    'rgba(16, 185, 129, 1)',
+                    'rgba(16, 185, 129, 1)',
+                    'rgba(59, 130, 246, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    display: false, // Ocultar ejes para simular mapa
+                    min: 0,
+                    max: 100
+                },
+                y: {
+                    display: false, // Ocultar ejes
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(30, 41, 59, 0.9)',
+                    padding: 12,
+                    callbacks: {
+                        label: function(context) {
+                            const point = context.raw;
+                            return `${point.city}: ${point.value} envíos`;
+                        }
+                    }
+                }
+            },
+            layout: {
+                padding: 20
+            }
+        }
+    });
+}
+
+// Poblar Tabla de Rendimiento Regional
+const regionTableBody = document.getElementById('regionTableBody');
+if (regionTableBody) {
+    const regions = [
+        { name: 'Centro', time: '1.2 días', diff: '-0.8 días', status: 'positive' },
+        { name: 'Bajío', time: '1.8 días', diff: '-0.2 días', status: 'positive' },
+        { name: 'Norte', time: '3.2 días', diff: '+1.2 días', status: 'negative' },
+        { name: 'Sureste', time: '3.5 días', diff: '+1.5 días', status: 'negative' },
+        { name: 'Noroeste', time: '4.1 días', diff: '+2.1 días', status: 'negative' }
+    ];
+
+    regions.forEach(region => {
+        const tr = document.createElement('tr');
+        
+        let badgeClass = region.status === 'positive' ? 'success-text' : 'danger-text';
+        let badgeBg = region.status === 'positive' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)';
+        
+        tr.innerHTML = `
+            <td style="font-weight: 500;">${region.name}</td>
+            <td>${region.time}</td>
+            <td>
+                <span style="background: ${badgeBg}; color: ${region.status === 'positive' ? '#10b981' : '#ef4444'}; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">
+>>>>>>> 8b322e4f4be0184d047331b04e6deeef07e3174a
                     ${region.diff}
                 </span>
             </td>
         `;
+<<<<<<< HEAD
     regionTableBody.appendChild(tr);
   });
+=======
+        regionTableBody.appendChild(tr);
+    });
+>>>>>>> 8b322e4f4be0184d047331b04e6deeef07e3174a
 }
 
 console.log("✅ Análisis Geográfico inicializado");
