@@ -1195,6 +1195,36 @@ body {
     margin: 0;
 }
 
+/* Leyenda de Trimestres */
+.carrier-legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-top: 24px;
+    padding: 16px;
+    background: var(--bg-primary);
+    border-radius: var(--radius-md);
+    flex-wrap: wrap;
+}
+
+.carrier-legend .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.carrier-legend .legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+
 /* Responsive adjustments for carrier circles */
 @media (max-width: 1200px) {
     .carrier-circles-container {
