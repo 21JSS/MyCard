@@ -44,58 +44,9 @@ body {
     justify-content: center;
     align-items: center;
     background: #f0f2f5; /* Fondo gris corporativo limpio */
-    /* Fondo técnico de sistema de rastreo (Grid) */
-    background-image: 
-        linear-gradient(rgba(13, 110, 253, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(13, 110, 253, 0.08) 1px, transparent 1px),
-        linear-gradient(rgba(13, 110, 253, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(13, 110, 253, 0.03) 1px, transparent 1px);
-    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-    background-position: center center;
     overflow: hidden;
     font-family: "IBM Plex Sans", sans-serif;
     position: relative;
-}
-
-/* Efecto Radar (Barrido giratorio) */
-body::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200vmax;
-    height: 200vmax;
-    background: conic-gradient(from 0deg, transparent 70%, rgba(13, 110, 253, 0.1));
-    border-radius: 50%;
-    animation: radarSpin 8s linear infinite;
-    transform: translate(-50%, -50%);
-    z-index: 0; /* Detrás de la tarjeta */
-    pointer-events: none;
-}
-
-/* Anillos concéntricos de distancia */
-body::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 150vmax;
-    height: 150vmax;
-    background: repeating-radial-gradient(
-        circle,
-        transparent 0,
-        transparent 149px,
-        rgba(13, 110, 253, 0.08) 150px
-    );
-    border-radius: 50%;
-    z-index: 0;
-    pointer-events: none;
-}
-
-@keyframes radarSpin {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* Panel de fondo traslúcido (el marco grande) */
@@ -106,14 +57,12 @@ body::after {
     max-width: 800px;
     height: auto;
     padding: 50px;
-    background: transparent;
     background: none;
     border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     box-shadow: none;
     overflow: hidden;
     z-index: 10;
@@ -124,24 +73,13 @@ body::after {
     position: relative;
     /* Dimensiones de la tarjeta de login (la pequeña) */
     width: 500px;
-    height: auto;
-    min-height: 480px;
-    /* Gradiente estilo tarjeta Premium/Platinum */
-    background: rgb(0, 0, 0);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    height: 320px;
     /* Estilo Tarjeta Corporativa Blanca */
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 15px;
-    color: white;
     color: #1e293b;
     padding: 25px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.953), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
     overflow: hidden;
 }
@@ -172,7 +110,7 @@ body::after {
     width: 60px; 
     height: 50px;
     object-fit: contain;
-    filter: brightness(0); /* Logo en negro formal */
+    filter: none;
 }
 
 .brand span {
@@ -182,28 +120,6 @@ body::after {
     align-self: center;
     letter-spacing: 12px; 
     
-}
-
-/* Estilos para el icono de usuario y texto de bienvenida */
-.login-welcome {
-    text-align: center;
-    margin: 10px 0 20px 0;
-}
-
-.user-icon-card {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-    opacity: 0.9;
-    margin-bottom: 10px;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-}
-
-.welcome-text {
-    font-size: 0.9rem;
-    color: #64748b;
-    font-weight: 500;
-    letter-spacing: 0.5px;
 }
 
 /* Formulario tarjeta" */
@@ -217,21 +133,17 @@ body::after {
     align-items: center;
     margin-bottom: 15px;
     /* Líneas debajo de los imputs */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     border-bottom: 1px solid #e2e8f0;
     transition: border-color 0.3s ease;
 }
 
 .input-row:focus-within {
-    border-bottom: 1px solid var(--primary-light);
     border-bottom: 1px solid var(--mycard-color);
 }
 
 .input-icon {
     width: 16px;
     margin-right: 10px;
-    filter: invert(1); /* Iconos blancos */
-    opacity: 0.9;
     filter: none; /* Iconos negros originales */
     opacity: 0.6;
 }
@@ -239,7 +151,6 @@ body::after {
 .input-row label {
     font-size: 14px;
     width: 100px;
-    color: rgba(255, 255, 255, 0.8);
     color: #64748b;
     font-weight: bold;
     letter-spacing: 1px;
@@ -251,13 +162,11 @@ body::after {
     background: none;
     border: none;
     outline: none;
-    color: white;
     color: #1e293b;
     font-family: "IBM Plex Sans", sans-serif;
     padding: 10px;
     letter-spacing: 2px;
     font-size: 0.8rem;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.81);
     text-shadow: none;
     font-weight: 500;
 }
@@ -275,8 +184,6 @@ body::after {
     opacity: 0.8;
     margin-left: 5px;
     filter: invert(1);
-    filter: none;
-    opacity: 0.5;
 }
 
 /* Botón y links */
@@ -291,8 +198,6 @@ body::after {
     /* Estilo base del botón */
     background:rgb(255, 255, 255);
     color: rgb(0, 0, 0);
-    background: #1e293b;
-    color: #ffffff;
     border: none;
     padding: 8px 20px;
     font-family: "IBM Plex Sans", sans-serif;
@@ -303,7 +208,6 @@ body::after {
     transition: 0.3s;
     letter-spacing: 1px;
     box-shadow: 0 4px 15px rgba(204, 192, 192, 0.2);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -311,7 +215,6 @@ body::after {
 
 .signup-link {
     color: rgba(255, 255, 255, 0.8);
-    color: #64748b;
     text-decoration: none;
     font-size: 0.6rem;
     opacity: 0.7;
@@ -330,7 +233,6 @@ body::after {
     height: 40px;
     object-fit: contain;
     opacity: 0.9; 
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
     filter: sepia(100%) saturate(300%) brightness(90%) hue-rotate(5deg) drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
@@ -341,8 +243,7 @@ body::after {
     font-size: 0.7rem;
     letter-spacing: 2px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    text-shadow: none;
-    color: #64748b;
+    color: white;
 }
 
 .card-date { opacity: 0.7; font-size: 0.6rem; }
@@ -502,7 +403,6 @@ body::after {
   top: 100%;
   width: 140%;
   height: 180%;
-  background-color: rgba(0, 0, 0, 0.05);
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   display: block;
@@ -518,7 +418,6 @@ body::after {
   top: 180%;
   width: 160%;
   height: 190%;
-  background-color:var(--mycard-color);
   background-color: var(--mycard-color);
   border-radius: 50%;
   display: block;
