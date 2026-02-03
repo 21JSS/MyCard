@@ -331,14 +331,14 @@ function updateCarrierChart(data) {
   // Se mantiene para evitar errores
 }
 
-// Nueva función para actualizar los círculos de paqueterías con múltiples trimestres
+// Nueva función para actualizar los círculos de paqueterías con anillos concéntricos múltiples (Activity Rings)
 function updateCarrierCircleCharts() {
-  // Colores vibrantes para cada trimestre (como en Browser market shares)
+  // Colores vibrantes para cada trimestre - MISMO ORDEN que en la leyenda
   const quarterColors = [
-    { bg: "rgba(0, 194, 255, 0.9)", border: "#00c2ff" }, // Q2-2025: Cyan brillante
-    { bg: "rgba(255, 0, 255, 0.9)", border: "#ff00ff" }, // Q1-2025: Magenta
-    { bg: "rgba(255, 215, 0, 0.9)", border: "#ffd700" }, // Q4-2024: Dorado
-    { bg: "rgba(0, 255, 127, 0.9)", border: "#00ff7f" }, // Q3-2024: Verde spring
+    "#00c2ff", // Q2-2025: Cyan brillante (anillo externo)
+    "#ff00ff", // Q1-2025: Magenta (anillo medio-exterior)
+    "#ffd700", // Q4-2024: Amarillo/Dorado (anillo medio-interior)
+    "#00ff7f", // Q3-2024: Verde brillante (anillo interno)
   ];
 
   const quarters = ["Q2-2025", "Q1-2025", "Q4-2024", "Q3-2024"];
@@ -355,55 +355,162 @@ function updateCarrierCircleCharts() {
       return quarterlyData[quarter].carrierData.success[carrierIndex];
     });
 
-    // Crear etiquetas con trimestre y porcentaje
-    const labels = quarters.map((q, i) => `${q}: ${successData[i]}%`);
+    // Crear datasets para cada anillo (4 anillos concéntricos)
+    const datasets = [];
+
+    // Cada anillo tiene su propio dataset
+    quarters.forEach((quarter, index) => {
+      const value = successData[index];
+      const remaining = 100 - value;
+
+      datasets.push({
+        label: quarter,
+        data: [value, remaining],
+        backgroundColor: [
+          quarterColors[index],
+          "rgba(200, 200, 200, 0.15)", // Color gris muy tenue para la parte no completada
+        ],
+        borderColor: "#ffffff",
+        borderWidth: 2,
+        hoverOffset: 0,
+        spacing: 0,
+        // Configuración para crear anillos concéntricos
+        weight: 1, // Todos los anillos tienen el mismo grosor
+        // Almacenar el valor para usarlo en el tooltip
+        quarterValue: value,
+        quarterName: quarter,
+      });
+    });
 
     new Chart(ctx, {
       type: "doughnut",
       data: {
-        labels: labels,
-        datasets: [
-          {
-            data: successData,
-            backgroundColor: quarterColors.map((c) => c.bg),
-            borderColor: quarterColors.map((c) => c.border),
-            borderWidth: 3,
-            hoverOffset: 8,
-            spacing: 2,
-          },
-        ],
+        datasets: datasets.reverse(), // Invertimos para que el más externo sea Q2-2025
       },
       options: {
         responsive: true,
         maintainAspectRatio: true,
-        cutout: "45%", // Hace más gruesos los anillos
+        cutout: "50%", // Centro más grande para que el logo sea más visible
         plugins: {
           legend: {
-            display: false, // Ocultamos la leyenda
+            display: false,
           },
           tooltip: {
             enabled: true,
-            backgroundColor: "rgba(30, 41, 59, 0.95)",
-            titleColor: "#ffffff",
-            bodyColor: "#ffffff",
-            borderColor: "#475569",
-            borderWidth: 1,
-            padding: 12,
-            borderRadius: 8,
-            titleFont: {
-              size: 13,
-              weight: "700",
-            },
-            bodyFont: {
-              size: 14,
-              weight: "600",
+            external: function (context) {
+              // Obtener el logo central de esta paquetería
+              const logoEl = ctx.parentNode.querySelector(
+                ".circle-center-logo",
+              );
+
+              // Crear o obtener el elemento del tooltip
+              let tooltipEl = document.getElementById(
+                "chartjs-tooltip-" + canvasId,
+              );
+
+              // Crear elemento si no existe
+              if (!tooltipEl) {
+                tooltipEl = document.createElement("div");
+                tooltipEl.id = "chartjs-tooltip-" + canvasId;
+                tooltipEl.style.cssText = `
+                  position: absolute;
+                  background: rgba(30, 41, 59, 0.95);
+                  color: white;
+                  border: 1px solid #475569;
+                  border-radius: 8px;
+                  padding: 12px;
+                  pointer-events: none;
+                  font-family: 'Inter', sans-serif;
+                  font-size: 14px;
+                  font-weight: 600;
+                  transition: all 0.2s ease;
+                  z-index: 9999;
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                `;
+                ctx.parentNode.parentNode.appendChild(tooltipEl);
+              }
+
+              // Ocultar si el tooltip debe estar oculto
+              const tooltipModel = context.tooltip;
+              if (tooltipModel.opacity === 0) {
+                tooltipEl.style.opacity = 0;
+                // Mostrar el logo nuevamente cuando el tooltip se oculta
+                if (logoEl) {
+                  logoEl.style.visibility = "visible";
+                  logoEl.style.opacity = "";
+                  console.log(`Tooltip oculto - Logo ${carrier} visible`);
+                }
+                return;
+              }
+
+              // Ocultar el logo cuando el tooltip está visible
+              if (logoEl) {
+                logoEl.style.visibility = "hidden";
+                console.log(
+                  `Tooltip visible - Logo ${carrier} OCULTO (visibility hidden)`,
+                );
+              } else {
+                console.error(
+                  `No se encontró logoEl para ${carrier} en tooltip`,
+                );
+              }
+
+              // Establecer contenido del tooltip
+              if (
+                tooltipModel.dataPoints &&
+                tooltipModel.dataPoints.length > 0
+              ) {
+                const dataPoint = tooltipModel.dataPoints[0];
+                const datasetIndex = dataPoint.datasetIndex;
+                const quarter = quarters[datasets.length - 1 - datasetIndex]; // Ajustar por el reverse
+                const value = successData[datasets.length - 1 - datasetIndex];
+
+                let innerHtml =
+                  '<div style="margin-bottom: 4px; font-weight: 700; font-size: 13px;">';
+                innerHtml += carrier;
+                innerHtml += "</div>";
+                innerHtml += "<div>" + quarter + ": " + value + "%</div>";
+
+                tooltipEl.innerHTML = innerHtml;
+              }
+
+              // Posicionar el tooltip
+              const position = context.chart.canvas.getBoundingClientRect();
+              const tooltipWidth = tooltipEl.offsetWidth;
+              const tooltipHeight = tooltipEl.offsetHeight;
+
+              // Calcular posición para que aparezca en el centro del gráfico
+              let left =
+                position.left + window.pageXOffset + position.width / 2;
+              let top = position.top + window.pageYOffset + position.height / 2;
+
+              // Centrar el tooltip
+              left = left - tooltipWidth / 2;
+              top = top - tooltipHeight / 2;
+
+              // Asegurar que no se salga de la pantalla
+              if (left < 0) left = 10;
+              if (left + tooltipWidth > window.innerWidth)
+                left = window.innerWidth - tooltipWidth - 10;
+              if (top < 0) top = 10;
+
+              tooltipEl.style.opacity = 1;
+              tooltipEl.style.left = left + "px";
+              tooltipEl.style.top = top + "px";
             },
             callbacks: {
               title: function (context) {
                 return carrier;
               },
               label: function (context) {
-                return context.label;
+                // Solo mostrar si es el segmento de valor (completado)
+                if (context.dataIndex === 0) {
+                  const dataset = context.dataset;
+                  const quarterName = dataset.quarterName || dataset.label;
+                  const quarterValue = dataset.quarterValue || context.parsed;
+                  return `${quarterName}: ${quarterValue}%`;
+                }
+                return null;
               },
             },
           },
@@ -416,7 +523,32 @@ function updateCarrierCircleCharts() {
         },
       },
     });
+
+    // Asegurar que el logo esté visible al inicio con !important
+    const logoEl = ctx.parentNode.querySelector(".circle-center-logo");
+    if (logoEl) {
+      logoEl.style.setProperty("opacity", "1", "important");
+      logoEl.style.transition = "opacity 0.3s ease";
+      logoEl.style.display = "flex";
+      logoEl.style.visibility = "visible";
+      console.log(`Logo ${carrier} inicializado`);
+    } else {
+      console.error(`No se encontró logo para ${carrier}`);
+    }
+
+    // Evento para restaurar el logo cuando el mouse sale del canvas completamente
+    ctx.addEventListener("mouseleave", function () {
+      setTimeout(() => {
+        if (logoEl) {
+          logoEl.style.visibility = "visible";
+          logoEl.style.opacity = "";
+          console.log(`Mouse salió de ${carrier} - Logo restaurado`);
+        }
+      }, 100); // Small delay para permitir que el tooltip se oculte primero
+    });
   });
+
+  console.log("✅ Todos los Activity Rings han sido creados");
 }
 
 // Generar reporte PDF
