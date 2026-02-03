@@ -93,6 +93,9 @@ window.addEventListener("load", () => {
   // Cargar datos del trimestre seleccionado
   updateDashboard("Q2-2025");
 
+  // Inicializar círculos de paqueterías con todos los trimestres
+  updateCarrierCircleCharts();
+
   // Establecer fechas por defecto
   const today = new Date();
   const lastMonth = new Date(
@@ -123,7 +126,7 @@ function updateDashboard(quarter) {
 
   // Actualizar gráficos
   updateTrendChart(data.trendData);
-  updateCarrierChart(data.carrierData);
+  // Ya no llamamos a updateCarrierChart(data.carrierData) aquí
 
   console.log(`📊 Dashboard actualizado para ${quarter}`);
 }
@@ -322,106 +325,97 @@ function updateTrendChart(data) {
   });
 }
 
-// Actualizar gráfico de paqueterías
+// Actualizar gráfico de paqueterías - DEPRECADO (mantenido para compatibilidad)
 function updateCarrierChart(data) {
-  const ctx = document.getElementById("carrierChart");
+  // Esta función ahora está vacía ya que usamos updateCarrierCircleCharts
+  // Se mantiene para evitar errores
+}
 
-  if (carrierChart) {
-    carrierChart.destroy();
-  }
+// Nueva función para actualizar los círculos de paqueterías con múltiples trimestres
+function updateCarrierCircleCharts() {
+  // Colores vibrantes para cada trimestre (como en Browser market shares)
+  const quarterColors = [
+    { bg: "rgba(0, 194, 255, 0.9)", border: "#00c2ff" }, // Q2-2025: Cyan brillante
+    { bg: "rgba(255, 0, 255, 0.9)", border: "#ff00ff" }, // Q1-2025: Magenta
+    { bg: "rgba(255, 215, 0, 0.9)", border: "#ffd700" }, // Q4-2024: Dorado
+    { bg: "rgba(0, 255, 127, 0.9)", border: "#00ff7f" }, // Q3-2024: Verde spring
+  ];
 
-  carrierChart = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: data.carriers,
-      datasets: [
-        {
-          label: "Tasa de Éxito (%)",
-          data: data.success,
-          backgroundColor: "rgba(16, 185, 129, 0.8)",
-          borderColor: "#10b981",
-          borderWidth: 2,
-          borderRadius: 6,
-        },
-        {
-          label: "Tasa de Retorno (%)",
-          data: data.returns,
-          backgroundColor: "rgba(239, 68, 68, 0.8)",
-          borderColor: "#ef4444",
-          borderWidth: 2,
-          borderRadius: 6,
-        },
-      ],
-    },
-    options: {
-      indexAxis: "y",
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false,
-        },
-        tooltip: {
-          enabled: true,
-          mode: "index",
-          intersect: false,
-          backgroundColor: "#ffffff",
-          titleColor: "#1e293b",
-          bodyColor: "#64748b",
-          borderColor: "#e2e8f0",
-          borderWidth: 1,
-          padding: 12,
-          borderRadius: 8,
-          titleFont: {
-            size: 13,
-            weight: "600",
+  const quarters = ["Q2-2025", "Q1-2025", "Q4-2024", "Q3-2024"];
+  const carriers = ["Estafeta", "DHL", "FedEx", "UPS", "Redpack"];
+
+  carriers.forEach((carrier, carrierIndex) => {
+    const canvasId = `carrierChart${carrierIndex + 1}`;
+    const ctx = document.getElementById(canvasId);
+
+    if (!ctx) return;
+
+    // Obtener datos de éxito para cada trimestre de esta paquetería
+    const successData = quarters.map((quarter) => {
+      return quarterlyData[quarter].carrierData.success[carrierIndex];
+    });
+
+    // Crear etiquetas con trimestre y porcentaje
+    const labels = quarters.map((q, i) => `${q}: ${successData[i]}%`);
+
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: successData,
+            backgroundColor: quarterColors.map((c) => c.bg),
+            borderColor: quarterColors.map((c) => c.border),
+            borderWidth: 3,
+            hoverOffset: 8,
+            spacing: 2,
           },
-          bodyFont: {
-            size: 14,
-            weight: "600",
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        cutout: "45%", // Hace más gruesos los anillos
+        plugins: {
+          legend: {
+            display: false, // Ocultamos la leyenda
           },
-          boxPadding: 6,
-          usePointStyle: true,
-          callbacks: {
-            label: function (context) {
-              return context.dataset.label + ": " + context.parsed.x + "%";
+          tooltip: {
+            enabled: true,
+            backgroundColor: "rgba(30, 41, 59, 0.95)",
+            titleColor: "#ffffff",
+            bodyColor: "#ffffff",
+            borderColor: "#475569",
+            borderWidth: 1,
+            padding: 12,
+            borderRadius: 8,
+            titleFont: {
+              size: 13,
+              weight: "700",
+            },
+            bodyFont: {
+              size: 14,
+              weight: "600",
+            },
+            callbacks: {
+              title: function (context) {
+                return carrier;
+              },
+              label: function (context) {
+                return context.label;
+              },
             },
           },
+        },
+        animation: {
+          animateRotate: true,
+          animateScale: true,
+          duration: 1500,
+          easing: "easeInOutQuart",
         },
       },
-      scales: {
-        x: {
-          beginAtZero: true,
-          max: 100,
-          grid: {
-            color: "#f1f5f9",
-            drawBorder: false,
-          },
-          ticks: {
-            font: {
-              size: 11,
-            },
-            color: "#94a3b8",
-            callback: function (value) {
-              return value + "%";
-            },
-          },
-        },
-        y: {
-          grid: {
-            display: false,
-            drawBorder: false,
-          },
-          ticks: {
-            font: {
-              size: 12,
-              weight: "500",
-            },
-            color: "#64748b",
-          },
-        },
-      },
-    },
+    });
   });
 }
 
@@ -685,107 +679,123 @@ console.log("✅ Nuevas gráficas de Analytics cargadas");
 
 // ===== ANÁLISIS GEOGRÁFICO (SIMULACIÓN) =====
 
-const geoCtx = document.getElementById('geoHeatmapChart');
+const geoCtx = document.getElementById("geoHeatmapChart");
 if (geoCtx) {
-    // Simulación de coordenadas relativas en un mapa abstracto de México
-    // X: Longitud aprox, Y: Latitud aprox (invertida para canvas a veces, pero aquí normal)
-    const geoData = [
-        { x: 50, y: 45, r: 25, city: 'Centro (CDMX/EdoMex)', value: 850 }, // Centro - Gran volumen
-        { x: 45, y: 55, r: 15, city: 'Bajío (Guadalajara/León)', value: 420 }, // Bajío
-        { x: 48, y: 75, r: 12, city: 'Norte (Monterrey)', value: 310 }, // Monterrey
-        { x: 20, y: 85, r: 8, city: 'Noroeste (Tijuana)', value: 120 }, // Tijuana
-        { x: 85, y: 40, r: 8, city: 'Sureste (Cancún/Mérida)', value: 147 }, // Cancún
-        { x: 65, y: 30, r: 6, city: 'Sur (Oaxaca/Chiapas)', value: 80 } // Sur
-    ];
+  // Simulación de coordenadas relativas en un mapa abstracto de México
+  // X: Longitud aprox, Y: Latitud aprox (invertida para canvas a veces, pero aquí normal)
+  const geoData = [
+    { x: 50, y: 45, r: 25, city: "Centro (CDMX/EdoMex)", value: 850 }, // Centro - Gran volumen
+    { x: 45, y: 55, r: 15, city: "Bajío (Guadalajara/León)", value: 420 }, // Bajío
+    { x: 48, y: 75, r: 12, city: "Norte (Monterrey)", value: 310 }, // Monterrey
+    { x: 20, y: 85, r: 8, city: "Noroeste (Tijuana)", value: 120 }, // Tijuana
+    { x: 85, y: 40, r: 8, city: "Sureste (Cancún/Mérida)", value: 147 }, // Cancún
+    { x: 65, y: 30, r: 6, city: "Sur (Oaxaca/Chiapas)", value: 80 }, // Sur
+  ];
 
-    new Chart(geoCtx, {
-        type: 'bubble',
-        data: {
-            datasets: [{
-                label: 'Volumen de Envíos',
-                data: geoData,
-                backgroundColor: [
-                    'rgba(239, 68, 68, 0.6)',  // Rojo intenso (Centro)
-                    'rgba(245, 158, 11, 0.6)', // Naranja (Bajío)
-                    'rgba(245, 158, 11, 0.5)', // Naranja suave (Norte)
-                    'rgba(16, 185, 129, 0.5)', // Verde (Noroeste)
-                    'rgba(16, 185, 129, 0.5)', // Verde (Sureste)
-                    'rgba(59, 130, 246, 0.5)'  // Azul (Sur)
-                ],
-                borderColor: [
-                    'rgba(239, 68, 68, 1)',
-                    'rgba(245, 158, 11, 1)',
-                    'rgba(245, 158, 11, 1)',
-                    'rgba(16, 185, 129, 1)',
-                    'rgba(16, 185, 129, 1)',
-                    'rgba(59, 130, 246, 1)'
-                ],
-                borderWidth: 1
-            }]
+  new Chart(geoCtx, {
+    type: "bubble",
+    data: {
+      datasets: [
+        {
+          label: "Volumen de Envíos",
+          data: geoData,
+          backgroundColor: [
+            "rgba(239, 68, 68, 0.6)", // Rojo intenso (Centro)
+            "rgba(245, 158, 11, 0.6)", // Naranja (Bajío)
+            "rgba(245, 158, 11, 0.5)", // Naranja suave (Norte)
+            "rgba(16, 185, 129, 0.5)", // Verde (Noroeste)
+            "rgba(16, 185, 129, 0.5)", // Verde (Sureste)
+            "rgba(59, 130, 246, 0.5)", // Azul (Sur)
+          ],
+          borderColor: [
+            "rgba(239, 68, 68, 1)",
+            "rgba(245, 158, 11, 1)",
+            "rgba(245, 158, 11, 1)",
+            "rgba(16, 185, 129, 1)",
+            "rgba(16, 185, 129, 1)",
+            "rgba(59, 130, 246, 1)",
+          ],
+          borderWidth: 1,
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    display: false, // Ocultar ejes para simular mapa
-                    min: 0,
-                    max: 100
-                },
-                y: {
-                    display: false, // Ocultar ejes
-                    min: 0,
-                    max: 100
-                }
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          display: false, // Ocultar ejes para simular mapa
+          min: 0,
+          max: 100,
+        },
+        y: {
+          display: false, // Ocultar ejes
+          min: 0,
+          max: 100,
+        },
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "rgba(30, 41, 59, 0.9)",
+          padding: 12,
+          callbacks: {
+            label: function (context) {
+              const point = context.raw;
+              return `${point.city}: ${point.value} envíos`;
             },
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    backgroundColor: 'rgba(30, 41, 59, 0.9)',
-                    padding: 12,
-                    callbacks: {
-                        label: function(context) {
-                            const point = context.raw;
-                            return `${point.city}: ${point.value} envíos`;
-                        }
-                    }
-                }
-            },
-            layout: {
-                padding: 20
-            }
-        }
-    });
+          },
+        },
+      },
+      layout: {
+        padding: 20,
+      },
+    },
+  });
 }
 
 // Poblar Tabla de Rendimiento Regional
-const regionTableBody = document.getElementById('regionTableBody');
+const regionTableBody = document.getElementById("regionTableBody");
 if (regionTableBody) {
-    const regions = [
-        { name: 'Centro', time: '1.2 días', diff: '-0.8 días', status: 'positive' },
-        { name: 'Bajío', time: '1.8 días', diff: '-0.2 días', status: 'positive' },
-        { name: 'Norte', time: '3.2 días', diff: '+1.2 días', status: 'negative' },
-        { name: 'Sureste', time: '3.5 días', diff: '+1.5 días', status: 'negative' },
-        { name: 'Noroeste', time: '4.1 días', diff: '+2.1 días', status: 'negative' }
-    ];
+  const regions = [
+    { name: "Centro", time: "1.2 días", diff: "-0.8 días", status: "positive" },
+    { name: "Bajío", time: "1.8 días", diff: "-0.2 días", status: "positive" },
+    { name: "Norte", time: "3.2 días", diff: "+1.2 días", status: "negative" },
+    {
+      name: "Sureste",
+      time: "3.5 días",
+      diff: "+1.5 días",
+      status: "negative",
+    },
+    {
+      name: "Noroeste",
+      time: "4.1 días",
+      diff: "+2.1 días",
+      status: "negative",
+    },
+  ];
 
-    regions.forEach(region => {
-        const tr = document.createElement('tr');
-        
-        let badgeClass = region.status === 'positive' ? 'success-text' : 'danger-text';
-        let badgeBg = region.status === 'positive' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)';
-        
-        tr.innerHTML = `
+  regions.forEach((region) => {
+    const tr = document.createElement("tr");
+
+    let badgeClass =
+      region.status === "positive" ? "success-text" : "danger-text";
+    let badgeBg =
+      region.status === "positive"
+        ? "rgba(16, 185, 129, 0.1)"
+        : "rgba(239, 68, 68, 0.1)";
+
+    tr.innerHTML = `
             <td style="font-weight: 500;">${region.name}</td>
             <td>${region.time}</td>
             <td>
-                <span style="background: ${badgeBg}; color: ${region.status === 'positive' ? '#10b981' : '#ef4444'}; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">
+                <span style="background: ${badgeBg}; color: ${region.status === "positive" ? "#10b981" : "#ef4444"}; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">
                     ${region.diff}
                 </span>
             </td>
         `;
-        regionTableBody.appendChild(tr);
-    });
+    regionTableBody.appendChild(tr);
+  });
 }
 
 console.log("✅ Análisis Geográfico inicializado");

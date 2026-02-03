@@ -206,15 +206,7 @@
                     <div class="metric-detail">Por tarjeta</div>
                 </div>
 
-                <!-- Satisfacción del Cliente -->
-                <div class="metric-card yellow">
-                    <div class="metric-header">
-                        <span class="metric-label">Satisfacción</span>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="metric-value" id="satisfaction">4.7/5</div>
-                    <div class="metric-detail">Calificación promedio</div>
-                </div>
+
             </div>
 
             <!-- Filters Section -->
@@ -369,11 +361,11 @@
                     </div>
                     <div class="chart-legend-custom">
                         <div class="legend-item">
-                            <span class="legend-color green"></span>
+                            <span class="legend-color orange"></span>
                             <span>OTD % (Éxito)</span>
                         </div>
                         <div class="legend-item">
-                            <span class="legend-color red"></span>
+                            <span class="legend-color purple-pro"></span>
                             <span>Retorno % (Problema)</span>
                         </div>
                     </div>
@@ -383,19 +375,73 @@
                 <div class="card chart-card">
                     <div class="card-header">
                         <h2>Rendimiento por Paquetería</h2>
-                        <p class="chart-subtitle">Comparativa de Tasa de Éxito y Retorno (Filtrado por trimestre)</p>
+                        <p class="chart-subtitle">Porcentaje de éxito por trimestre - Cada anillo representa un trimestre diferente</p>
                     </div>
-                    <div class="chart-container">
-                        <canvas id="carrierChart"></canvas>
+                    <div class="carrier-circles-container">
+                        <div class="carrier-circle-item">
+                            <div class="circle-chart-wrapper">
+                                <canvas id="carrierChart1" width="140" height="140"></canvas>
+                                <div class="circle-center-logo">
+                                    <img src="Logo-Estafeta.svg" alt="Estafeta" class="carrier-logo-circle">
+                                </div>
+                            </div>
+                            <p class="carrier-name">Estafeta</p>
+                        </div>
+                        <div class="carrier-circle-item">
+                            <div class="circle-chart-wrapper">
+                                <canvas id="carrierChart2" width="140" height="140"></canvas>
+                                <div class="circle-center-logo">
+                                    <img src="dhl.png" alt="DHL" class="carrier-logo-circle">
+                                </div>
+                            </div>
+                            <p class="carrier-name">DHL</p>
+                        </div>
+                        <div class="carrier-circle-item">
+                            <div class="circle-chart-wrapper">
+                                <canvas id="carrierChart3" width="140" height="140"></canvas>
+                                <div class="circle-center-logo">
+                                    <img src="fedex.png" alt="FedEx" class="carrier-logo-circle">
+                                </div>
+                            </div>
+                            <p class="carrier-name">FedEx</p>
+                        </div>
+                        <div class="carrier-circle-item">
+                            <div class="circle-chart-wrapper">
+                                <canvas id="carrierChart4" width="140" height="140"></canvas>
+                                <div class="circle-center-logo">
+                                    <img src="ups-icon.svg" alt="UPS" class="carrier-logo-circle">
+                                </div>
+                            </div>
+                            <p class="carrier-name">UPS</p>
+                        </div>
+                        <div class="carrier-circle-item">
+                            <div class="circle-chart-wrapper">
+                                <canvas id="carrierChart5" width="140" height="140"></canvas>
+                                <div class="circle-center-logo">
+                                    <img src="logo-redpack.png" alt="Redpack" class="carrier-logo-circle">
+                                </div>
+                            </div>
+                            <p class="carrier-name">Redpack</p>
+                        </div>
                     </div>
-                    <div class="chart-legend-custom">
+                    
+                    <!-- Leyenda de Trimestres -->
+                    <div class="carrier-legend">
                         <div class="legend-item">
-                            <span class="legend-color green"></span>
-                            <span>Tasa de Éxito (%)</span>
+                            <span class="legend-color" style="background: rgba(0, 194, 255, 0.9); box-shadow: 0 0 8px rgba(0, 194, 255, 0.5);"></span>
+                            <span>Q2 - 2025</span>
                         </div>
                         <div class="legend-item">
-                            <span class="legend-color red"></span>
-                            <span>Tasa de Retorno (%)</span>
+                            <span class="legend-color" style="background: rgba(255, 0, 255, 0.9); box-shadow: 0 0 8px rgba(255, 0, 255, 0.5);"></span>
+                            <span>Q1 - 2025</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: rgba(255, 215, 0, 0.9); box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);"></span>
+                            <span>Q4 - 2024</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: rgba(0, 255, 127, 0.9); box-shadow: 0 0 8px rgba(0, 255, 127, 0.5);"></span>
+                            <span>Q3 - 2024</span>
                         </div>
                     </div>
                 </div>

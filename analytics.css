@@ -526,6 +526,7 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
+    margin-top: 32px; /* Espacio con la sección anterior */
     margin-bottom: 24px;
     min-width: 0;
 }
@@ -541,6 +542,13 @@ body {
     padding: 24px;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-color);
+    overflow: hidden; /* Evitar que contenido se salga de bordes redondeados */
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .card-header {
@@ -596,6 +604,49 @@ body {
 
 .legend-color.red {
     background: var(--danger-color);
+}
+
+.legend-color.indigo {
+    background: #6366f1;
+}
+
+.legend-color.purple {
+    background: #a855f7;
+}
+
+.legend-color.neon-blue {
+    background: #00c2ff;
+    box-shadow: 0 0 10px rgba(0, 194, 255, 0.8),
+                0 0 20px rgba(0, 194, 255, 0.4);
+}
+
+.legend-color.neon-pink {
+    background: #ff00ff;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.8),
+                0 0 20px rgba(255, 0, 255, 0.4);
+}
+
+/* Estilo especial para la tarjeta de gráfica neón */
+.chart-card:first-child {
+    background: var(--bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--border-color);
+    overflow: hidden;
+    box-sizing: border-box;
+                
+}
+
+.chart-card:first-child .card-header h2 {
+    color: #00c2ff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.chart-card:first-child .chart-subtitle {
+    color: #94a3b8;
+}
+
+.chart-card:first-child .legend-item span:not(.legend-color) {
+    color: #cbd5e1;
 }
 
 /* Reports Card */
@@ -921,6 +972,7 @@ body {
 .ranking-table {
     width: 100%;
     border-collapse: collapse;
+    border-spacing: 0; /* Asegurar union perfecta de bordes */
 }
 
 .ranking-table thead {
@@ -942,6 +994,11 @@ body {
     padding: 16px;
     border-bottom: 1px solid var(--border-color);
     color: var(--text-primary);
+    vertical-align: middle; /* Corrección de alineación con imágenes */
+}
+
+.ranking-table tbody tr:last-child td {
+    border-bottom: none; /* Evitar corte visual en la última fila */
 }
 
 .ranking-table tbody tr {
@@ -1060,7 +1117,8 @@ body {
     font-weight: 600;
 }
 
-/* Center align logo column */
+/* Center align logo column (Header and Body) */
+.ranking-table th:nth-child(2),
 .ranking-table td:nth-child(2) {
     text-align: center;
 }
@@ -1079,3 +1137,160 @@ body {
     font-size: 16px;
 }
 
+/* Carrier Circles Container */
+.carrier-circles-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding: 24px 16px;
+    min-height: 280px;
+}
+
+.carrier-circle-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.circle-chart-wrapper {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle-center-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+}
+
+.carrier-logo-circle {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.carrier-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
+}
+
+/* Leyenda de Trimestres */
+.carrier-legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-top: 24px;
+    padding: 16px;
+    background: var(--bg-primary);
+    border-radius: var(--radius-md);
+    flex-wrap: wrap;
+}
+
+.carrier-legend .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.carrier-legend .legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+
+/* Responsive adjustments for carrier circles */
+@media (max-width: 1200px) {
+    .carrier-circles-container {
+        gap: 24px;
+    }
+    
+    .circle-chart-wrapper {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .circle-center-logo {
+        width: 60px;
+        height: 60px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carrier-circles-container {
+        gap: 20px;
+    }
+    
+    .circle-chart-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .circle-center-logo {
+        width: 50px;
+        height: 50px;
+        padding: 8px;
+    }
+}
+
+/* Colores profesionales para la leyenda */
+.legend-color.orange {
+    background: #ff7f50;
+    box-shadow: 0 2px 4px rgba(255, 127, 80, 0.3);
+}
+
+.legend-color.purple-pro {
+    background: #9333ea;
+    box-shadow: 0 2px 4px rgba(147, 51, 234, 0.3);
+}
+
+/* Estilo especial para la tarjeta de gráfica con fondo oscuro */
+.chart-card:first-child {
+    background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chart-card:first-child .card-header {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.chart-card:first-child .card-header h2 {
+    color: #000000;
+    font-weight: 600;
+}
+
+.chart-card:first-child .chart-subtitle {
+    color: #000000;
+}
+
+.chart-card:first-child .legend-item span:not(.legend-color) {
+    color: #000000;
+}
