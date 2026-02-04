@@ -353,16 +353,16 @@ body.is-scrolled .plata-card {
   height: 45px;
   border-radius: 20px;
   border: none;
-  box-shadow: 1px 1px rgba(107, 221, 215, 0.37);
+  box-shadow: 1px 1px rgba(226, 106, 106, 0.37);
   padding: 5px 10px;
-  background-color: rgb(59, 190, 230);
+  background-color: rgb(255, 0, 0);
   color: #fff;
   font-family: Roboto, sans-serif;
   font-weight: 505;
   font-size: 16px;
   line-height: 1;
   cursor: pointer;
-  filter: drop-shadow(0 0 10px rgba(59, 190, 230, 0.568));
+  filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.568));
   transition: 0.5s linear;
   display: flex;
   align-items: center;
@@ -394,7 +394,7 @@ body.is-scrolled .plata-card {
   position: absolute;
   width: 16px;
   height: 3px;
-  background-color: rgb(59, 190, 230);
+  background-color: rgb(224, 80, 54);
   margin-left: -20px;
   animation: animate 0.9s linear infinite;
 }

@@ -45,99 +45,89 @@
             max-width: calc(100vw - 80px);
         }
 
-        /* Estilos para el botón de descarga animado */
-        .container {
-            --color: #a5a5b0;
-            height: 45px; /* Altura para igualar inputs */
+        /* Estilos para el botón .botao (Blue) */
+        .botao-container {
+            width: 125px;
+            height: 50px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            position: relative;
-            cursor: pointer;
-            font-size: 14px;
-            width: 100%;
+            justify-content: flex-end;
         }
 
-        .container .label {
-            position: relative;
+        .botao {
+            width: 125px;
+            height: 45px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 1px 1px rgba(107, 221, 215, 0.37);
+            padding: 5px 10px;
+            background-color: rgb(59, 190, 230);
+            color: #fff;
+            font-family: Roboto, sans-serif;
+            font-weight: 505;
+            font-size: 16px;
+            line-height: 1;
+            cursor: pointer;
+            filter: drop-shadow(0 0 10px rgba(59, 190, 230, 0.568));
+            transition: 0.5s linear;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 0 20px;
+            position: relative;
+        }
+
+        .botao .mysvg {
+            display: none;
+        }
+
+        .botao-container:hover .botao {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: 0.5s linear;
+        }
+
+        .botao-container:hover .texto {
+            display: none;
+        }
+
+        .botao-container:hover .mysvg {
+            display: inline;
+        }
+
+        .botao-container:hover .botao::after {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 3px;
+            background-color: rgb(59, 190, 230);
+            margin-left: -20px;
+            animation: animate 0.9s linear infinite;
+        }
+
+        .botao-container:hover .botao::before {
+            content: "";
+            position: absolute;
+            top: -3px;
+            left: -3px;
             width: 100%;
             height: 100%;
-            border: 1px solid var(--border-color, #e2e8f0);
-            background-color: #10b981; /* Verde Success */
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: white;
-            font-weight: 600;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 3.5px solid transparent;
+            border-top: 3.5px solid #fff;
+            border-right: 3.5px solid #fff;
+            border-radius: 50%;
+            animation: animateC 2s linear infinite;
         }
 
-        .container .label:hover {
-            background-color: #059669;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        @keyframes animateC {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        .container .input { display: none; }
-
-        .container .circle {
-            position: relative;
-            height: 20px;
-            width: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        @keyframes animate {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(20px); }
         }
-
-        .container .icon {
-            width: 18px;
-            height: 18px;
-            color: white;
-            transition: all 0.3s;
-            position: absolute;
-        }
-
-        .container .square {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border: 2px solid white;
-            border-top: none;
-            border-right: none;
-            transform: rotate(-45deg);
-            opacity: 0;
-            transition: all 0.3s;
-            top: 48%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-        }
-
-        .container .title {
-            margin: 0;
-            padding: 0;
-            transition: all 0.3s;
-        }
-
-        /* Lógica de cambio de texto */
-        .container .title.open { display: none; }
-        
-        .container .input:checked ~ .circle .icon {
-            transform: translateY(20px);
-            opacity: 0;
-        }
-
-        .container .input:checked ~ .circle .square {
-            opacity: 1;
-            transform: translate(-50%, -50%) rotate(-45deg) scale(1.2);
-        }
-
-        .container .input:checked ~ .title.download { display: none; }
-        .container .input:checked ~ .title.open { display: block; }
     </style>
 </head>
 
@@ -235,32 +225,20 @@
                     <input type="text" id="searchGuide" class="filter-input" placeholder="Buscar por # de guía...">
                 </div>
 
-                <div class="filter-group" style="justify-content: flex-end;">
-                    <!-- From Uiverse.io by Na3ar-17 --> 
-                    <div class="container">
-                    <label class="label">
-                        <input type="checkbox" class="input" />
-                        <span class="circle"
-                        ><svg
-                            class="icon"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="1.5"
-                            d="M12 19V5m0 14-4-4m4 4 4-4"
-                            ></path>
-                        </svg>
-                        <div class="square"></div>
-                        </span>
-                        <p class="title download">Download</p>
-                        <p class="title open">Open</p>
-                    </label>
+                <div class="filter-group" style="justify-content: flex-end; align-items: flex-end;">
+                    <div class="botao-container">
+                        <button class="botao">
+                            <svg class="mysvg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24px" width="24px">
+                                <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+                                <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <g id="Interface / Download">
+                                        <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#f1f1f1" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" id="Vector"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <span class="texto">Exportar Excel</span>
+                        </button>
                     </div>
                 </div>
 
