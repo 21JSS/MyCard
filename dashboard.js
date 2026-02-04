@@ -457,6 +457,14 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "envios-status.html";
     });
   }
+
+  // Funcionalidad para el botón de descarga animado (Click en lugar de Hover)
+  const botaoContainers = document.querySelectorAll(".botao-container");
+  botaoContainers.forEach(container => {
+    container.addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  });
 });
 
 console.log("✅ Dashboard MyCard cargado correctamente");

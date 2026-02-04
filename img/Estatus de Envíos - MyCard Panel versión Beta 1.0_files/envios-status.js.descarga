@@ -50,13 +50,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Funcionalidad para el botón de descarga animado (Click en lugar de Hover)
-    const botaoContainers = document.querySelectorAll(".botao-container");
-    botaoContainers.forEach(container => {
-        container.addEventListener("click", function() {
-            this.classList.toggle("active");
-        });
-    });
-
     console.log('✅ Envíos Status cargado correctamente');
 });
