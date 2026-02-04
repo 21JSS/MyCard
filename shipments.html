@@ -138,116 +138,6 @@
                 </div>
             </div>
 
-            <!-- Results Section (Initially Hidden) -->
-            <div class="results-section" id="resultsSection" style="display: none;">
-                <!-- Shipment Details Card -->
-                <div class="card shipment-details">
-                    <div class="card-header">
-                        <div>
-                            <h2>Detalles del Envío</h2>
-                            <p class="tracking-number-display">Guía: <span id="displayTrackingNumber"></span></p>
-                        </div>
-                        <div class="status-badge" id="statusBadge">
-                            <i class="fas fa-circle"></i>
-                            <span>En Tránsito</span>
-                        </div>
-                    </div>
-
-                    <div class="details-grid">
-                        <div class="detail-item">
-                            <div class="detail-icon blue">
-                                <i class="fas fa-shipping-fast"></i>
-                            </div>
-                            <div class="detail-info">
-                                <div class="detail-label">Paquetería</div>
-                                <div class="detail-value" id="carrier">Estafeta</div>
-                            </div>
-                        </div>
-
-                        <div class="detail-item">
-                            <div class="detail-icon green">
-                                <i class="fas fa-calendar-check"></i>
-                            </div>
-                            <div class="detail-info">
-                                <div class="detail-label">Fecha Estimada de Entrega</div>
-                                <div class="detail-value" id="estimatedDate">25 Enero 2026</div>
-                            </div>
-                        </div>
-
-                        <div class="detail-item">
-                            <div class="detail-icon orange">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="detail-info">
-                                <div class="detail-label">Última Ubicación</div>
-                                <div class="detail-value" id="lastLocation">Centro de Distribución CDMX</div>
-                            </div>
-                        </div>
-
-                        <div class="detail-item">
-                            <div class="detail-icon purple">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="detail-info">
-                                <div class="detail-label">Última Actualización</div>
-                                <div class="detail-value" id="lastUpdate">Hoy, 10:30 AM</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Timeline Card -->
-                <div class="card timeline-card">
-                    <div class="card-header">
-                        <h2>Historial de Seguimiento</h2>
-                    </div>
-
-                    <div class="timeline" id="timeline">
-                        <div class="timeline-item active">
-                            <div class="timeline-marker">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <div class="timeline-time">Hoy, 10:30 AM</div>
-                                <div class="timeline-title">En tránsito a destino</div>
-                                <div class="timeline-location">Centro de Distribución CDMX</div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item completed">
-                            <div class="timeline-marker">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <div class="timeline-time">23 Ene, 3:45 PM</div>
-                                <div class="timeline-title">Paquete en centro de distribución</div>
-                                <div class="timeline-location">Hub Querétaro</div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item completed">
-                            <div class="timeline-marker">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <div class="timeline-time">22 Ene, 8:20 AM</div>
-                                <div class="timeline-title">Paquete recolectado</div>
-                                <div class="timeline-location">Oficina MyCard - Monterrey</div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item completed">
-                            <div class="timeline-marker">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <div class="timeline-time">21 Ene, 2:00 PM</div>
-                                <div class="timeline-title">Orden creada</div>
-                                <div class="timeline-location">Sistema MyCard</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             <!-- Empty State (Initially Visible) -->
             <div class="empty-state" id="emptyState">
                 <div class="empty-icon">
@@ -267,14 +157,6 @@
     <!-- JavaScript -->
     <script src="menu.js"></script>
     <script src="shipments.js"></script>
-    <script>
-        // Redirección rápida para demo de tracking
-        document.getElementById('searchBtn').addEventListener('click', () => {
-            const trackingNum = document.getElementById('trackingNumber').value;
-            // Redirigir si hay texto o simplemente para la demo
-            window.location.href = `tracking.html?guide=${trackingNum || 'MX-DEMO'}`;
-        });
-    </script>
 </body>
 
 </html>
