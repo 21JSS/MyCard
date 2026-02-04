@@ -53,10 +53,65 @@
                     <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFzeQ0hz39haiHkhSOKnHJCG3v6AynORgBKrj0Zf2FTYMvjAsDAxzqIFZ8DYXbyq_-u_kuZcgg5nRpXxVGp18K15NiCGvVwTv-8QUGdZwJS3sSlhRpqEpZ3RHP7vQCIoKYnd6UFEAzxrhFPR5byjFFR6ld7gWvNCD7g5LF3Y6uhJvgY1_hw8qBCqO6/s1600/chip.png" class="chip-img">
                 </div>
                 <!-- Botón de autorización -->
-                <button class="button2" type="submit" form="login-form">Acceder</button>
+                <button class="button2" type="submit" form="login-form" id="login-button">Acceder</button>
             </div>
         </div>
 
+    <!-- Loading Overlay (Pantalla Completa) -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <svg
+                class="pl"
+                width="128px"
+                height="128px"
+                viewBox="0 0 128 128"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <circle
+                    class="pl__ring2"
+                    cx="64"
+                    cy="64"
+                    r="52.5"
+                    fill="none"
+                    stroke="#676EF4"
+                    stroke-width="12"
+                    transform="rotate(-90,64,64)"
+                    stroke-linecap="round"
+                    stroke-dasharray="329.9 329.9"
+                    stroke-dashoffset="-329.3"
+                ></circle>
+
+                <circle
+                    class="pl__ring4"
+                    cx="64"
+                    cy="64"
+                    r="37.5"
+                    fill="none"
+                    stroke="#121DED"
+                    stroke-width="9"
+                    transform="rotate(-90,64,64)"
+                    stroke-linecap="round"
+                    stroke-dasharray="254.5 254.5"
+                    stroke-dashoffset="-254"
+                ></circle>
+
+                <circle
+                    class="pl__ring6"
+                    cx="64"
+                    cy="64"
+                    r="22.5"
+                    fill="none"
+                    stroke="#464FF1"
+                    stroke-width="9"
+                    transform="rotate(-90,64,64)"
+                    stroke-linecap="round"
+                    stroke-dasharray="204.2 204.2"
+                    stroke-dashoffset="-203.9"
+                ></circle>
+            </svg>
+            <div class="loading-text">AUTENTICANDO...</div>
+        </div>
+    </div>
 
     <!-- Librería para el efecto de inclinación (Tilt) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
@@ -69,6 +124,7 @@
         const usernameInput = document.getElementById('username-input');
         const passwordInput = document.getElementById('password-input');
         const errorMsg = document.getElementById('login-error');
+        const loadingOverlay = document.getElementById('loadingOverlay');
 
         togglePassword.addEventListener('click', function () {
             // Alternar el tipo de input entre password y text
@@ -82,30 +138,34 @@
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Mostrar overlay de carga
+            loadingOverlay.classList.add('active');
+            errorMsg.style.display = 'none';
+            
             const user = usernameInput.value.trim();
             const pass = passwordInput.value.trim();
             
-            if (user === 'admin_plata' && pass === 'plata123') {
-                localStorage.setItem('currentUser', 'plata');
-                window.location.href = 'dashboard.html';
-            } else if (user === 'admin_broxel' && pass === 'broxel123') {
-                localStorage.setItem('currentUser', 'broxel');
-                window.location.href = 'dashboard.html';
-            } else {
-                // Fallback para pruebas rápidas si no coinciden
-                // Si el usuario pone cualquier otra cosa, por seguridad mejor mostrar error, 
-                // pero si quieres mantener el comportamiento anterior de entrar directo:
-                // localStorage.setItem('currentUser', 'plata'); // Default
-                // window.location.href = 'dashboard.html';
-                
-                // Mejor mostramos error para que prueben los usuarios reales
-                errorMsg.style.display = 'block';
-                
-                // Shake effect visual
-                const card = document.querySelector('.card');
-                card.style.animation = 'shake 0.5s';
-                setTimeout(() => card.style.animation = '', 500);
-            }
+            // Simular delay de autenticación (1.5 segundos)
+            setTimeout(() => {
+                if (user === 'admin_plata' && pass === 'plata123') {
+                    localStorage.setItem('currentUser', 'plata');
+                    window.location.href = 'dashboard.html';
+                } else if (user === 'admin_broxel' && pass === 'broxel123') {
+                    localStorage.setItem('currentUser', 'broxel');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    // Ocultar overlay
+                    loadingOverlay.classList.remove('active');
+                    
+                    // Mostrar error
+                    errorMsg.style.display = 'block';
+                    
+                    // Shake effect visual
+                    const card = document.querySelector('.card');
+                    card.style.animation = 'shake 0.5s';
+                    setTimeout(() => card.style.animation = '', 500);
+                }
+            }, 1500);
         });
     </script>
 </body>
