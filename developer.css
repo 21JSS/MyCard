@@ -132,15 +132,6 @@ body {
 }
 
 /* Top Header */
-.top-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border-color);
-}
-
 .page-title {
     font-size: 16px;
     font-weight: 600;
@@ -183,12 +174,36 @@ body {
 }
 
 .user-profile i {
-    font-size: 20px;
+    font-size: 24px;
     color: var(--primary-color);
 }
 
 .user-profile:hover {
     background-color: var(--border-color);
+}
+
+/* Mini Tarjeta en Header */
+.header-mini-card {
+   width: 60px;
+   height: 38px;
+   border-radius: 6px;
+   overflow: hidden;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+   opacity: 0;
+   transform: translateY(20px) scale(0.8);
+   transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+   display: flex;
+}
+
+.header-mini-card img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+body.is-scrolled .header-mini-card {
+   opacity: 1;
+   transform: translateY(0) scale(1);
 }
 
 /* Estilos del Dropdown de Perfil */
@@ -212,7 +227,7 @@ body {
     box-shadow: var(--shadow-lg);
     display: none;
     flex-direction: column;
-    z-index: 1000;
+    z-index: 2000;
     overflow: hidden;
     animation: fadeIn 0.2s ease-out;
 }
