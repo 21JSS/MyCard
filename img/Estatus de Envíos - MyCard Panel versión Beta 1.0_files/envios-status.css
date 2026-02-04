@@ -284,11 +284,11 @@ body.is-scrolled .header-mini-card {
   border: none;
   box-shadow: 1px 1px rgba(107, 221, 111, 0.549);
   padding: 5px 10px;
-  background-color: rgb(20, 83, 10);
-  color: #f9f8f8;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: rgb(34, 207, 7);
+  color: #000000;
+  font-family: Roboto, sans-serif;
   font-weight: 505;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1;
   cursor: pointer;
   filter: drop-shadow(0 0 10px rgba(125, 230, 59, 0.568));
@@ -303,22 +303,22 @@ body.is-scrolled .header-mini-card {
   display: none;
 }
 
-.botao-container.active .botao {
+.botao-container:hover .botao {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   transition: 0.5s linear;
 }
 
-.botao-container.active .texto {
+.botao-container:hover .texto {
   display: none;
 }
 
-.botao-container.active .mysvg {
+.botao-container:hover .mysvg {
   display: inline;
 }
 
-.botao-container.active .botao::after {
+.botao-container:hover .botao::after {
   content: "";
   position: absolute;
   width: 16px;
@@ -328,7 +328,7 @@ body.is-scrolled .header-mini-card {
   animation: animate 0.9s linear infinite;
 }
 
-.botao-container.active .botao::before {
+.botao-container:hover .botao::before {
   content: "";
   position: absolute;
   top: -3px;

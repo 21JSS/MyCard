@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const map = L.map('trackingMap').setView(startCoords, 14);
 
     // Capa de Mapa (OpenStreetMap)
+    // NOTA: Este servicio es GRATUITO y NO requiere API Key.
+    // Si quisieras usar Google Maps o Mapbox, aquí es donde cambiarías la URL y pondrías tu API Key.
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
