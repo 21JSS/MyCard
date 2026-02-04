@@ -364,6 +364,9 @@ body.is-scrolled .plata-card {
   cursor: pointer;
   filter: drop-shadow(0 0 10px rgba(59, 190, 230, 0.568));
   transition: 0.5s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
 }
 
@@ -429,7 +432,6 @@ body.is-scrolled .plata-card {
     transform: translateY(20px);
   }
 }
-
 
 .badge {
    position: absolute;
