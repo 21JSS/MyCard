@@ -226,9 +226,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setContent("estimatedDate", shipment.estimatedDate);
     setContent("currentLocation", shipment.lastLocation);
     setContent("lastUpdate", shipment.lastUpdate);
-    setContent("weight", shipment.weight || "0.5 kg");
-    setContent("dimensions", "25x15x5 cm");
-    setContent("serviceType", "Express");
 
     updateTimeline(shipment.timeline);
 
