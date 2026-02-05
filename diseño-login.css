@@ -310,8 +310,6 @@ body {
     padding: 15px 15px 15px 45px;
     border: 2px solid rgba(255, 255, 255, 0.15);
     background: rgba(13, 110, 253, 0.08);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     color: white;
     font-size: 16px;
     font-family: 'LINE Seed JP', sans-serif;
@@ -327,8 +325,6 @@ body {
     pointer-events: none;
     color: rgba(255, 255, 255, 0.5);
     transition: all 0.4s ease-out;
-    background: rgba(13, 110, 253, 0.08);
-    backdrop-filter: blur(5px);
     padding: 0 5px;
     font-family: 'LINE Seed JP', sans-serif;
     font-weight: 500;
@@ -358,11 +354,6 @@ body {
 .nebula-input .input:focus {
     border-color: #0d6efd;
     background: rgba(13, 110, 253, 0.12);
-    box-shadow:
-        0 5px 8px rgba(13, 110, 253, 0.3),
-        0 10px 20px rgba(13, 110, 253, 0.2),
-        0 15px 40px rgba(13, 110, 253, 0.15),
-        0 20px 60px rgba(13, 110, 253, 0.1);
 }
 
 .nebula-input .input:focus ~ .user-label,
