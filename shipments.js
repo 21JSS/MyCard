@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (resultsSection) resultsSection.style.display = 'none';
     if (loadingSpinner) loadingSpinner.style.display = 'flex';
 
-    // 2. Simular tiempo de carga (20 segundos)
+    // 2. Simular tiempo de carga 
     setTimeout(() => {
         if (loadingSpinner) loadingSpinner.style.display = 'none';
         
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Volver a mostrar el estado vacío si no se encuentra
             if (emptyState) emptyState.style.display = 'flex';
         }
-    }, 20000);
+    }, 3000);
   }
 
   function displayShipmentInfo(trackingNumber, shipment) {
