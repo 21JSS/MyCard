@@ -17,6 +17,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="shipments.css">
+    <link rel="stylesheet" href="shipments-premium.css">
     
     <!-- Prevent sidebar flash -->
     <script>
@@ -108,9 +109,19 @@
                 </div>
             </header>
 
-            <div class="section-header">
-                <h2 class="section-title">Shipments</h2>
+            <!-- Botón Regresar (oculto por defecto) -->
+            <div class="back-button-container" id="backButtonContainer" style="display: none;">
+                <button class="back-button" id="backButton">
+                    <i class="fas fa-arrow-left"></i>
+                    Regresar
+                </button>
             </div>
+
+            <!-- Search Section (visible por defecto) -->
+            <div id="searchSection">
+                <div class="section-header">
+                    <h2 class="section-title">Shipments</h2>
+                </div>
 
             <!-- Tracking Card -->
             <div class="tracking-card">
@@ -140,6 +151,7 @@
                     </div>
                 </div>
             </div>
+            </div> <!-- End of searchSection -->
 
             <!-- Loading Spinner (Hidden by default) -->
             <div id="loadingSpinner" class="loader-overlay" style="display: none;">
@@ -160,114 +172,149 @@
 
             <!-- Results Section (Initially Hidden) -->
             <div class="results-section" id="resultsSection" style="display: none;">
-                <!-- Shipment Details Card -->
-                <div class="card shipment-details">
-                    <div class="card-header">
-                        <div>
-                            <h2>Detalles del Envío</h2>
-                            <p class="tracking-number-display">Guía: <span id="displayTrackingNumber"></span></p>
+                
+                <!-- Hero Card - Tracking Status -->
+                <div class="tracking-hero">
+                    <div class="hero-content">
+                        <h1 class="hero-tracking-number">TRACKING #<span id="displayTrackingNumber">1234567890</span></h1>
+                        <div class="hero-status-badge" id="statusBadge">
+                            <i class="fas fa-truck"></i>
+                            <span>In Transit</span>
                         </div>
-                        <div class="status-badge" id="statusBadge">
-                            <i class="fas fa-circle"></i>
-                            <span>En Tránsito</span>
+                    </div>
+                    
+                    <!-- Progress Tracker -->
+                    <div class="progress-tracker">
+                        <div class="progress-step completed">
+                            <div class="step-circle">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="step-label">ORIGIN</div>
+                        </div>
+                        <div class="progress-line completed"></div>
+                        
+                        <div class="progress-step active">
+                            <div class="step-circle">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="step-label">IN TRANSIT</div>
+                            <div class="step-percentage">60%</div>
+                        </div>
+                        <div class="progress-line"></div>
+                        
+                        <div class="progress-step">
+                            <div class="step-circle">
+                                <i class="fas fa-flag-checkered"></i>
+                            </div>
+                            <div class="step-label">DESTINATION</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Cards Grid -->
+                <div class="info-cards-grid">
+                    <!-- Delivery Details -->
+                    <div class="info-card-modern blue-border">
+                        <div class="card-icon blue-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3 class="card-title">DELIVERY DETAILS</h3>
+                        <div class="card-detail">
+                            <strong>Estimated Delivery:</strong><br>
+                            <span id="estimatedDate">October 26, 2024</span>
+                        </div>
+                        <div class="card-detail">
+                            <strong>Destination:</strong><br>
+                            <span id="destination">1234 Maple Drive,<br>San Francisco, CA 94102</span>
+                        </div>
+                        <div class="card-detail">
+                            <strong>Recipient:</strong><br>
+                            <span id="recipient">John Doe</span>
                         </div>
                     </div>
 
-                    <div class="details-grid">
-                        <div class="detail-item">
-                            <div class="detail-icon blue">
-                                <i class="fas fa-shipping-fast"></i>
-                            </div>
-                            <div class="detail-info">
-                                <div class="detail-label">Paquetería</div>
-                                <div class="detail-value" id="carrier">Estafeta</div>
-                            </div>
+                    <!-- Shipping Info -->
+                    <div class="info-card-modern purple-border">
+                        <div class="card-icon purple-icon">
+                            <i class="fas fa-shipping-fast"></i>
                         </div>
-
-                        <div class="detail-item">
-                            <div class="detail-icon green">
-                                <i class="fas fa-calendar-check"></i>
-                            </div>
-                            <div class="detail-info">
-                                <div class="detail-label">Fecha Estimada de Entrega</div>
-                                <div class="detail-value" id="estimatedDate">25 Enero 2026</div>
-                            </div>
+                        <h3 class="card-title">SHIPPING INFO</h3>
+                        <div class="card-detail">
+                            <strong>Carrier:</strong><br>
+                            <span id="carrier">FedEx</span>
                         </div>
-
-                        <div class="detail-item">
-                            <div class="detail-icon orange">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="detail-info">
-                                <div class="detail-label">Última Ubicación</div>
-                                <div class="detail-value" id="lastLocation">Centro de Distribución CDMX</div>
-                            </div>
+                        <div class="card-detail">
+                            <strong>Last Update:</strong><br>
+                            <span id="lastUpdate">October 23, 2024, 10:45 AM</span>
                         </div>
+                        <div class="card-detail">
+                            <strong>Current Location:</strong><br>
+                            <span id="currentLocation">Chicago, IL - In transit to destination</span>
+                        </div>
+                    </div>
 
-                        <div class="detail-item">
-                            <div class="detail-icon purple">
+                    <!-- Package Data -->
+                    <div class="info-card-modern orange-border">
+                        <div class="card-icon orange-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <h3 class="card-title">PACKAGE DATA</h3>
+                        <div class="card-detail">
+                            <strong>Weight:</strong><br>
+                            <span id="weight">5.2 lbs</span>
+                        </div>
+                        <div class="card-detail">
+                            <strong>Dimensions:</strong><br>
+                            <span id="dimensions">14x10x6 in</span>
+                        </div>
+                        <div class="card-detail">
+                            <strong>Service Type:</strong><br>
+                            <span id="serviceType">FedEx Ground</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="timeline-container">
+                    <div class="timeline-item completed-item">
+                        <div class="timeline-icon completed">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">
                                 <i class="fas fa-clock"></i>
+                                October 23, 2024, 10:45 AM
                             </div>
-                            <div class="detail-info">
-                                <div class="detail-label">Última Actualización</div>
-                                <div class="detail-value" id="lastUpdate">Hoy, 10:30 AM</div>
+                            <div class="timeline-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Chicago, IL
                             </div>
+                            <p class="timeline-text">Package departed FedEx facility. In transit to destination.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item completed-item">
+                        <div class="timeline-icon completed">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="timeline-line-end"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">
+                                <i class="fas fa-clock"></i>
+                                October 22, 2024, 3:30 PM
+                            </div>
+                            <div class="timeline-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Columbus, OH
+                            </div>
+                            <p class="timeline-text">Package arrived at FedEx facility. Shipment sorted.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Timeline Card -->
-                <div class="card timeline-card">
-                    <div class="card-header">
-                        <h2>Historial de Seguimiento</h2>
-                    </div>
-
-                    <div class="timeline" id="timeline">
-                        <div class="timeline-item active">
-                            <div class="timeline-marker">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <div class="timeline-time">Hoy, 10:30 AM</div>
-                                <div class="timeline-title">En tránsito a destino</div>
-                                <div class="timeline-location">Centro de Distribución CDMX</div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item completed">
-                            <div class="timeline-marker">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <div class="timeline-time">23 Ene, 3:45 PM</div>
-                                <div class="timeline-title">Paquete en centro de distribución</div>
-                                <div class="timeline-location">Hub Querétaro</div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item completed">
-                            <div class="timeline-marker">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <div class="timeline-time">22 Ene, 8:20 AM</div>
-                                <div class="timeline-title">Paquete recolectado</div>
-                                <div class="timeline-location">Oficina MyCard - Monterrey</div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item completed">
-                            <div class="timeline-marker">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <div class="timeline-time">21 Ene, 2:00 PM</div>
-                                <div class="timeline-title">Orden creada</div>
-                                <div class="timeline-location">Sistema MyCard</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            
             <!-- Empty State (Initially Visible) -->
             <div class="empty-state" id="emptyState">
                 <div class="empty-icon">
