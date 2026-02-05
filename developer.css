@@ -183,14 +183,20 @@ body {
 }
 
 /* Mini Tarjeta en Header */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
 .header-mini-card {
    width: 60px;
    height: 38px;
    border-radius: 6px;
    overflow: hidden;
    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-   opacity: 0;
-   transform: translateY(20px) scale(0.8);
+   opacity: 1;
+   transform: translateY(0) scale(1);
    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
    display: flex;
 }
@@ -201,6 +207,7 @@ body {
    object-fit: cover;
 }
 
+/* Ya no necesitamos este estado porque siempre está visible */
 body.is-scrolled .header-mini-card {
    opacity: 1;
    transform: translateY(0) scale(1);

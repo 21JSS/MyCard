@@ -1301,3 +1301,28 @@ body {
     margin-left: 80px;
     max-width: calc(100vw - 80px);
 }
+
+/* Fix para alinear el título y la mini card horizontalmente */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Mini card estática - siempre visible sin animaciones */
+.header-mini-card {
+    width: 60px;
+    height: 38px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    display: flex;
+}
+
+.header-mini-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+

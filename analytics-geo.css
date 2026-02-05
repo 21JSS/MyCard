@@ -1,3 +1,10 @@
+/* Fix para alinear el título y la mini card horizontalmente */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
 .geo-dashboard-grid {
     display: grid;
     grid-template-columns: 1.6fr 1fr;
