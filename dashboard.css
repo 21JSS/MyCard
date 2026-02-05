@@ -1398,6 +1398,7 @@ body.is-scrolled .plata-card {
     perspective: 1500px; /* Profundidad para el contenedor padre */
 }
 
+
 /* LIMPIEZA FINAL: Asegurar que NO existan cuadros grises ni bordes extraños */
 .plata-card, 
 .plata-card-container, 
@@ -1406,4 +1407,11 @@ body.is-scrolled .plata-card {
     border: none !important;
     box-shadow: none !important; /* Quitar sombras del contenedor padre */
     outline: none !important;
+}
+
+/* Fix para alinear el título y la mini card horizontalmente cuando aparece con scroll */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
