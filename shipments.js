@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Volver a mostrar el estado vacío si no se encuentra
         if (emptyState) emptyState.style.display = "flex";
       }
-    }, 3000);
+    }, 12000); // 12s load time (3 cycles of 4s)
   }
 
   function displayShipmentInfo(trackingNumber, shipment) {

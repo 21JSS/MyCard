@@ -485,3 +485,90 @@
         transform: translateX(0);
     }
 }
+
+/* --- AURA LOADER STYLES --- */
+.loader-overlay {
+    display: flex;
+    flex-direction: column; /* Asegura que el texto quede abajo del camión */
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Separación entre camión y texto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 1000;
+}
+
+.aura-text-svg {
+    width: 600px;
+    height: 120px;
+    overflow: visible;
+}
+
+/* Animations from Uiverse - Modified for Readability */
+.dash {
+  animation: dashArray 4s ease-in-out infinite; /* 4s cycle: Slow appear, Fast disappear */
+}
+
+@keyframes dashArray {
+  0% {
+    stroke-dasharray: 0 2000;
+    stroke-dashoffset: 0;
+  }
+  80% { /* Slow drawing phase took 80% of time (3.2s) */
+    stroke-dasharray: 2000 2000;
+    stroke-dashoffset: 0;
+  }
+  100% { /* Fast erasing phase in last 20% (0.8s) */
+    stroke-dasharray: 2000 2000;
+    stroke-dashoffset: -2000;
+  }
+}
+
+/* Removed separate dashOffset keyframes as it's now integrated */
+
+/* Gradients */
+.gradient-c {
+  stroke: url(#gradient-aura);
+}
+
+/* Empty State Fix */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+    background: white;
+    border-radius: 24px;
+    margin-top: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.empty-icon {
+    font-size: 72px;
+    color: #e2e8f0;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.empty-state h3 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #334155;
+    margin-bottom: 12px;
+}
+
+.empty-state p {
+    font-size: 16px;
+    color: #64748b;
+    max-width: 400px;
+    line-height: 1.6;
+}

@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Nunito:wght@800;900&display=swap"
         rel="stylesheet">
 
     <!-- Font Awesome Icons -->
@@ -153,9 +153,9 @@
             </div>
             </div> <!-- End of searchSection -->
 
-            <!-- Loading Spinner (Hidden by default) -->
+           
             <div id="loadingSpinner" class="loader-overlay" style="display: none;">
-                <!-- From Uiverse.io by yeisonordonez --> 
+                
                 <div class="car-container">
                     <div class="car">
                         <div class="window"></div>
@@ -168,6 +168,47 @@
                     <div class="street"></div>
                     <div class="post"></div>
                 </div>
+                
+                
+                <svg class="aura-text-svg" viewBox="0 0 900 120">
+                    <defs>
+                        <linearGradient
+                            id="gradient-aura"
+                            x1="0"
+                            y1="64"
+                            x2="0"
+                            y2="0"
+                            gradientUnits="userSpaceOnUse"
+                        >
+                            <stop stop-color="#FFC800"></stop>
+                            <stop offset="1" stop-color="#F0F"></stop>
+                            <animateTransform
+                                attributeName="gradientTransform"
+                                type="rotate"
+                                values="0 32 32;-270 32 32;-540 32 32;-810 32 32;-1080 32 32"
+                                dur="8s"
+                                keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1"
+                                repeatCount="indefinite"
+                            ></animateTransform>
+                        </linearGradient>
+                    </defs>
+                    <text 
+                        x="50%" 
+                        y="70%" 
+                        text-anchor="middle" 
+                        class="dash"
+                        stroke="black"
+                        style="font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 80px; letter-spacing: 6px;"
+                        pathLength="360"
+                        fill="#ffffff"
+                        stroke-width="5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        paint-order="stroke fill"
+                    >
+                        BUSCANDO GUIA
+                    </text>
+                </svg>
             </div>
 
             <!-- Results Section (Initially Hidden) -->
