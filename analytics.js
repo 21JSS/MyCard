@@ -107,6 +107,10 @@ window.addEventListener("load", () => {
   endDateInput.valueAsDate = today;
   startDateInput.valueAsDate = lastMonth;
 
+  // Inicializar nuevas gráficas de tendencia y estado
+  initShipmentsTimelineChart();
+  initStatusDistributionChart();
+
   console.log("✅ Página de Analytics cargada");
 });
 
@@ -390,7 +394,7 @@ function updateCarrierCircleCharts() {
       options: {
         responsive: true,
         maintainAspectRatio: true,
-        cutout: "50%", // Centro más grande para que el logo sea más visible
+        cutout: "40%", // Ajustado para los 4 anillos concéntricos
         plugins: {
           legend: {
             display: false,
@@ -659,134 +663,131 @@ console.log("📈 Datos disponibles para Q1-Q4 2024 y Q1-Q2 2025");
 
 // ===== NUEVAS GRÁFICAS =====
 
-// Gráfica de Tendencia de Envíos (Timeline)
-const shipmentsTimelineCtx = document.getElementById("shipmentsTimelineChart");
-if (shipmentsTimelineCtx) {
-  new Chart(shipmentsTimelineCtx, {
-    type: "line",
-    data: {
-      labels: [
-        "Sem 1",
-        "Sem 2",
-        "Sem 3",
-        "Sem 4",
-        "Sem 5",
-        "Sem 6",
-        "Sem 7",
-        "Sem 8",
-      ],
-      datasets: [
-        {
-          label: "Envíos",
-          data: [45, 52, 48, 61, 58, 67, 72, 69],
+function initShipmentsTimelineChart() {
+  const shipmentsTimelineCtx = document.getElementById("shipmentsTimelineChart");
+  if (shipmentsTimelineCtx) {
+    const ctx = shipmentsTimelineCtx.getContext("2d");
+    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+    gradient.addColorStop(0, "rgba(99, 102, 241, 0.4)");
+    gradient.addColorStop(1, "rgba(99, 102, 241, 0.0)");
+
+    new Chart(shipmentsTimelineCtx, {
+      type: "line",
+      data: {
+        labels: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+        datasets: [{
+          label: "Tarjetas Enviadas",
+          data: [45, 52, 48, 61, 58, 67, 72],
           borderColor: "#6366f1",
-          backgroundColor: "rgba(99, 102, 241, 0.1)",
+          backgroundColor: gradient,
           fill: true,
           tension: 0.4,
           borderWidth: 3,
-          pointRadius: 5,
-          pointHoverRadius: 7,
-          pointBackgroundColor: "#6366f1",
-          pointBorderColor: "#fff",
+          pointRadius: 4,
+          pointBackgroundColor: "#ffffff",
+          pointBorderColor: "#6366f1",
           pointBorderWidth: 2,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false,
-        },
-        tooltip: {
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
-          padding: 12,
-          titleFont: { size: 14, weight: "bold" },
-          bodyFont: { size: 13 },
-          callbacks: {
-            label: function (context) {
-              return `Envíos: ${context.parsed.y}`;
+          pointHoverRadius: 6,
+          pointHoverBackgroundColor: "#6366f1",
+          pointHoverBorderColor: "#ffffff",
+          pointHoverBorderWidth: 2,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: "#ffffff",
+            titleColor: "#1e293b",
+            bodyColor: "#64748b",
+            borderColor: "#e2e8f0",
+            borderWidth: 1,
+            padding: 12,
+            titleFont: { size: 13, family: "'Inter', sans-serif", weight: "600" },
+            bodyFont: { size: 13, family: "'Inter', sans-serif", weight: "500" },
+            displayColors: false,
+            callbacks: {
+              label: function (context) {
+                return `Volumen: ${context.parsed.y} envíos`;
+              },
             },
           },
         },
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          grid: {
-            color: "rgba(0, 0, 0, 0.05)",
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: { color: "#f1f5f9", borderDash: [5, 5] },
+            ticks: { font: { size: 11, family: "'Inter', sans-serif", weight: "500" }, color: "#94a3b8" },
+            border: { display: false },
           },
-          ticks: {
-            font: { size: 12 },
-          },
-        },
-        x: {
-          grid: {
-            display: false,
-          },
-          ticks: {
-            font: { size: 12 },
+          x: {
+            grid: { display: false },
+            ticks: { font: { size: 11, family: "'Inter', sans-serif", weight: "500" }, color: "#94a3b8" },
+            border: { display: false },
           },
         },
       },
-    },
-  });
+    });
+  }
 }
 
-// Gráfica de Distribución por Estado (Pie Chart)
-const statusDistributionCtx = document.getElementById(
-  "statusDistributionChart",
-);
-if (statusDistributionCtx) {
-  new Chart(statusDistributionCtx, {
-    type: "doughnut",
-    data: {
-      labels: ["Entregados", "En Tránsito", "Excepción", "Retornos"],
-      datasets: [
-        {
-          data: [340, 43, 9, 6],
+function initStatusDistributionChart() {
+  const statusDistributionCtx = document.getElementById("statusDistributionChart");
+  if (statusDistributionCtx) {
+    new Chart(statusDistributionCtx, {
+      type: "doughnut",
+      data: {
+        labels: ["Entregados", "En Tránsito", "Excepción", "Retornos"],
+        datasets: [{
+          data: [65, 20, 10, 5],
           backgroundColor: [
-            "#10b981", // verde - entregados
-            "#06b6d4", // cyan - en tránsito
-            "#f59e0b", // naranja - excepción
-            "#ef4444", // rojo - retornos
+            "#10b981", // verde
+            "#3b82f6", // azul
+            "#f59e0b", // naranja
+            "#ef4444", // rojo
           ],
-          borderWidth: 3,
-          borderColor: "#fff",
+          borderWidth: 2,
+          borderColor: "#ffffff",
           hoverOffset: 10,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: "bottom",
-          labels: {
-            padding: 15,
-            font: { size: 13, weight: "600" },
-            usePointStyle: true,
-            pointStyle: "circle",
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: "70%",
+        plugins: {
+          legend: {
+            position: "right",
+            labels: {
+              padding: 20,
+              font: { size: 12, family: "'Inter', sans-serif", weight: "500" },
+              usePointStyle: true,
+              pointStyle: "circle",
+              color: "#64748b",
+            },
           },
-        },
-        tooltip: {
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
-          padding: 12,
-          titleFont: { size: 14, weight: "bold" },
-          bodyFont: { size: 13 },
-          callbacks: {
-            label: function (context) {
-              const total = context.dataset.data.reduce((a, b) => a + b, 0);
-              const percentage = ((context.parsed / total) * 100).toFixed(1);
-              return `${context.label}: ${context.parsed} (${percentage}%)`;
+          tooltip: {
+            backgroundColor: "#ffffff",
+            titleColor: "#1e293b",
+            bodyColor: "#64748b",
+            borderColor: "#e2e8f0",
+            borderWidth: 1,
+            padding: 12,
+            bodyFont: { size: 13, family: "'Inter', sans-serif", weight: "500" },
+            callbacks: {
+              label: function (context) {
+                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                const percentage = ((context.parsed / total) * 100).toFixed(1);
+                return ` ${context.label}: ${percentage}% (${context.parsed})`;
+              },
             },
           },
         },
       },
-    },
-  });
+    });
+  }
 }
 
 // Event Listener para Filtros

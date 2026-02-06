@@ -20,7 +20,6 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="analytics.css">
-    <link rel="stylesheet" href="analytics-geo.css">
 
     <!-- Prevent sidebar flash - apply collapsed state before render -->
     <script>
@@ -247,10 +246,17 @@
                         </select>
                     </div>
                     <div class="filter-group">
-                        <button class="btn btn-primary" id="applyFilters">
-                            <i class="fas fa-filter"></i>
-                            Aplicar Filtros
-                        </button>
+<button id="applyFilters" class="btn-apply-filters">
+  Aplicar Filtros
+  <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+    <path
+      fill-rule="evenodd"
+      d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+      clip-rule="evenodd"
+    ></path>
+  </svg>
+</button>
+
                     </div>
                 </div>
             </div>
@@ -352,7 +358,7 @@
 
 
             <!-- Charts Grid -->
-            <div class="charts-grid">
+            <div class="charts-grid" style="margin-top: 32px;">
                 <!-- Tendencia Mensual -->
                 <div class="card chart-card">
                     <div class="card-header">
@@ -450,59 +456,6 @@
                 </div>
             </div>
             
-            <!-- Análisis Geográfico (Nuevo) -->
-            <div class="section-header" style="margin-top: 48px; margin-bottom: 10px;">
-                <h2 class="section-title">Análisis Geográfico</h2>
-            </div>
-            <p class="section-subtitle">Distribución de envíos y rendimiento por zona logística</p>
-
-            <div class="geo-dashboard-grid">
-                <!-- Mapa de Calor -->
-                <div class="card geo-card">
-                    <div class="card-header">
-                        <h2>Mapa de Calor (Heatmap)</h2>
-                        <p class="chart-subtitle">Concentración de envíos por zona</p>
-                    </div>
-                    <div class="map-wrapper">
-                        <div class="map-background">
-                            <canvas id="geoHeatmapChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="geo-insight">
-                        <i class="fas fa-lightbulb"></i>
-                        <p><strong>Insight:</strong> El 65% de los envíos se concentran en el <span>Centro y Bajío</span>, lo que sugiere una oportunidad para consolidar rutas terrestres en estas zonas.</p>
-                    </div>
-                </div>
-
-                <!-- Tabla de Rendimiento Regional -->
-                <div class="card region-card">
-                    <div class="card-header">
-                        <h2>Rendimiento por Región</h2>
-                        <p class="chart-subtitle">Comparativa vs. Promedio Nacional</p>
-                    </div>
-                    <div class="table-wrapper">
-                        <table class="data-table region-table">
-                            <thead>
-                                <tr>
-                                    <th>Región</th>
-                                    <th>Tiempo Prom.</th>
-                                    <th>Diferencia</th>
-                                </tr>
-                            </thead>
-                            <tbody id="regionTableBody">
-                                <!-- JS Populated -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="geo-insight warning" style="margin-top: 24px;">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <p><strong>Atención:</strong> Los envíos a la <span>Zona Norte</span> tardan <strong>2 días más</strong> que al Centro. Se recomienda ajustar la promesa de entrega en el checkout para esta región.</p>
-                    </div>
-                </div>
-            </div>
-
-
-
             <!-- Reportes Personalizados -->
             <div class="card reports-card">
                 <div class="card-header">
